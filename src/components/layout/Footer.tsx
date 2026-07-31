@@ -106,10 +106,7 @@ export const Footer: React.FC = () => {
 
         <div className="border-t border-dark-border mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
           <p>{t('footer.copyright')}</p>
-          <div className="flex items-center gap-4 mt-2 sm:mt-0 font-mono text-[11px]">
-            <span className="text-cyan-400">Build v1.0.0 (SSG)</span>
-            <span>Next.js 15 App Router</span>
-          </div>
+
         </div>
       </div>
     </footer>
