@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     default: 'منصة BunyanX للأمن السيبراني — الجدار الناري المتقدم للمؤسسات',
     template: '%s | BunyanX Enterprise NGFW',
   },
-  description: 'الموقع الرسمي للتوثيق الأكاديمي والتقني الشامل لمنصة BunyanX Enterprise NGFW. معمارية النظام، وحدات الذكاء الاصطناعي الـ 17، الأبحاث واختبارات الأداء.',
+  description: 'الموقع الرسمي للتوثيق الأكاديمي والتقني الشامل لمنصة BunyanX Enterprise NGFW. معمارية النظام، وحدات الذكاء الاصطناعي الـ 17، الأبحاث وااختبارات الأداء.',
   keywords: [
     'BunyanX', 'NGFW', 'Firewall', 'Cybersecurity', 'eBPF', 'XDP', 'IDS', 'IPS',
     'WAF', 'DLP', 'UEBA', 'ORACLE v3', 'DART', 'SSL Inspection', 'Proxy',
@@ -55,14 +55,14 @@ export default async function RootLayout({
   const websiteSchema = generateWebsiteSchema();
 
   return (
-    <html lang="ar" dir="rtl" className="dark">
+    <html lang="ar" dir="rtl">
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
-      <body className="bg-dark-bg text-slate-100 min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-black">
+      <body className="antialiased selection:bg-cyan-500 selection:text-black">
         <LanguageProvider>
           <ThemeProvider>
             <NavigationProgressBar />

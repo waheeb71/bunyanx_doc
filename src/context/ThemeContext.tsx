@@ -19,9 +19,15 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   useEffect(() => {
     const saved = localStorage.getItem('bunyanx_theme') as Theme;
-    if (saved) {
+    if (saved && (saved === 'dark' || saved === 'light')) {
       setTheme(saved);
-      document.documentElement.classList.toggle('dark', saved === 'dark');
+      if (saved === 'light') {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+      } else {
+        document.documentElement.classList.remove('light');
+        document.documentElement.classList.add('dark');
+      }
     } else {
       document.documentElement.classList.add('dark');
     }
@@ -31,7 +37,13 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const next = theme === 'dark' ? 'light' : 'dark';
     setTheme(next);
     localStorage.setItem('bunyanx_theme', next);
-    document.documentElement.classList.toggle('dark', next === 'dark');
+    if (next === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+    }
   };
 
   return (

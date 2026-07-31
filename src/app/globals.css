@@ -9,6 +9,42 @@
   :root {
     --font-inter: 'Inter', sans-serif;
     --font-cairo: 'Cairo', 'Tajawal', sans-serif;
+
+    /* Light Theme Variables */
+    --bg-color: #f8fafc;
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --card-border: #e2e8f0;
+    --card-hover-bg: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --text-heading: #0f172a;
+    --header-bg: rgba(255, 255, 255, 0.85);
+    --cyber-badge-bg: #e0f2fe;
+    --cyber-badge-text: #0284c7;
+    --cyber-badge-border: #93c5fd;
+    --code-bg: #f1f5f9;
+    --code-text: #0284c7;
+    --table-header-bg: #f1f5f9;
+    --table-border: #e2e8f0;
+  }
+
+  html.dark {
+    /* Dark Theme Variables */
+    --bg-color: #070a12;
+    --card-bg: rgba(14, 19, 34, 0.75);
+    --card-border: #1b2438;
+    --card-hover-bg: #141c30;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --text-heading: #f8fafc;
+    --header-bg: rgba(7, 10, 18, 0.85);
+    --cyber-badge-bg: rgba(8, 47, 73, 0.8);
+    --cyber-badge-text: #38bdf8;
+    --cyber-badge-border: rgba(56, 189, 248, 0.3);
+    --code-bg: rgba(14, 19, 34, 0.8);
+    --code-text: #38bdf8;
+    --table-header-bg: #0e1322;
+    --table-border: #1b2438;
   }
 
   html {
@@ -16,25 +52,34 @@
   }
 
   body {
-    @apply bg-dark-bg text-slate-200 antialiased font-sans transition-colors duration-300 selection:bg-cyan-500 selection:text-black;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    @apply antialiased font-sans transition-colors duration-300 selection:bg-cyan-500 selection:text-black;
   }
 }
 
-/* Glassmorphism & Cyber Card Utilities */
+/* Glassmorphism & Theme Aware Card Utilities */
 .glass-panel {
-  @apply bg-dark-card/70 backdrop-blur-xl border border-dark-border shadow-lg rounded-xl;
+  background-color: var(--card-bg);
+  border-color: var(--card-border);
+  @apply backdrop-blur-xl border shadow-md rounded-xl transition-all duration-300;
 }
 
 .glass-panel-hover {
-  @apply glass-panel hover:border-cyan-500/50 hover:shadow-neon-glow transition-all duration-300;
+  background-color: var(--card-bg);
+  border-color: var(--card-border);
+  @apply backdrop-blur-xl border shadow-md rounded-xl transition-all duration-300 hover:border-cyan-500/50 hover:shadow-neon-glow;
 }
 
 .cyber-badge {
-  @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-cyan-950/80 text-cyan-400 border border-cyan-500/30;
+  background-color: var(--cyber-badge-bg);
+  color: var(--cyber-badge-text);
+  border-color: var(--cyber-badge-border);
+  @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold border transition-colors duration-300;
 }
 
 .cyber-glow-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 drop-shadow-[0_0_12px_rgba(0,240,255,0.4)];
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 drop-shadow-[0_0_12px_rgba(0,240,255,0.4)];
 }
 
 /* Custom Scrollbar */
@@ -43,10 +88,10 @@
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #070a12;
+  background: var(--bg-color);
 }
 ::-webkit-scrollbar-thumb {
-  background: #1b2438;
+  background: var(--card-border);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -58,31 +103,38 @@
   max-width: 100%;
 }
 .prose h1, .prose h2, .prose h3, .prose h4 {
-  color: #f1f5f9;
+  color: var(--text-heading);
   font-weight: 700;
   scroll-margin-top: 100px;
 }
+.prose p, .prose li {
+  color: var(--text-main);
+}
 .prose h2 {
-  border-bottom: 1px solid rgba(27, 36, 56, 0.8);
+  border-bottom: 1px solid var(--card-border);
   padding-bottom: 0.5rem;
   margin-top: 2rem;
 }
 .prose a {
-  color: #00f0ff;
+  color: #0284c7;
   text-decoration: none;
-  border-bottom: 1px dashed rgba(0, 240, 255, 0.4);
+  border-bottom: 1px dashed rgba(2, 132, 199, 0.4);
   transition: all 0.2s ease;
+}
+html.dark .prose a {
+  color: #00f0ff;
+  border-bottom-color: rgba(0, 240, 255, 0.4);
 }
 .prose a:hover {
   color: #38bdf8;
   border-bottom-style: solid;
 }
 .prose code:not(pre code) {
-  background-color: rgba(14, 19, 34, 0.8);
-  color: #38bdf8;
+  background-color: var(--code-bg);
+  color: var(--code-text);
   padding: 0.2rem 0.4rem;
   border-radius: 0.375rem;
-  border: 1px solid rgba(27, 36, 56, 0.8);
+  border: 1px solid var(--card-border);
   font-size: 0.875em;
 }
 .prose table {
@@ -92,17 +144,18 @@
   margin-bottom: 1.5rem;
 }
 .prose th {
-  background-color: #0e1322;
-  color: #00f0ff;
+  background-color: var(--table-header-bg);
+  color: var(--text-heading);
   font-weight: 600;
   text-align: inherit;
   padding: 0.75rem 1rem;
-  border: 1px solid #1b2438;
+  border: 1px solid var(--table-border);
 }
 .prose td {
   padding: 0.75rem 1rem;
-  border: 1px solid #1b2438;
+  border: 1px solid var(--table-border);
+  color: var(--text-main);
 }
 .prose tr:nth-child(even) {
-  background-color: rgba(14, 19, 34, 0.4);
+  background-color: var(--card-bg);
 }
