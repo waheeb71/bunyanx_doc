@@ -8,37 +8,47 @@ import { NavigationProgressBar } from '@/components/layout/NavigationProgressBar
 import { getAllDocs } from '@/lib/docs';
 import { generateWebsiteSchema } from '@/lib/seo';
 
+const SITE_ORIGIN = process.env.NEXT_PUBLIC_SITE_URL || 'https://bunyanx-doc.netlify.app';
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://bunyanx.enterprise-ngfw.org'),
+  metadataBase: new URL(SITE_ORIGIN),
   title: {
     default: 'منصة BunyanX للأمن السيبراني — الجدار الناري المتقدم للمؤسسات',
     template: '%s | BunyanX Enterprise NGFW',
   },
-  description: 'الموقع الرسمي للتوثيق الأكاديمي والتقني الشامل لمنصة BunyanX Enterprise NGFW. معمارية النظام، وحدات الذكاء الاصطناعي الـ 17، الأبحاث وااختبارات الأداء.',
+  description: 'بوابة التوثيق الأكاديمي والتقني الشاملة لمشروع تخرج منصة BunyanX Enterprise NGFW. يضم المعمارية الهندسية، وحدات الذكاء الاصطناعي الـ 17، والأبحاث واختبارات الأداء.',
   keywords: [
     'BunyanX', 'NGFW', 'Firewall', 'Cybersecurity', 'eBPF', 'XDP', 'IDS', 'IPS',
     'WAF', 'DLP', 'UEBA', 'ORACLE v3', 'DART', 'SSL Inspection', 'Proxy',
     'الأمن السيبراني', 'الجدار الناري', 'مشروع التخرج', 'كلية الهندسة'
   ],
-  authors: [{ name: 'BunyanX Team' }],
+  authors: [{ name: 'فريق مشروع BunyanX' }],
   icons: {
     icon: '/logo.png',
+    shortcut: '/logo.png',
     apple: '/logo.png',
   },
   openGraph: {
-    title: 'BunyanX Enterprise NGFW — Academic Documentation Portal',
-    description: 'Complete technical documentation portal for BunyanX Enterprise NGFW graduation project.',
-    url: 'https://bunyanx.enterprise-ngfw.org',
-    siteName: 'BunyanX Enterprise NGFW',
-    images: [{ url: '/logo.png' }],
+    title: 'منصة BunyanX للأمن السيبراني — الجدار الناري المتقدم للمؤسسات',
+    description: 'بوابة التوثيق الأكاديمي والتقني الشاملة لمشروع تخرج منصة BunyanX Enterprise NGFW. معمارية النظام، وحدات الذكاء الاصطناعي الـ 17، الأبحاث واختبارات الأداء.',
+    url: SITE_ORIGIN,
+    siteName: 'منصة BunyanX للأمن السيبراني',
+    images: [
+      {
+        url: `${SITE_ORIGIN}/logo.png`,
+        width: 512,
+        height: 512,
+        alt: 'شعار منصة BunyanX Enterprise NGFW',
+      },
+    ],
     locale: 'ar_SA',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'BunyanX Enterprise NGFW',
-    description: 'Enterprise Cybersecurity Graduation Project Documentation Portal',
-    images: ['/logo.png'],
+    title: 'منصة BunyanX للأمن السيبراني — BunyanX Enterprise NGFW',
+    description: 'بوابة التوثيق الأكاديمي والتقني الشاملة لمشروع تخرج منصة BunyanX Enterprise NGFW.',
+    images: [`${SITE_ORIGIN}/logo.png`],
   },
   robots: {
     index: true,
@@ -57,6 +67,10 @@ export default async function RootLayout({
   return (
     <html lang="ar" dir="rtl">
       <head>
+        <meta property="og:image" content={`${SITE_ORIGIN}/logo.png`} />
+        <meta property="og:image:width" content="512" />
+        <meta property="og:image:height" content="512" />
+        <meta name="twitter:image" content={`${SITE_ORIGIN}/logo.png`} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
