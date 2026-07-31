@@ -2,8 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
-import { Shield, BookOpen, Download, Github, Mail, Globe, Cpu, Award } from 'lucide-react';
+import { BookOpen, Download, Github, Mail, Globe, Cpu, Award } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const { t } = useLanguage();
@@ -12,11 +13,17 @@ export const Footer: React.FC = () => {
     <footer className="w-full border-t border-dark-border bg-dark-bg/90 mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Col 1: Brand & Academic Info */}
+          {/* Col 1: Brand Logo & Academic Info */}
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-cyan-950/80 border border-cyan-500/40 p-1 flex items-center justify-center">
-                <Shield className="w-4 h-4 text-cyan-400" />
+              <div className="w-9 h-9 rounded-xl bg-cyan-950/80 border border-cyan-500/40 p-1 flex items-center justify-center">
+                <Image
+                  src="/logo.png"
+                  alt="BunyanX Logo"
+                  width={36}
+                  height={36}
+                  className="w-full h-full object-contain"
+                />
               </div>
               <span className="font-extrabold text-lg text-slate-100">
                 Bunyan<span className="text-cyan-400">X</span> Enterprise NGFW
@@ -82,7 +89,7 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors flex items-center gap-1.5">
+                <a href="https://github.com/waheeb71/bunyanx_doc" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors flex items-center gap-1.5">
                   <Github className="w-3.5 h-3.5 text-cyan-400" />
                   GitHub Repository
                 </a>

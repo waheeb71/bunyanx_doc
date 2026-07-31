@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getAllDocs } from '@/lib/docs';
 import {
   Shield,
@@ -11,12 +12,7 @@ import {
   Zap,
   BrainCircuit,
   Award,
-  Lock,
   ArrowLeft,
-  CheckCircle2,
-  Activity,
-  Server,
-  Globe,
 } from 'lucide-react';
 
 export default async function HomePage() {
@@ -29,9 +25,23 @@ export default async function HomePage() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-hero-gradient pointer-events-none" />
 
       {/* Hero Section */}
-      <section className="relative pt-20 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center space-y-8">
+      <section className="relative pt-16 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center space-y-8">
+        {/* Official Logo Display */}
+        <div className="flex justify-center">
+          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-cyan-950/80 border-2 border-cyan-500/40 p-3 shadow-neon-strong flex items-center justify-center animate-pulse">
+            <Image
+              src="/logo.png"
+              alt="BunyanX Official Logo"
+              width={112}
+              height={112}
+              className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(0,240,255,0.6)]"
+              priority
+            />
+          </div>
+        </div>
+
         {/* Version Badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-cyan-400 text-xs font-semibold shadow-neon-glow animate-pulse">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-500/40 text-cyan-400 text-xs font-semibold shadow-neon-glow">
           <Shield className="w-4 h-4" />
           <span>BunyanX Enterprise NGFW — Academic Release v1.0</span>
         </div>
@@ -49,11 +59,11 @@ export default async function HomePage() {
           </p>
         </div>
 
-        {/* Hero CTA Action Buttons */}
+        {/* Hero CTA Action Buttons with active:scale-95 tactile press feedback */}
         <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
           <Link
             href="/docs"
-            className="flex items-center gap-2 px-6 py-3.5 rounded-xl bg-cyan-500 text-black font-bold text-sm hover:bg-cyan-400 shadow-neon-glow hover:shadow-neon-strong transition-all transform hover:-translate-y-0.5"
+            className="flex items-center gap-2 px-6 py-3.5 rounded-xl bg-cyan-500 text-black font-bold text-sm hover:bg-cyan-400 active:scale-95 shadow-neon-glow hover:shadow-neon-strong transition-all transform hover:-translate-y-0.5"
           >
             <BookOpen className="w-4 h-4" />
             <span>قراءة التوثيق الأكاديمي</span>
@@ -61,17 +71,17 @@ export default async function HomePage() {
 
           <Link
             href="/modules"
-            className="flex items-center gap-2 px-6 py-3.5 rounded-xl glass-panel-hover text-slate-100 font-semibold text-sm hover:text-cyan-400"
+            className="flex items-center gap-2 px-6 py-3.5 rounded-xl glass-panel-hover text-slate-100 font-semibold text-sm hover:text-cyan-400 active:scale-95 transition-all"
           >
             <Layers className="w-4 h-4 text-cyan-400" />
             <span>استعراض الوحدات الـ 17</span>
           </Link>
 
           <a
-            href="https://github.com"
+            href="https://github.com/waheeb71/bunyanx_doc"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-5 py-3.5 rounded-xl bg-dark-card border border-dark-border text-slate-300 font-medium text-sm hover:text-white hover:border-slate-500 transition-all"
+            className="flex items-center gap-2 px-5 py-3.5 rounded-xl bg-dark-card border border-dark-border text-slate-300 font-medium text-sm hover:text-white hover:border-slate-500 active:scale-95 transition-all"
           >
             <Github className="w-4 h-4" />
             <span>GitHub Repository</span>
@@ -79,7 +89,7 @@ export default async function HomePage() {
 
           <Link
             href="/downloads"
-            className="flex items-center gap-2 px-5 py-3.5 rounded-xl bg-dark-card border border-cyan-500/30 text-cyan-400 font-medium text-sm hover:bg-cyan-950/40 transition-all"
+            className="flex items-center gap-2 px-5 py-3.5 rounded-xl bg-dark-card border border-cyan-500/30 text-cyan-400 font-medium text-sm hover:bg-cyan-950/40 active:scale-95 transition-all"
           >
             <Download className="w-4 h-4" />
             <span>تحميل الرسالة الماستر (PDF)</span>
@@ -128,7 +138,7 @@ export default async function HomePage() {
             </div>
             <Link
               href="/architecture"
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-bold hover:bg-cyan-500/20 transition-all shrink-0"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-bold hover:bg-cyan-500/20 active:scale-95 transition-all shrink-0"
             >
               <span>استكشاف المعمارية التفاعلية</span>
               <ArrowLeft className="w-4 h-4" />
@@ -188,7 +198,7 @@ export default async function HomePage() {
             <Link
               key={doc.slug}
               href={`/docs/${doc.slug}`}
-              className="glass-panel-hover p-5 space-y-3 block group"
+              className="glass-panel-hover p-5 space-y-3 block group active:scale-95 transition-all"
             >
               <div className="flex items-center justify-between">
                 <span className="cyber-badge">{doc.categoryAr}</span>

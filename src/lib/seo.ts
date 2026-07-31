@@ -1,6 +1,6 @@
 import { DocItem } from './docs';
 
-export const SITE_URL = 'https://bunyanx.enterprise-ngfw.org';
+export const SITE_URL = 'https://bunyanx.netlify.app';
 
 export function generateDocSchema(doc: DocItem, lang: 'ar' | 'en') {
   const isAr = lang === 'ar';

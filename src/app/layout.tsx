@@ -4,6 +4,7 @@ import { LanguageProvider } from '@/context/LanguageContext';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { NavigationProgressBar } from '@/components/layout/NavigationProgressBar';
 import { getAllDocs } from '@/lib/docs';
 import { generateWebsiteSchema } from '@/lib/seo';
 
@@ -20,11 +21,16 @@ export const metadata: Metadata = {
     'الأمن السيبراني', 'الجدار الناري', 'مشروع التخرج', 'كلية الهندسة'
   ],
   authors: [{ name: 'BunyanX Team' }],
+  icons: {
+    icon: '/logo.png',
+    apple: '/logo.png',
+  },
   openGraph: {
     title: 'BunyanX Enterprise NGFW — Academic Documentation Portal',
     description: 'Complete technical documentation portal for BunyanX Enterprise NGFW graduation project.',
     url: 'https://bunyanx.enterprise-ngfw.org',
     siteName: 'BunyanX Enterprise NGFW',
+    images: [{ url: '/logo.png' }],
     locale: 'ar_SA',
     type: 'website',
   },
@@ -32,6 +38,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'BunyanX Enterprise NGFW',
     description: 'Enterprise Cybersecurity Graduation Project Documentation Portal',
+    images: ['/logo.png'],
   },
   robots: {
     index: true,
@@ -58,6 +65,7 @@ export default async function RootLayout({
       <body className="bg-dark-bg text-slate-100 min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-black">
         <LanguageProvider>
           <ThemeProvider>
+            <NavigationProgressBar />
             <Header docs={docs} />
             <main className="flex-1 w-full">{children}</main>
             <Footer />

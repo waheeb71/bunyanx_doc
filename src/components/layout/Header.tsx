@@ -21,7 +21,6 @@ import {
   Mail,
   Award,
   Sparkles,
-  GitBranch,
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -47,12 +46,19 @@ export const Header: React.FC<HeaderProps> = ({ docs = [] }) => {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full border-b border-dark-border bg-dark-bg/80 backdrop-blur-xl transition-all">
+      <header className="sticky top-0 z-40 w-full border-b border-dark-border bg-dark-bg/85 backdrop-blur-xl transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          {/* Brand Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          {/* Brand Logo with Official logo.png */}
+          <Link href="/" className="flex items-center gap-3 group active:scale-95 transition-transform">
             <div className="relative w-9 h-9 rounded-xl bg-cyan-950/80 border border-cyan-500/40 p-1 flex items-center justify-center group-hover:border-cyan-400 group-hover:shadow-neon-glow transition-all">
-              <Shield className="w-5 h-5 text-cyan-400" />
+              <Image
+                src="/logo.png"
+                alt="BunyanX Logo"
+                width={36}
+                height={36}
+                className="w-full h-full object-contain drop-shadow-[0_0_8px_rgba(0,240,255,0.5)]"
+                priority
+              />
             </div>
             <div>
               <span className="font-extrabold text-lg text-slate-100 tracking-wider group-hover:text-cyan-400 transition-colors">
@@ -72,7 +78,7 @@ export const Header: React.FC<HeaderProps> = ({ docs = [] }) => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-cyan-400 hover:bg-dark-card transition-all flex items-center gap-1.5"
+                  className="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-cyan-400 hover:bg-dark-card active:scale-95 transition-all flex items-center gap-1.5"
                 >
                   <Icon className="w-3.5 h-3.5 text-slate-400" />
                   <span>{link.label}</span>
@@ -81,16 +87,17 @@ export const Header: React.FC<HeaderProps> = ({ docs = [] }) => {
             })}
           </nav>
 
-          {/* Action Bar (Search, Language, Theme, Mobile Menu) */}
+          {/* Action Bar (Search Trigger, Language, Theme, Mobile Menu) */}
           <div className="flex items-center gap-2">
-            {/* Search Trigger */}
+            {/* Instant Search Trigger Button with Visual Pulse */}
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-dark-card border border-dark-border text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 transition-all text-xs"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-dark-card border border-cyan-500/30 text-slate-300 hover:text-cyan-400 hover:border-cyan-400 active:scale-95 transition-all text-xs font-semibold shadow-sm hover:shadow-neon-glow"
+              title="Open Search Modal (Ctrl + K)"
             >
-              <Search className="w-3.5 h-3.5 text-cyan-400" />
+              <Search className="w-4 h-4 text-cyan-400 animate-pulse" />
               <span className="hidden md:inline">{t('searchPlaceholder')}</span>
-              <kbd className="hidden md:inline-block px-1.5 py-0.5 text-[10px] rounded bg-dark-bg border border-dark-border text-slate-400">
+              <kbd className="hidden md:inline-block px-1.5 py-0.5 text-[10px] rounded bg-dark-bg border border-dark-border text-cyan-400 font-mono">
                 Ctrl K
               </kbd>
             </button>
@@ -101,7 +108,7 @@ export const Header: React.FC<HeaderProps> = ({ docs = [] }) => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-1.5 rounded-lg bg-dark-card border border-dark-border text-slate-300 hover:text-cyan-400"
+              className="lg:hidden p-1.5 rounded-lg bg-dark-card border border-dark-border text-slate-300 hover:text-cyan-400 active:scale-95 transition-all"
             >
               {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -118,7 +125,7 @@ export const Header: React.FC<HeaderProps> = ({ docs = [] }) => {
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium text-slate-200 hover:text-cyan-400 hover:bg-dark-hover transition-all"
+                  className="flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium text-slate-200 hover:text-cyan-400 hover:bg-dark-hover active:scale-95 transition-all"
                 >
                   <Icon className="w-4 h-4 text-cyan-400" />
                   <span>{link.label}</span>
@@ -129,7 +136,7 @@ export const Header: React.FC<HeaderProps> = ({ docs = [] }) => {
         )}
       </header>
 
-      {/* Global Search Modal */}
+      {/* Global Instant Search Modal */}
       <SearchModal
         docs={docs}
         isOpen={isSearchOpen}
