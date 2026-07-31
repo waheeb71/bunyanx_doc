@@ -1,0 +1,108 @@
+@import 'katex/dist/katex.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-inter: 'Inter', sans-serif;
+    --font-cairo: 'Cairo', 'Tajawal', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-dark-bg text-slate-200 antialiased font-sans transition-colors duration-300 selection:bg-cyan-500 selection:text-black;
+  }
+}
+
+/* Glassmorphism & Cyber Card Utilities */
+.glass-panel {
+  @apply bg-dark-card/70 backdrop-blur-xl border border-dark-border shadow-lg rounded-xl;
+}
+
+.glass-panel-hover {
+  @apply glass-panel hover:border-cyan-500/50 hover:shadow-neon-glow transition-all duration-300;
+}
+
+.cyber-badge {
+  @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-cyan-950/80 text-cyan-400 border border-cyan-500/30;
+}
+
+.cyber-glow-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 drop-shadow-[0_0_12px_rgba(0,240,255,0.4)];
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #070a12;
+}
+::-webkit-scrollbar-thumb {
+  background: #1b2438;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00f0ff;
+}
+
+/* Markdown Styling Overrides */
+.prose {
+  max-width: 100%;
+}
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  color: #f1f5f9;
+  font-weight: 700;
+  scroll-margin-top: 100px;
+}
+.prose h2 {
+  border-bottom: 1px solid rgba(27, 36, 56, 0.8);
+  padding-bottom: 0.5rem;
+  margin-top: 2rem;
+}
+.prose a {
+  color: #00f0ff;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(0, 240, 255, 0.4);
+  transition: all 0.2s ease;
+}
+.prose a:hover {
+  color: #38bdf8;
+  border-bottom-style: solid;
+}
+.prose code:not(pre code) {
+  background-color: rgba(14, 19, 34, 0.8);
+  color: #38bdf8;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(27, 36, 56, 0.8);
+  font-size: 0.875em;
+}
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.prose th {
+  background-color: #0e1322;
+  color: #00f0ff;
+  font-weight: 600;
+  text-align: inherit;
+  padding: 0.75rem 1rem;
+  border: 1px solid #1b2438;
+}
+.prose td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #1b2438;
+}
+.prose tr:nth-child(even) {
+  background-color: rgba(14, 19, 34, 0.4);
+}

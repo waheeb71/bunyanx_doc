@@ -1,0 +1,60 @@
+{
+  "siteTitle": "BunyanX Cybersecurity Platform",
+  "siteSubTitle": "Next Generation Firewall Platform — BunyanX Enterprise NGFW",
+  "heroTitle": "Comprehensive Academic & Technical Documentation Portal",
+  "heroDescription": "Official graduation project documentation portal for BunyanX Enterprise NGFW. Featuring core system architecture, 17 AI-powered security modules, academic research contributions, and performance benchmarks.",
+  "readDocs": "Read Academic Docs",
+  "browseModules": "Browse 17 Modules",
+  "downloadThesis": "Download Master Thesis (PDF)",
+  "githubRepo": "GitHub Repository",
+  "searchPlaceholder": "Search documentation... (Ctrl + K)",
+  "stats": {
+    "modules": "Integrated Security Modules",
+    "files": "Academic Documentation Files",
+    "lines": "+2300 Documentation Lines",
+    "aiEngine": "Predictive AI Engine",
+    "research": "Academic Research & Innovations",
+    "acceleration": "eBPF / XDP Acceleration"
+  },
+  "nav": {
+    "home": "Home",
+    "documentation": "Documentation",
+    "modules": "Security Modules",
+    "architecture": "System Architecture",
+    "pipeline": "Packet Pipeline",
+    "research": "Research Contributions",
+    "downloads": "Download Center",
+    "about": "About Project",
+    "contributors": "Team & Contributors",
+    "contact": "Contact & Collaboration",
+    "faq": "FAQ",
+    "updates": "Changelog"
+  },
+  "docTools": {
+    "toc": "Table of Contents",
+    "readingTime": "Reading Time",
+    "minutes": "mins",
+    "words": "words",
+    "wordsCount": "Word Count",
+    "lastUpdated": "Last Updated",
+    "printPage": "Print Page",
+    "downloadPdf": "Download PDF",
+    "copyLink": "Copy Heading Link",
+    "copied": "Copied!",
+    "previous": "Previous Document",
+    "next": "Next Document",
+    "feedback": "Was this documentation helpful?",
+    "yes": "Yes, very helpful",
+    "no": "Needs improvement",
+    "aiSummary": "Automated AI Summary",
+    "keywords": "Extracted Keywords",
+    "relatedDocs": "Related & Recommended Reading"
+  },
+  "footer": {
+    "quickLinks": "Quick Links",
+    "resources": "Resources & Downloads",
+    "academicInfo": "Academic Info",
+    "university": "Faculty of Engineering — Information Security & Network Engineering Dept.",
+    "copyright": "All rights reserved. BunyanX Enterprise NGFW © 2026"
+  }
+}
