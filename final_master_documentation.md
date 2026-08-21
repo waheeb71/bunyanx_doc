@@ -8,13 +8,14 @@
 ---
 
 > **الجامعة:** [اسم الجامعة]
-> **الكلية:** كلية الهندسة — قسم أمن المعلومات وهندسة الشبكات
+> **الكلية:** كلية الهندسة — قسم الامن السيبراني
 > **المقرر:** مشروع التخرج
 > **الفريق:** [أسماء الطلاب]
 > **المشرف:** [اسم المشرف]
 > **تاريخ التسليم:** 2026
 
 ---
+
 ## جدول المحتويات
 
 | الفصل | العنوان | الصفحة |
@@ -68,7 +69,7 @@
 | 5.9 | وحدة الكشف عن البرمجيات الخبيثة (NM-MDE FlowSpec) | — |
 | 5.10 | وحدة تحليل سلوك المستخدمين (UBA) | — |
 | 5.11 | وحدة أمان البريد الإلكتروني (Email Security) | — |
-| 5.12 | وحدة الذكاء الاصطناعي الاستباقي — ORACLE v3 | — |
+| 5.12 | وحدة الذكاء الاصطناعي الاستباقي — AEGIS v3 | — |
 | 5.13 | وحدة فحص HTTP | — |
 | 5.14 | وحدة تصفية الويب — HoloFilter | — |
 | 5.15 | وحدة QoS | — |
@@ -294,7 +295,7 @@
 المبادئ الخمسة في BunyanX:
 1. التحقق الصريح → SPF/DKIM/DMARC + mTLS
 2. أقل امتياز مطلوب → RBAC في WAF API
-3. افتراض الاختراق → UBA + ORACLE Deception
+3. افتراض الاختراق → UBA + AEGIS Deception
 4. Default Deny → Fail-Closed في كل الوحدات
 5. المراقبة المستمرة → EventBus + UnifiedEventSink
 ```
@@ -304,7 +305,7 @@
 تُدمج المنصة استخبارات التهديدات على مستويين:
 
 - **Real-time Feeds:** تحديث قوائم C2/IOC/DGA في DNS Security و malware_av
-- **Predictive Intelligence:** محرك ORACLE يُقدّر احتمالية الهجوم القادم من **6 مصادر استخباراتية خارجية**
+- **Predictive Intelligence:** محرك AEGIS يُقدّر احتمالية الهجوم القادم من **6 مصادر استخباراتية خارجية**
 
 ## 2.8 مفاهيم SIEM
 
@@ -319,15 +320,15 @@
 
 | تقنية AI | التطبيق في BunyanX | الوحدة |
 | :--- | :--- | :--- |
-| Transformer Encoders | توقع TTPs للمهاجمين | ORACLE v3 |
-| Graph Neural Networks | كشف الحركة الجانبية | ORACLE GNN |
-| Reinforcement Learning (Q-Table + TD(λ)) | تحسين الاستراتيجية الدفاعية | ORACLE Nash |
+| Transformer Encoders | توقع TTPs للمهاجمين | AEGIS v3 |
+| Graph Neural Networks | كشف الحركة الجانبية | AEGIS GNN |
+| Reinforcement Learning (Q-Table + TD(λ)) | تحسين الاستراتيجية الدفاعية | AEGIS Nash |
 | Sentence Transformers (384-dim) | بصمة المرسل اللغوية | Email PLSF |
 | XGBoost + 2381 Features | تصنيف PE/ELF Malware | malware_av |
 | Hyperdimensional Computing | تصنيف نطاقات الويب | Web Filter HDC |
 | BiLSTM (Temporal) | كشف APTs في WAF | WAF Tracker |
 | Wavelet Transform (Daubechies-8) | كشف C2 Beaconing | malware_av WBS-D |
-| Bayesian Belief Networks | تتبع مراحل المهاجم | ORACLE ASE |
+| Bayesian Belief Networks | تتبع مراحل المهاجم | AEGIS ASE |
 
 ## 2.10 مقارنة بالحلول الموجودة
 
@@ -376,7 +377,7 @@
 | **تحليل حركة المرور المشفرة (ETA)** | **نعم** عبر NM-MDE FlowSpec (دون فك التشفير) | نعم (لكن يتطلب فك تشفير SSL جزئياً) | لا (تعتمد على فك التشفير المباشر) | لا (تعتمد على فك التشفير المباشر) |
 | **كشف BEC النفسي-اللغوي** | **نعم** عبر PLSF (مساهمة أصيلة) | قواعد نصية بسيطة | قواعد نصية بسيطة | قواعد نصية بسيطة |
 | **تصنيف النطاقات بالذكاء الاصطناعي (HDC)** | **نعم** عبر HoloFilter (زمن أقل من ميكروثانية محلياً) | سحابي (يسبب تأخيراً بسيطاً) | سحابي | سحابي |
-| **الدفاع الاستباقي المستند لنظرية الألعاب** | **نعم** عبر ORACLE (Nash Equilibrium) | لا (قرار ثابت: حظر أو تنبيه) | لا | لا |
+| **الدفاع الاستباقي المستند لنظرية الألعاب** | **نعم** عبر AEGIS (Nash Equilibrium) | لا (قرار ثابت: حظر أو تنبيه) | لا | لا |
 | **حظر DNS بضمان صفر إيجابيات كاذبة** | **نعم** عبر DART-DNS Framework | جزئي (يعتمد على القوائم السوداء) | جزئي | جزئي |
 | **التمييز البشري بالتشويش الشبكي (UBA)** | **نعم** (Causal Active Perturbation) | لا (تعتمد على CAPTCHA أو بصمات المتصفح) | لا | لا |
 | **الخداع الديناميكي (Active Deception)** | **نعم** (Generative Decoy Labyrinths) | اختياري (تتطلب تراخيص وأجهزة إضافية) | اختياري (FortiDeceptor منفصل) | اختياري (ThreatCloud) |
@@ -450,7 +451,7 @@ graph TD
 | التهديد | الفئة | الوحدة المعالِجة | المستوى |
 | :--- | :--- | :--- | :---: |
 | DDoS SYN Flood | Network | eBPF SYN Proxy | 🔴 حرج |
-| APT Lateral Movement | Advanced | ORACLE + UBA | 🔴 حرج |
+| APT Lateral Movement | Advanced | AEGIS + UBA | 🔴 حرج |
 | Ransomware عبر HTTPS | Malware | malware_av FlowSpec | 🔴 حرج |
 | BEC مولَّد بـ GPT-4 | Social Eng. | Email PLSF + VSDE | 🔴 حرج |
 | DNS Tunneling تسريب بيانات | Exfiltration | DNS DART | 🔴 حرج |
@@ -604,7 +605,7 @@ class InspectorPlugin:
 | **WAF** | `waf_events`, `waf_training_data` | WAF |
 | **UBA** | `uba_profiles`, `uba_anomaly_events` | UBA |
 | **DLP** | `dlp_events` | DLP |
-| **ORACLE** | `attack_intent_log`, `oracle_decision_log`, `oracle_decoy_log`, `rl_safety_audit_log` | Predictive AI |
+| **AEGIS** | `attack_intent_log`, `AEGIS_decision_log`, `AEGIS_decoy_log`, `rl_safety_audit_log` | Predictive AI |
 | **Infrastructure** | `vpn_sessions`, `qos_policies`, `ssl_inspection_logs`, `proxy_logs` | VPN/QoS/SSL/Proxy |
 
 ## 4.6 تصميم الـ API
@@ -633,7 +634,7 @@ DELETE /api/v1/{module}/{id}     — حذف إدخال
 - **17 لوحة إدارة** لكل وحدة
 - **محرر القواعد:** بناء سياسات أمنية مرئياً
 - **مستعرض التنبيهات:** فرز وتصفية الحوادث
-- **لوحة الـ AI:** تصور قرارات ORACLE ومسارات المهاجمين
+- **لوحة الـ AI:** تصور قرارات AEGIS ومسارات المهاجمين
 
 ## 4.8 مخطط تدفق البيانات
 
@@ -979,20 +980,20 @@ sequenceDiagram
 
 ---
 
-## 5.12 وحدة الذكاء الاصطناعي الاستباقي — ORACLE v3
+## 5.12 وحدة الذكاء الاصطناعي الاستباقي — AEGIS v3
 
 > ### 📄 التوثيق الأصلي الكامل
 >
 > **[predictive_ai_documentation.md](file:///F:/enterprise_ngfw/modules/predictive_ai/predictive_ai_documentation.md)**
 > *(720 سطر — 72,618 byte)*
 
-> ### 📄 الورقة البحثية ORACLE
+> ### 📄 الورقة البحثية AEGIS
 >
-> **[ORACLE_paper_final.md](file:///F:/enterprise_ngfw/modules/predictive_ai/ORACLE_paper_final.md)**
+> **[AEGIS_paper_final.md](file:///F:/enterprise_ngfw/modules/predictive_ai/AEGIS_paper_final.md)**
 
 > ### 📄 نسخة API من الورقة البحثية
 >
-> **[api/ORACLE_paper_final.md](file:///F:/enterprise_ngfw/modules/predictive_ai/predictive_ai_documentation.md)**
+> **[api/AEGIS_paper_final.md](file:///F:/enterprise_ngfw/modules/predictive_ai/predictive_ai_documentation.md)**
 
 ### ملخص الوحدة
 
@@ -1164,7 +1165,7 @@ python scripts/simulate_traffic.py --scenario=sql_injection
 | SQL Injection عبر WAF | WAF → HTTP → Firewall | BLOCK في WAF Layer |
 | BEC Email مولَّد بـ GPT | Email Security (PLSF+VSDE) | QUARANTINE |
 | DNS Tunneling لتسريب | DNS Security (DART) | BLOCK + SINKHOLE |
-| APT Lateral Movement | ORACLE → UBA → Firewall | HONEYPOT + ALERT |
+| APT Lateral Movement | AEGIS → UBA → Firewall | HONEYPOT + ALERT |
 | DDoS SYN Flood | eBPF/XDP → Firewall | XDP_DROP < 1μs |
 | Encrypted C2 Beacon | malware_av (WBS-D) | BLOCK |
 | CSS Zero-Font BEC | Email Security (VSDE) | Force BLOCK |
@@ -1200,7 +1201,7 @@ python modules/email_security/training_pipeline/benchmark.py
 | Email (VSDE) | F1 | > 95% | ✅ 100% |
 | WAF | Inspection | < 50ms | ✅ < 50ms |
 | UBA | Response | < 5ms | ✅ ≤ 2ms |
-| ORACLE | Data-Plane | < 1ms | ✅ 0.3ms |
+| AEGIS | Data-Plane | < 1ms | ✅ 0.3ms |
 | eBPF/XDP | Throughput | Wire-Speed | ✅ μs-level |
 
 ## 6.7 مقاييس التقييم (Evaluation Metrics)
@@ -1253,7 +1254,7 @@ python modules/email_security/training_pipeline/benchmark.py
 | **Kernel (eBPF/XDP)** | **< 1 ميكروثانية** | O(1) بلا تخصيص ذاكرة |
 | **System Control Plane** | **< 1ms** | Ring Buffer + asyncio |
 | **Inspection Pipeline** | **< 10ms** | Async Parallel Processing |
-| **AI Inference (ORACLE)** | **< 1ms** | Async Transformer |
+| **AI Inference (AEGIS)** | **< 1ms** | Async Transformer |
 | **Email Inspection** | **< 500ms** | 7-Layer Pipeline |
 
 ## 7.4 المساهمات البحثية الأصيلة (27 مساهمة)
@@ -1269,7 +1270,7 @@ python modules/email_security/training_pipeline/benchmark.py
 | 21 | HoloFilter HDC | Web Filter | بحث أصيل |
 | 22-25 | Randomized Smoothing, Stateful BiLSTM, Active Deception, GraphQL Defense | WAF | رياضيات + تصميم |
 | 26-28 | Circular Statistics, Causal Perturbation, Deception Labyrinths | UBA | بحث أصيل |
-| 29-33 | TPE Coupling, Bayesian Belief Graph, Hybrid Predictor, Nash Escalation, GNN Lateral | ORACLE | رياضيات + بحث |
+| 29-33 | TPE Coupling, Bayesian Belief Graph, Hybrid Predictor, Nash Escalation, GNN Lateral | AEGIS | رياضيات + بحث |
 
 ## 7.5 نقاط القوة والقيود
 
@@ -1279,7 +1280,7 @@ python modules/email_security/training_pipeline/benchmark.py
 | :--- | :--- |
 | **معمارية موحدة** | 17 وحدة في Pub/Sub framework واحد |
 | **كشف TLS المشفر** | ETA بدون فك تشفير |
-| **استجابة استباقية** | ORACLE يتنبأ قبل الهجوم |
+| **استجابة استباقية** | AEGIS يتنبأ قبل الهجوم |
 | **صفر إيجابيات كاذبة (DNS)** | DART Precision = 1.00 |
 | **مقاومة هجمات AI** | Certified Robustness |
 | **أداء الوقت الفعلي** | eBPF μs + Async ms |
@@ -1313,7 +1314,7 @@ python modules/email_security/training_pipeline/benchmark.py
 
 على الصعيد الهندسي، جمعت المنصة **17 وحدة أمنية متخصصة** تحت معمارية موحدة تستند إلى eBPF/XDP على مستوى النواة ونظام أحداث Pub/Sub على مستوى التطبيق، محققةً معالجة على مستوى السرعة السلكية مع ضمانات Fail-Closed صارمة.
 
-على الصعيد البحثي، قدّمت المنصة **27 مساهمة أصيلة** تتضمن: خوارزمية **PLSF** للكشف النفسي-اللغوي عن BEC، وإطار **FlowSpec** لكشف البرمجيات الخبيثة في حركة TLS المشفرة دون فك التشفير، ومحرك **ORACLE** المستند إلى نظرية الألعاب لاستراتيجية دفاع تمنع تصعيد المهاجم، وإطار **DART-DNS** الذي يضمن رياضياً صفر إيجابيات كاذبة في حجب DNS.
+على الصعيد البحثي، قدّمت المنصة **27 مساهمة أصيلة** تتضمن: خوارزمية **PLSF** للكشف النفسي-اللغوي عن BEC، وإطار **FlowSpec** لكشف البرمجيات الخبيثة في حركة TLS المشفرة دون فك التشفير، ومحرك **AEGIS** المستند إلى نظرية الألعاب لاستراتيجية دفاع تمنع تصعيد المهاجم، وإطار **DART-DNS** الذي يضمن رياضياً صفر إيجابيات كاذبة في حجب DNS.
 
 ## 8.2 الدروس المستفادة
 
@@ -1331,7 +1332,7 @@ python modules/email_security/training_pipeline/benchmark.py
 | :--- | :--- | :---: |
 | **قاعدة البيانات** | الترقية لـ PostgreSQL للإنتاج الكبير | 🔴 عالية |
 | **التوزيع** | Kubernetes deployment + Horizontal Scaling | 🔴 عالية |
-| **ORACLE** | تدريب نماذج Transformer على بيانات هجمات حقيقية | 🟠 متوسطة |
+| **AEGIS** | تدريب نماذج Transformer على بيانات هجمات حقيقية | 🟠 متوسطة |
 | **PLSF** | دعم اللغات الآسيوية (الصينية، اليابانية) | 🟡 منخفضة |
 | **eBPF** | دعم `XDP_REDIRECT` بين كروت الشبكة (AF_XDP) | 🟠 متوسطة |
 | **Web-UI** | تصدير تقارير PDF/Excel لتقارير CISO | 🟡 منخفضة |
@@ -1344,9 +1345,9 @@ python modules/email_security/training_pipeline/benchmark.py
 | :--- | :--- | :--- |
 | نشر **PLSF** كورقة بحثية محكّمة | Email Security | مساهمة في NLP for Security |
 | توسيع **DART-DNS** لتشمل DoH/DoT | DNS Security | حماية DNS المشفر |
-| تحسين **Nash Optimizer** بـ Multi-Agent RL | ORACLE | استراتيجية دفاع أكثر واقعية |
+| تحسين **Nash Optimizer** بـ Multi-Agent RL | AEGIS | استراتيجية دفاع أكثر واقعية |
 | تطبيق **HDC** على تصنيف البرمجيات الخبيثة | malware_av | بديل خفيف للـ Deep Learning |
-| دمج **GNN** مع **Threat Intelligence Feeds** | ORACLE | خرائط تهديد ديناميكية |
+| دمج **GNN** مع **Threat Intelligence Feeds** | AEGIS | خرائط تهديد ديناميكية |
 | **Federated Learning** لنماذج PLSF | Email | تدريب موزع بدون مشاركة البيانات |
 
 ---
@@ -1375,7 +1376,7 @@ python modules/email_security/training_pipeline/benchmark.py
 | :--- | :--- | :--- |
 | PHANTOM Research Paper | [PHANTOM_research_paper.md](file:///F:/enterprise_ngfw/modules/ids_ips/ids_ips_system_documentation.md) | IDS/IPS |
 | DART-DNS Research Paper | [dart_research_paper.md](file:///F:/enterprise_ngfw/modules/dns_security/docs/dart_research_paper.md) | DNS Security |
-| ORACLE Paper Final | [ORACLE_paper_final.md](file:///F:/enterprise_ngfw/modules/predictive_ai/ORACLE_paper_final.md) | Predictive AI |
+| AEGIS Paper Final | [AEGIS_paper_final.md](file:///F:/enterprise_ngfw/modules/predictive_ai/AEGIS_paper_final.md) | Predictive AI |
 | WAF Academic Paper | [waf_academic_paper.md](file:///F:/enterprise_ngfw/modules/waf/waf_enterprise_documentation.md) | WAF |
 | HoloFilter Paper Draft | [HoloFilter_Paper_Draft.md](file:///F:/enterprise_ngfw/modules/web_filter/web_filter_system_documentation.md) | Web Filter |
 | MSEM-Lite Paper Final | [msem_lite_paper_final.md](file:///F:/enterprise_ngfw/modules/dlp/dlp_module_documentation.md) | DLP |
@@ -1564,7 +1565,7 @@ while True:
 ### Performance
 
 | Metric | Value |
-|--------|-------|
+| -------- | ------- |
 | Throughput | 10+ Gbps |
 | Latency | < 10 μs |
 | CPU Overhead | < 5% |
@@ -2203,8 +2204,8 @@ Ready to deploy your BunyanX -grade BunyanX!
 | `malware_av/docs/audit_report.md` | ملحق B | — | تقرير مراجعة |
 | `uba_graduation_documentation.md` | 5 | 5.10 | تنفيذ UBA |
 | `email_security_documentation.md` | 5 | 5.11 | تنفيذ Email Security |
-| `predictive_ai_documentation.md` | 5 | 5.12 | تنفيذ ORACLE |
-| `ORACLE_paper_final.md` | 7, ملحق A | 7.4 | مساهمة بحثية |
+| `predictive_ai_documentation.md` | 5 | 5.12 | تنفيذ AEGIS |
+| `AEGIS_paper_final.md` | 7, ملحق A | 7.4 | مساهمة بحثية |
 | `http_inspection_academic_doc.md` | 5 | 5.13 | تنفيذ HTTP |
 | `web_filter_system_documentation.md` | 5 | 5.14 | تنفيذ Web Filter |
 | `HoloFilter_Paper_Draft.md` | 7, ملحق A | 7.4 | مساهمة بحثية |

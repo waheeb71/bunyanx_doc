@@ -13,14 +13,14 @@ const SITE_ORIGIN = process.env.NEXT_PUBLIC_SITE_URL || 'https://bunyanx-doc.net
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_ORIGIN),
   title: {
-    default: 'منصة BunyanX للأمن السيبراني — الجدار الناري المتقدم للمؤسسات',
-    template: '%s | BunyanX Enterprise NGFW',
+    default: 'BUNYANX — Enterprise NGFW | Cybersecurity Graduation Project',
+    template: '%s | BUNYANX Enterprise NGFW',
   },
-  description: 'بوابة التوثيق الأكاديمي والتقني الشاملة لمشروع تخرج منصة BunyanX Enterprise NGFW. يضم المعمارية الهندسية، وحدات الذكاء الاصطناعي الـ 17، والأبحاث واختبارات الأداء.',
+  description: 'منظومة جدار ناري مؤسسية تجمع بين حماية الشبكة، تحليل التهديدات، وفحص حركة البيانات ضمن بنية أمنية متعددة الطبقات — مشروع التخرج الأكاديمي 2026.',
   keywords: [
-    'BunyanX', 'NGFW', 'Firewall', 'Cybersecurity', 'eBPF', 'XDP', 'IDS', 'IPS',
-    'WAF', 'DLP', 'UEBA', 'ORACLE v3', 'DART', 'SSL Inspection', 'Proxy',
-    'الأمن السيبراني', 'الجدار الناري', 'مشروع التخرج', 'كلية الهندسة'
+    'BUNYANX', 'Enterprise NGFW', 'Next Generation Firewall', 'Cybersecurity',
+    'eBPF', 'XDP', 'PHANTOM', 'IDS', 'IPS', 'WAF', 'DLP', 'UEBA', 'AEGIS v3',
+    'DART', 'SSL Inspection', 'Proxy', 'مشروع تخرج', 'أمن سيبراني', 'جدار ناري'
   ],
   authors: [{ name: 'فريق مشروع BunyanX' }],
   icons: {

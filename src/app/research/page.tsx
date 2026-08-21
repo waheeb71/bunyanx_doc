@@ -23,7 +23,7 @@ export default function ResearchPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {[
           {
-            title: 'خوارزمية ORACLE v3 التنبؤية للتهديدات المستقبلية',
+            title: 'خوارزمية AEGIS v3 التنبؤية للتهديدات المستقبلية',
             desc: 'المساهمة في بناء محرك تجميع للأحداث الأمنية (Clustering) يعتمد على السلاسل الزمنية والتنبؤ بمسارات التسلل قبل وقوعها بنسبة دقة تتجاوز 98.4%.',
             category: 'Predictive AI',
             icon: BrainCircuit,

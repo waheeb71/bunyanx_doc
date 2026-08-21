@@ -207,8 +207,8 @@ const SLUG_MAP: Record<string, {
   },
   'predictive_ai_documentation.md': {
     slug: 'predictive-ai',
-    titleAr: 'وحدة الذكاء الاصطناعي التنبؤي ORACLE v3',
-    titleEn: 'ORACLE v3 Predictive AI Security',
+    titleAr: 'وحدة الذكاء الاصطناعي التنبؤي AEGIS v3',
+    titleEn: 'AEGIS v3 Predictive AI Security',
     categoryAr: 'الذكاء الاصطناعي والتحليل',
     categoryEn: 'AI & Behavioral Analytics',
     moduleId: 'ai',
@@ -249,7 +249,7 @@ function extractHeadings(markdown: string): TocItem[] {
 function extractKeywords(markdown: string): string[] {
   const commonKeywords = [
     'BunyanX', 'NGFW', 'Firewall', 'eBPF', 'XDP', 'PHANTOM', 'IDS', 'IPS', 'WAF',
-    'DLP', 'UEBA', 'UBA', 'ORACLE', 'DART', 'SSL', 'TLS', 'Proxy', 'QoS', 'VPN',
+    'DLP', 'UEBA', 'UBA', 'AEGIS', 'DART', 'SSL', 'TLS', 'Proxy', 'QoS', 'VPN',
     'Email Security', 'Zero Trust', 'Anti-Malware', 'DNS Security', 'Kernel',
     'الجدار الناري', 'الذكاء الاصطناعي', 'الأمن السيبراني', 'مشروع التخرج'
   ];
@@ -276,7 +276,13 @@ export function getAllDocFiles(): string[] {
   return files.filter((f) => f.endsWith('.md'));
 }
 
+let cachedDocs: DocItem[] | null = null;
+
 export async function getAllDocs(): Promise<DocItem[]> {
+  if (cachedDocs) {
+    return cachedDocs;
+  }
+
   const files = getAllDocFiles();
   const docs: DocItem[] = [];
 
@@ -330,7 +336,8 @@ export async function getAllDocs(): Promise<DocItem[]> {
     });
   }
 
-  return docs.sort((a, b) => a.order - b.order);
+  cachedDocs = docs.sort((a, b) => a.order - b.order);
+  return cachedDocs;
 }
 
 export async function getDocBySlug(slug: string): Promise<DocItem | null> {

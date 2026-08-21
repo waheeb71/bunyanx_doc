@@ -1,34 +1,32 @@
 {
-  "siteTitle": "منصة BunyanX للأمن السيبراني",
-  "siteSubTitle": "الجدار الناري المتقدم للمؤسسات — BunyanX Enterprise NGFW",
-  "heroTitle": "بوابة التوثيق الأكاديمي والتقني الشاملة",
-  "heroDescription": "الموقع الرسمي لتوثيق مشروع التخرج الأكاديمي لمنصة BunyanX Enterprise NGFW، يغطي معمارية النظام، وحدات الذكاء الاصطناعي التنبؤية الـ 17، الأبحاث والمساهمات العلمية، واختبارات الأداء.",
-  "readDocs": "قراءة التوثيق الأكاديمي",
-  "browseModules": "استعراض الوحدات الـ 17",
-  "downloadThesis": "تحميل الرسالة الماستر (PDF)",
-  "githubRepo": "مستودع GitHub",
-  "searchPlaceholder": "ابحث في التوثيق... (Ctrl + K)",
-  "stats": {
-    "modules": "وحدة أمنية متكاملة",
-    "files": "ملف توثيق أكاديمي",
-    "lines": "+2300 سطر توثيقي",
-    "aiEngine": "ذكاء اصطناعي تنبؤي",
-    "research": "ابتكارات وأبحاث أكاديمية",
-    "acceleration": "تسريع eBPF / XDP"
-  },
+  "siteTitle": "BUNYANX — Enterprise NGFW",
+  "siteSubTitle": "منظومة جدار ناري مؤسسية متعددة الطبقات — مشروع التخرج الأكاديمي 2026",
+  "heroTitle": "BUNYANX Enterprise NGFW",
+  "heroTagline": "Cybersecurity Graduation Project — 2026",
+  "heroDescription": "منظومة جدار ناري مؤسسية تجمع بين حماية الشبكة، تحليل التهديدات، وفحص حركة البيانات ضمن بنية أمنية متعددة الطبقات.",
+  "exploreSystem": "استكشف المنظومة",
+  "viewArchitecture": "المعمارية الهندسية",
+  "viewDocs": "التوثيقات والأدلة",
+  "searchPlaceholder": "بحث سريع في الوثائق والوحدات... (Ctrl + K)",
   "nav": {
     "home": "الرئيسية",
-    "documentation": "التوثيق الأكاديمي",
+    "overview": "عن المشروع",
+    "architecture": "المعمارية",
     "modules": "الوحدات الأمنية",
-    "architecture": "معمارية النظام",
-    "pipeline": "خط سير الحزمة",
-    "research": "الأبحاث والابتكارات",
-    "downloads": "مركز التحميلات",
-    "about": "عن المشروع",
-    "contributors": "فريق العمل",
-    "contact": "الاتصال والتعاون",
-    "faq": "الأسئلة الشائعة",
-    "updates": "سجل الإصدارات"
+    "demo": "العروض والأدلة",
+    "testing": "الاختبارات والنتائج",
+    "documentation": "التوثيق",
+    "team": "فريق العمل",
+    "downloads": "التحميلات",
+    "contact": "الاتصال"
+  },
+  "stats": {
+    "modules": "وحدة أمنية متكاملة",
+    "docs": "وثيقة أكاديمية معتمدة",
+    "latency": "زمن معالجة eBPF",
+    "ai": "ذكاء اصطناعي تنبؤي",
+    "class": "دفعة التخرج",
+    "architecture": "طبقات دفاع متكاملة"
   },
   "docTools": {
     "toc": "جدول المحتويات",
@@ -39,22 +37,21 @@
     "lastUpdated": "آخر تحديث",
     "printPage": "طباعة الصفحة",
     "downloadPdf": "تحميل كـ PDF",
-    "copyLink": "نسخ الرابط المباشر",
-    "copied": "تم النسخ!",
+    "copyLink": "نسخ الرابط",
+    "copied": "تم النسخ بنجاح!",
     "previous": "الوثيقة السابقة",
     "next": "الوثيقة التالية",
     "feedback": "هل كان هذا التوثيق مفيداً؟",
     "yes": "نعم، مفيد جداً",
-    "no": "يحتاج تحسين",
-    "aiSummary": "الملخص التلقائي الذكي",
-    "keywords": "الكلمات المفتاحية المستخرجة",
-    "relatedDocs": "وثائق ذات صلة وموصى بها"
+    "no": "يحتاج توضيحاً إضافياً",
+    "aiSummary": "الملخص الأوتوماتيكي للتوثيق الأكاديمي",
+    "keywords": "الكلمات المفتاحية",
+    "relatedDocs": "وثائق ذات صلة"
   },
   "footer": {
-    "quickLinks": "روابط سريعة",
-    "resources": "المصادر والتحميلات",
-    "academicInfo": "معلومات المشروع الأكاديمي",
-    "university": "كلية الهندسة — قسم الامن السيبراني ",
-    "copyright": "جميع الحقوق محفوظة منصة BunyanX Enterprise NGFW © 2026"
+    "quickLinks": "أقسام المنظومة",
+    "resources": "الأدلة والتوثيق",
+    "university": "كلية الهندسة — قسم الامن السيبراني",
+    "copyright": "مشروع تخرج BUNYANX Enterprise NGFW © 2026 — جميع الحقوق محفوظة"
   }
 }

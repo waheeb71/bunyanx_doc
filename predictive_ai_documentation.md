@@ -1,6 +1,6 @@
 # وثيقة التوثيق الهندسي والأكاديمي الشامل
 
-## وحدة الذكاء الاصطناعي الاستباقي (Predictive AI) - محرك ORACLE v3
+## وحدة الذكاء الاصطناعي الاستباقي (Predictive AI) - محرك AEGIS v3
 
 ### مشروع التخرج الهندسي: منصة الجدار الناري المتقدمة للمؤسسات (Enterprise NGFW Cybersecurity Platform)
 
@@ -8,7 +8,7 @@
 
 ## 1. المقدمة (INTRODUCTION)
 
-تُمثل وحدة الذكاء الاصطناعي الاستباقي (Predictive AI) العقل التخطيطي الحركي لمنصة الجدار الناري للمؤسسات (Enterprise NGFW). يستند تصميم وتطوير هذه الوحدة إلى إطار العمل البحثي **ORACLE** (Online Reasoning Anticipation Counter-attack Layer Engine) في إصداره الثالث، وهو نظام دفاع شبكي مغلق ثنائي المراحل يهدف إلى سد "الفجوة الاستراتيجية-التشغيلية" (Strategic-Operational Gap) في أنظمة الدفاع السيبراني الحديثة.
+تُمثل وحدة الذكاء الاصطناعي الاستباقي (Predictive AI) العقل التخطيطي الحركي لمنصة الجدار الناري للمؤسسات (Enterprise NGFW). يستند تصميم وتطوير هذه الوحدة إلى إطار العمل البحثي **AEGIS** (Online Reasoning Anticipation Counter-attack Layer Engine) في إصداره الثالث، وهو نظام دفاع شبكي مغلق ثنائي المراحل يهدف إلى سد "الفجوة الاستراتيجية-التشغيلية" (Strategic-Operational Gap) في أنظمة الدفاع السيبراني الحديثة.
 
 تاريخياً، تعاني أنظمة الجدار الناري وكشف التسلل (IDS/IPS) من كونها أنظمة "رد فعل" (Reactive) صماء، حيث تبدأ التحليل فقط بعد رصد أنشطة معادية وتنفذ حظراً جافاً للمصادر. هذا النهج يسهل تجاوزه من قبل التهديدات المتقدمة المستمرة (APTs) التي تلجأ لتقنيات بطيئة وخفية (Slow-and-Low). تعالج وحدة `predictive_ai` هذه المعضلة من خلال معمارية ذكية تتنبأ باحتمالية الهجمات قبل حدوثها (Stage 1)، وتتوقع الخطوات التالية للمهاجم أثناء الاختراق الفعلي عبر التعلم الآلي القائم على المحولات (Transformers) ونظرية الألعاب (Game Theory) لاتخاذ قرارات دفاعية ناضجة تحرم المهاجم من تحقيق أهدافه دون التسبب في تصعيده (Stage 2).
 
@@ -124,7 +124,7 @@ graph TD
         EngineTPE --> PreArm[توجيه التسليح المسبق Pre-Arm Directive]
     end
 
-    subgraph Stage2 ["المرحلة الثانية: الاستجابة التكيفية المغلقة (ORACLE Engine)"]
+    subgraph Stage2 ["المرحلة الثانية: الاستجابة التكيفية المغلقة (AEGIS Engine)"]
         WAF -- حدث أمني --> ASE[مقدّر الحالة العدائية ASE]
         ASE -- توزيع الاعتقاد البايزي --> GNN[محاكي التحرك الجانبي GNN]
         GNN -- احتمالات التداخل الطوبولوجي --> AIS[محاكي النية العدائية AIS]
@@ -153,7 +153,7 @@ graph TD
 
 تتكامل وحدة `predictive_ai` بشكل وثيق مع المكونات التالية في المنصة:
 
-* [engine.py](file:///f:/enterprise_ngfw/system/core/engine.py): يستقبل محرك التطبيق العام القرارات الصادرة عن `OracleEngine` ويمرر الأحداث الأمنية المكتشفة بالشبكة إليه.
+* [engine.py](file:///f:/enterprise_ngfw/system/core/engine.py): يستقبل محرك التطبيق العام القرارات الصادرة عن `AEGISEngine` ويمرر الأحداث الأمنية المكتشفة بالشبكة إليه.
 * [flow_tracker.py](file:///f:/enterprise_ngfw/system/core/flow_tracker.py): يزود المحرك بمعلومات تدفق البيانات وحجم الاتصالات المشبوهة لتحليل الـ UEBA.
 * [database.py](file:///f:/enterprise_ngfw/system/database/database.py): يوفر جلسات الاتصال بقاعدة البيانات لتسجيل الأحداث وتخزين القرارات وحفظ التكوين الديناميكي للمحرك.
 
@@ -166,14 +166,14 @@ graph TD
 ### أ. الانتقال من نماذج LSTM إلى نماذج Transformer في طبقة التنبؤ (AIS)
 
 * **البديل:** الحفاظ على شبكة الذاكرة قصيرة المدى المطورة سابقاً (BiLSTM).
-* **القرار:** بناء نموذج [attention_predictor.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/oracle/intent/attention_predictor.py) مستنداً إلى 2-layer Transformer Encoder بـ 4 رؤوس انتباه ذاتي ونطاق ذاكرة أكبر (10 أحداث بدلاً من 5).
+* **القرار:** بناء نموذج [attention_predictor.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/AEGIS/intent/attention_predictor.py) مستنداً إلى 2-layer Transformer Encoder بـ 4 رؤوس انتباه ذاتي ونطاق ذاكرة أكبر (10 أحداث بدلاً من 5).
 * **السبب الهندسي والأثر:**
   * *المزايا:* قدرة الـ Transformer على ربط الأحداث المتباعدة زمنياً بمسار ذو طول ثابت $\mathcal{O}(1)$، مما يمكنه من ربط عمليات الاستطلاع المبكرة بعمليات الاستخراج المتأخرة وهو ما تفشل فيه خلايا LSTM ذات التدفق المتسلسل. كما يتيح استخراج مصفوفات الانتباه لتقديم تفسيرات واضحة للمهندسين.
   * *العيوب والأثر:* زيادة طفيفة في حجم النموذج على القرص ($542$ كيلوبايت) وزمن استدلال المعالج ($0.49$ مللي ثانية) مقارنة بالـ LSTM ($0.27$ مللي ثانية)، ولكن هذا التأثير تم عزله كلياً عن مسار البيانات المتزامن عبر تشغيل الاستدلال بشكل غير متزامن.
 
 ### ب. دمج طبقة معالجة الرسوم البيانية للتحركات الجانبية (GNN Layer 2.5)
 
-* **القرار:** حقن تنبؤات شبكة عصبية رسومية (Graph Neural Network) مدمجة [gnn.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/oracle/topology/gnn.py) لتحليل اتجاهات الهجوم التوبولوجية للشبكة بدلاً من التحليل التسلسلي المحض للأحداث.
+* **القرار:** حقن تنبؤات شبكة عصبية رسومية (Graph Neural Network) مدمجة [gnn.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/AEGIS/topology/gnn.py) لتحليل اتجاهات الهجوم التوبولوجية للشبكة بدلاً من التحليل التسلسلي المحض للأحداث.
 * **المزايا:** تنبؤ دقيق بالأجهزة الأكثر عرضة للاستهداف التالي بالاعتماد على مسارات الشبكة المتاحة وقربها من الأجهزة المخترقة، وتخطي جمود النماذج التسلسلية التي لا تفهم طوبولوجيا الأنظمة.
 
 ---
@@ -182,14 +182,14 @@ graph TD
 
 تتوزع مهام المحرك داخلياً على كلاسات متخصصة تؤدي كل منها دوراً محورياً:
 
-* `OracleEngine` ([oracle_engine.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/oracle/core/oracle_engine.py)): المنسق العام للمحرك، يستقبل الأحداث عبر دالة `process_event` ويقود خط التنبؤ والاستجابة.
+* `AEGISEngine` ([AEGIS_engine.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/AEGIS/core/AEGIS_engine.py)): المنسق العام للمحرك، يستقبل الأحداث عبر دالة `process_event` ويقود خط التنبؤ والاستجابة.
 * `ThreatProbabilityEngine` ([threat_probability_engine.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/tpe/threat_probability_engine.py)): ينفذ تقييمات المرحلة الأولى لحساب احتمالية الهجمات.
-* `AdversarialStateEstimator` ([estimator.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/oracle/state/estimator.py)): يدير مرشح بايز لتحديث مستويات الثقة بتموقع المهاجم على خط الدفاع.
-* `TTPTransformerPredictor` ([attention_predictor.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/oracle/intent/attention_predictor.py)): محرك التنبؤ العصبي القائم على الـ Transformer المفسر.
-* `GNNLateralPredictor` ([gnn.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/oracle/topology/gnn.py)): محرك تقييم مخاطر التحرك الجانبي توبولوجياً.
-* `CounterStrategyOptimizer` ([optimizer.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/oracle/strategy/optimizer.py)): يحدد أفضل رد دفاعي باستخدام خوارزميات نظرية الألعاب وحساب أوزان ميزانية المخاطر.
-* `UEBAVerifier` ([verifier.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/oracle/ueba/verifier.py)): يفحص شذوذ العمليات ويتأكد من ملاءمة القرار المتخذ لسجل المستخدم لتجنب قطع الأعمال.
-* `DeceptionInjectionEngine` ([injector.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/oracle/deception/injector.py)): يحدد مصيدة الخداع الملائمة ويرسل تعليمات النشر للشبكة.
+* `AdversarialStateEstimator` ([estimator.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/AEGIS/state/estimator.py)): يدير مرشح بايز لتحديث مستويات الثقة بتموقع المهاجم على خط الدفاع.
+* `TTPTransformerPredictor` ([attention_predictor.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/AEGIS/intent/attention_predictor.py)): محرك التنبؤ العصبي القائم على الـ Transformer المفسر.
+* `GNNLateralPredictor` ([gnn.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/AEGIS/topology/gnn.py)): محرك تقييم مخاطر التحرك الجانبي توبولوجياً.
+* `CounterStrategyOptimizer` ([optimizer.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/AEGIS/strategy/optimizer.py)): يحدد أفضل رد دفاعي باستخدام خوارزميات نظرية الألعاب وحساب أوزان ميزانية المخاطر.
+* `UEBAVerifier` ([verifier.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/AEGIS/ueba/verifier.py)): يفحص شذوذ العمليات ويتأكد من ملاءمة القرار المتخذ لسجل المستخدم لتجنب قطع الأعمال.
+* `DeceptionInjectionEngine` ([injector.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/AEGIS/deception/injector.py)): يحدد مصيدة الخداع الملائمة ويرسل تعليمات النشر للشبكة.
 
 ---
 
@@ -200,11 +200,11 @@ graph TD
 | كائن البيانات / الموديل | النوع البرمجي | الدور والوظيفة | الحقول الرئيسية وعلاقاتها |
 | :--- | :--- | :--- | :--- |
 | `PredictiveAIConfig` | SQLAlchemy Model | حفظ وتعديل إعدادات تشغيل محركات الذكاء الاصطناعي بشكل ديناميكي. | `id` (PK), `is_active`, `enable_forecaster`, `alert_on_high_risk`, `enable_rl_agent` |
-| `OracleResult` | Dataclass / DTO | تداول نتيجة دورة الاستدلال الحالية متضمنة كافة تفاصيل التنبؤ والاستجابة. | `src_ip`, `event_type`, `belief_state` (BeliefState), `ttp_distribution`, `counter_strategy` (CounterStrategy), `decoy_directive` |
+| `AEGISResult` | Dataclass / DTO | تداول نتيجة دورة الاستدلال الحالية متضمنة كافة تفاصيل التنبؤ والاستجابة. | `src_ip`, `event_type`, `belief_state` (BeliefState), `ttp_distribution`, `counter_strategy` (CounterStrategy), `decoy_directive` |
 | `AttackIntentLog` | SQLAlchemy Model | أرشفة توقعات النوايا السيبرانية للمهاجمين في قاعدة البيانات للتدقيق التاريخي. | `id` (PK), `timestamp`, `src_ip`, `predicted_ttp`, `confidence`, `action` |
 | `RLSafetyAuditLog` | SQLAlchemy Model | تدقيق قرارات طبقة الحماية والتأكد من مطابقتها لميزانية المخاطر المعتمدة. | `id` (PK), `timestamp`, `action_proposed`, `action_taken`, `budget_before`, `budget_after`, `safety_triggered` |
-| `OracleDecisionLog` | SQLAlchemy Model | حفظ تفصيلي لكل دورة استدلال لمحرك ORACLE متبوعة بالتبريرات الفنية والدفاعات المطبقة. | `id` (PK), `timestamp`, `src_ip`, `event_type`, `belief_state` (Text), `predicted_ttp_dist` (Text), `counter_strategy`, `action_explanation` |
-| `OracleDecoyLog` | SQLAlchemy Model | تتبع ومراقبة نشاط وحياة المصائد الشبكية المزروعة للمهاجمين. | `id` (PK), `decoy_id` (Index), `src_ip`, `stage`, `decoy_ip`, `fake_service`, `fake_port`, `interaction_count` |
+| `AEGISDecisionLog` | SQLAlchemy Model | حفظ تفصيلي لكل دورة استدلال لمحرك AEGIS متبوعة بالتبريرات الفنية والدفاعات المطبقة. | `id` (PK), `timestamp`, `src_ip`, `event_type`, `belief_state` (Text), `predicted_ttp_dist` (Text), `counter_strategy`, `action_explanation` |
+| `AEGISDecoyLog` | SQLAlchemy Model | تتبع ومراقبة نشاط وحياة المصائد الشبكية المزروعة للمهاجمين. | `id` (PK), `decoy_id` (Index), `src_ip`, `stage`, `decoy_ip`, `fake_service`, `fake_port`, `interaction_count` |
 
 ---
 
@@ -227,10 +227,10 @@ F:\enterprise_ngfw\modules\predictive_ai
 │   │   ├── sentiment_cti_feed.py  # محاكاة تغذية Darkweb وتحليل المشاعر التهديدية
 │   │   ├── threat_intel_feed.py   # بروتوكول استلام استخبارات التهديدات CTI
 │   │   └── threat_probability_engine.py  # الكود الرياضي المنفذ للـ TPE
-│   └── oracle/                    # محرك الاستجابة التكيفية المغلقة (Stage 2)
+│   └── AEGIS/                    # محرك الاستجابة التكيفية المغلقة (Stage 2)
 │       ├── core/
 │       │   ├── constants.py       # ثوابت وأوزان دالة المنفعة للألعاب
-│       │   └── oracle_engine.py   # المنسق العام للمحرك (Entry point)
+│       │   └── AEGIS_engine.py   # المنسق العام للمحرك (Entry point)
 │       ├── deception/
 │       │   └── injector.py        # مولد تعليمات المصائد الشبكية الذكية
 │       ├── intent/
@@ -268,7 +268,7 @@ F:\enterprise_ngfw\modules\predictive_ai
 
 ## 11. تحليل سير العمل (WORKFLOW ANALYSIS)
 
-يوضح المخطط التالي دورة معالجة الحدث الأمني لحظة بلحظة داخل محرك ORACLE:
+يوضح المخطط التالي دورة معالجة الحدث الأمني لحظة بلحظة داخل محرك AEGIS:
 
 ```mermaid
 flowchart TD
@@ -314,7 +314,7 @@ sequenceDiagram
     actor Attacker as الهاكر (المهاجم)
     participant Kernel as مصفاة النواة eBPF/XDP
     participant Core as النظام المركزي bunyanx
-    participant Engine as محرك ORACLE Engine
+    participant Engine as محرك AEGIS Engine
     participant UEBA as بوابة السلوكيات UEBA
     participant DIE as محرك الخداع DIE
     participant DB as قاعدة البيانات DB
@@ -340,8 +340,8 @@ sequenceDiagram
         DIE-->>Engine: تفاصيل المصيدة المنشورة (Decoy IP)
     end
     
-    Engine->>DB: تدوين سجل القرار (OracleDecisionLog)
-    Engine-->>Core: إرجاع النتيجة الكاملة (OracleResult)
+    Engine->>DB: تدوين سجل القرار (AEGISDecisionLog)
+    Engine-->>Core: إرجاع النتيجة الكاملة (AEGISResult)
     Core->>Kernel: تحديث القواعد النشطة للفلترة (قائمة الحظر/التحويل)
     Kernel->>Attacker: تحويل مسار الاتصال آلياً لعنوان المصيدة (Decoy IP)
 ```
@@ -385,16 +385,16 @@ graph LR
 | :--- | :--- | :--- | :--- |
 | `tpe.thresholds.pre_arm_trigger` | عتبة حساب درجة الخطر المسبق لتفعيل وضع الحساسية العالية. | `0.65` | خفض القيمة يزيد من تحفز الجدار الناري والتأهب المبكر، بينما رفعها يمنع التسلح التلقائي إلا في بيئات شديدة الخطورة. |
 | `tpe.thresholds.honeypot_deploy` | الحد الأدنى لدرجة التهديد المسبق لنشر المصائد بشكل استباقي. | `0.80` | خفضها يؤدي لنشر مبكر للـ Decoys مما قد يستهلك موارد الشبكة، ورفعها يقيد نشر المصائد إلا للمؤسسات المستهدفة بوضوح. |
-| `oracle.cso_weights.lambda_escalation` | الوزن الرياضي لعقوبة خطر تصعيد المهاجم ($\lambda$) في دالة المنفعة. | `2.0` | خفض القيمة إلى `0` يلغي خوف النظام من التصعيد ويجعله يلجأ للحظر الجاف فوراً، ورفعها يجبر النظام على تفضيل الخداع والمراقبة الناعمة دائماً. |
-| `oracle.sensitivity.normal_threshold` | عتبة التدخل الدفاعي الافتراضية لتنفيذ القرارات في الحالات العادية. | `0.55` | زيادة القيمة تجعل الدفاع محافظاً للغاية مما يتيح استمرار بعض الاختراقات، وخفضها يجعل الجدار الناري عدائياً وقد يرفع الإنذارات الكاذبة. |
-| `oracle.sensitivity.high_threshold` | عتبة التدخل عند تفعيل وضع التأهب المسبق (Pre-armed). | `0.40` | تعمل تلقائياً عند استشعار خطر تنظيمي داهم لضمان اقتناص التهديدات الضعيفة الإشارة. |
-| `oracle.state_estimator.decay_alpha` | معامل تلاشي الاعتقادات البايزية القديمة للمهاجمين مع الوقت. | `0.15` | رفع المعامل يسرع نسيان نشاط الهاكر الخامل مما يفيد ضد الـ IPs الديناميكية، وخفضه يحفظ السجل التاريخي لفترات طويلة. |
+| `AEGIS.cso_weights.lambda_escalation` | الوزن الرياضي لعقوبة خطر تصعيد المهاجم ($\lambda$) في دالة المنفعة. | `2.0` | خفض القيمة إلى `0` يلغي خوف النظام من التصعيد ويجعله يلجأ للحظر الجاف فوراً، ورفعها يجبر النظام على تفضيل الخداع والمراقبة الناعمة دائماً. |
+| `AEGIS.sensitivity.normal_threshold` | عتبة التدخل الدفاعي الافتراضية لتنفيذ القرارات في الحالات العادية. | `0.55` | زيادة القيمة تجعل الدفاع محافظاً للغاية مما يتيح استمرار بعض الاختراقات، وخفضها يجعل الجدار الناري عدائياً وقد يرفع الإنذارات الكاذبة. |
+| `AEGIS.sensitivity.high_threshold` | عتبة التدخل عند تفعيل وضع التأهب المسبق (Pre-armed). | `0.40` | تعمل تلقائياً عند استشعار خطر تنظيمي داهم لضمان اقتناص التهديدات الضعيفة الإشارة. |
+| `AEGIS.state_estimator.decay_alpha` | معامل تلاشي الاعتقادات البايزية القديمة للمهاجمين مع الوقت. | `0.15` | رفع المعامل يسرع نسيان نشاط الهاكر الخامل مما يفيد ضد الـ IPs الديناميكية، وخفضه يحفظ السجل التاريخي لفترات طويلة. |
 
 ---
 
 ## 15. تحليل التكامل (INTEGRATION ANALYSIS)
 
-يتكامل محرك ORACLE مع بقية أجزاء منصة الجدار الناري كـ "صندوق أسود ذكي" لتجنب تعقيد الاعتماديات:
+يتكامل محرك AEGIS مع بقية أجزاء منصة الجدار الناري كـ "صندوق أسود ذكي" لتجنب تعقيد الاعتماديات:
 
 * **التكامل مع جدار الحماية (Firewall & eBPF/XDP Data path):**
   * عندما يقرر المحرك اتخاذ إجراء حظر أو تحويل مسار (`HONEYPOT_REDIRECT`)، يرسل المحرك تعليمة برمجية عبر قناة اتصال سريعة (Ring Buffer) إلى مشغل الـ eBPF في النواة لتعديل جدول التحويل وتوجيه الحزم المشبوهة لعنوان الـ Decoy IP المناسب فورياً دون أي تأخير إضافي لحزم البيانات الأخرى.
@@ -414,16 +414,16 @@ graph LR
 | `/api/v1/ai/config` | `GET` | لا يوجد | كائن إعدادات المحرك الحالي (ConfigSchema). | JWT Token | مستخدم بصلاحية `ai` أو مسؤول النظام. |
 | `/api/v1/ai/config` | `PUT` | كائن التعديل الجديد (ConfigSchema) | كائن الإعدادات المحدث بنجاح. | JWT Token | مسؤول النظام فقط (Admin). |
 | `/api/v1/ai/threat-assessment` | `POST` | ملف تعريف المؤسسة الفني (ThreatAssessmentRequest) | تقرير الخطر التفصيلي ودرجة الـ ThreatScore وتوجيهات الخداع. | JWT Token | مستخدم بصلاحية `ai`. |
-| `/api/v1/ai/oracle/belief/{src_ip}` | `GET` | IP المراد تتبعه. | توزيع الاعتقاد البايزي الحالي عبر مراحل سلسلة القتل والـ entropy. | JWT Token | مستخدم بصلاحية `ai`. |
-| `/api/v1/ai/oracle/decisions` | `GET` | معلمة تحديد العدد `limit` (الحد الأقصى 200). | آخر N قرارات اتخذها المحرك متضمنة التبريرات والتكتيك المتوقع والمصائد. | JWT Token | مستخدم بصلاحية `ai`. |
-| `/api/v1/ai/oracle/deception/active` | `GET` | لا يوجد | قائمة بالمصائد النشطة حالياً وعناوينها (Decoy IPs) ومعدل تفاعل الهاكرز معها. | JWT Token | مستخدم بصلاحية `ai`. |
-| `/api/v1/ai/oracle/health` | `GET` | لا يوجد | الحالة الفنية لتشغيل المكونات الفرعية (ASE, AIS, CSO, DIE, UEBA). | JWT Token | مستخدم بصلاحية `ai`. |
+| `/api/v1/ai/AEGIS/belief/{src_ip}` | `GET` | IP المراد تتبعه. | توزيع الاعتقاد البايزي الحالي عبر مراحل سلسلة القتل والـ entropy. | JWT Token | مستخدم بصلاحية `ai`. |
+| `/api/v1/ai/AEGIS/decisions` | `GET` | معلمة تحديد العدد `limit` (الحد الأقصى 200). | آخر N قرارات اتخذها المحرك متضمنة التبريرات والتكتيك المتوقع والمصائد. | JWT Token | مستخدم بصلاحية `ai`. |
+| `/api/v1/ai/AEGIS/deception/active` | `GET` | لا يوجد | قائمة بالمصائد النشطة حالياً وعناوينها (Decoy IPs) ومعدل تفاعل الهاكرز معها. | JWT Token | مستخدم بصلاحية `ai`. |
+| `/api/v1/ai/AEGIS/health` | `GET` | لا يوجد | الحالة الفنية لتشغيل المكونات الفرعية (ASE, AIS, CSO, DIE, UEBA). | JWT Token | مستخدم بصلاحية `ai`. |
 
 ---
 
 ## 17. تحليل قاعدة البيانات (DATABASE ANALYSIS)
 
-يرتبط محرك ORACLE بنظام قواعد البيانات من خلال الجداول المعرفة في كود [**init**.py](file:///f:/enterprise_ngfw/modules/predictive_ai/models/__init__.py):
+يرتبط محرك AEGIS بنظام قواعد البيانات من خلال الجداول المعرفة في كود [**init**.py](file:///f:/enterprise_ngfw/modules/predictive_ai/models/__init__.py):
 
 ```mermaid
 erDiagram
@@ -453,7 +453,7 @@ erDiagram
         float budget_after
         bool safety_triggered
     }
-    oracle_decision_logs {
+    AEGIS_decision_logs {
         int id PK
         datetime timestamp
         string src_ip
@@ -465,7 +465,7 @@ erDiagram
         bool decoy_deployed
         text decoy_details
     }
-    oracle_decoy_logs {
+    AEGIS_decoy_logs {
         int id PK
         datetime timestamp
         string decoy_id
@@ -481,7 +481,7 @@ erDiagram
 
 * **الفهارس والعلاقات (Indexes & Relations):**
   * تم إنشاء فهارس بحث سريعة (Database Indexes) على حقل `src_ip` في جداول السجلات وجداول الخداع لتسريع عملية البحث والاسترجاع خلال الاستعلامات المتكررة للآي بي المهاجم.
-  * جدول `oracle_decision_logs` يرتبط منطقياً بجدول `oracle_decoy_logs` عبر الحقل `src_ip` و `timestamp` لتتبع العلاقة بين القرار الدفاعي المتخذ والمصيدة التي تم نشرها وتفاعل المهاجم معها.
+  * جدول `AEGIS_decision_logs` يرتبط منطقياً بجدول `AEGIS_decoy_logs` عبر الحقل `src_ip` و `timestamp` لتتبع العلاقة بين القرار الدفاعي المتخذ والمصيدة التي تم نشرها وتفاعل المهاجم معها.
 
 ---
 
@@ -502,7 +502,7 @@ erDiagram
 
 ## 19. المراقبة والملاحظة (MONITORING & OBSERVABILITY)
 
-يوفر كلاس `OracleEngine` مصفوفة صحة شاملة للتحقق اللحظي عبر دالة `health_check()`:
+يوفر كلاس `AEGISEngine` مصفوفة صحة شاملة للتحقق اللحظي عبر دالة `health_check()`:
 
 1. **دقة التنبؤ النشطة (AIS Accuracy):** قياس الفارق بين تنبؤات المودل وما تم فعلياً من خلال دالة `get_accuracy_report()`.
 2. **حجم استهلاك الذاكرة المؤقتة (ASE Utilization):** نسبة امتلاء ذاكرة مرشح بايز (Tracked IPs count / Max Capacity) للتحقق من عدم حدوث فيضان الذاكرة.
@@ -575,7 +575,7 @@ graph TD
 
 ## 22. تحليل الأداء (PERFORMANCE ANALYSIS)
 
-تتميز منصة ORACLE بفصل معمارية مسار الاستدلال بشكل كامل لتلبية متطلبات بيئات الإنتاج عالية التدفق:
+تتميز منصة AEGIS بفصل معمارية مسار الاستدلال بشكل كامل لتلبية متطلبات بيئات الإنتاج عالية التدفق:
 
 * **زمن استجابة النواة (Kernel-level Data plane latency):**
   * يعمل مرشح الحزم eBPF المكتوب بـ C في حدود **$0.27$ مللي ثانية** لتمرير وحظر وتوجيه الحزم المشروعة، مما يضمن تدفق البيانات بسرعة خط الاتصال دون تأثر بالعمليات الحسابية الذكية.
@@ -591,7 +591,7 @@ graph TD
 ### حالة الاستخدام الأولى: التصدي لحملة اختراق تكتيكية من APT29
 
 * **الجهة الفاعلة (Actor):** مهاجم خارجي متقدم مستمر (APT29).
-* **الشروط المسبقة (Preconditions):** تفعيل محرك ORACLE v3 وربطه بـ CTI تشير لوجود حملات لقطاع البنوك.
+* **الشروط المسبقة (Preconditions):** تفعيل محرك AEGIS v3 وربطه بـ CTI تشير لوجود حملات لقطاع البنوك.
 * **سير العمل (Workflow):**
     1. يطلق المهاجم فحصاً بطيئاً للمنافذ (SCAN)؛ يسجل ASE الاعتقاد بنسبة 90% في مرحلة Reconnaissance.
     2. يقوم المهاجم بمحاولة استغلال ثغرة ويب؛ يتوقع AIS باستخدام Transformer استهداف قاعدة البيانات تالياً.
@@ -622,7 +622,7 @@ graph TD
   * اختبار تكامل واجهات FastAPI والتصريح بالوصول ومستويات الحماية داخل [test_api.py](file:///f:/enterprise_ngfw/tests/unit/test_api.py).
 * **اختبارات التكامل الفني (Integration & System Testing):**
   * استخدام اختبارات هجينة متكاملة لتدفق الحزم من النواة إلى المصيدة الوهمية داخل [test_event_flow.py](file:///f:/enterprise_ngfw/tests/integration/test_event_flow.py).
-  * إخضاع النظام لاختبار محاكاة حملات الاختراق الكاملة (APT29) والتحقق من بقاء المهاجم بالمصيدة باستخدام سيناريوهات **ORACLEBench-v3**.
+  * إخضاع النظام لاختبار محاكاة حملات الاختراق الكاملة (APT29) والتحقق من بقاء المهاجم بالمصيدة باستخدام سيناريوهات **AEGISBench-v3**.
 
 ---
 
@@ -635,7 +635,7 @@ graph TD
 | **تقييم TPE للبنوك في مناطق النزاع** | قطاع: `BANKING` منطق جيوسياسية: `WAR_ZONE` | نتيجة الـ ThreatScore تتجاوز العتبة `0.75` (خطر عالٍ). | استدعاء دالة `assess` وتأكيد تفعيل Pre-arm Directive للمحرك. | **حرجة (Critical)** |
 | **تحديث اعتقاد مرشح بايز ASE** | إرسال حدث متتابع: `SCAN` يتبعه `WAF_EXPLOIT` | مرحلة الاعتقاد الأعلى تصبح `INITIAL_ACCESS` بقيمة ثقة > 70%. | التحقق من مخرجات دالة `observe` ومقارنتها بتتابع أحداث الـ IPs. | **عالية (High)** |
 | **تجاوز الإنذار الكاذب للموظف** | حدث: `DLP_EXFIL` حجم نقل البيانات: 500GB تطابق Baseline مجدول. | إصدار قرار `OVERRIDE` وتخفيض الإجراء المطبق إلى `MONITOR`. | التحقق من تفعيل دالة `verify` لـ UEBAVerifier ومخرجات الـ Verdict. | **عالية (High)** |
-| **آلية الاحتياط الآمن Fail-safe** | إغلاق أو تعطل خدمات محرك ORACLE بشكل مفاجئ. | تراجع النظام لتطبيق سياسات الحظر الصلبة التقليدية للجدار الناري. | التحقق من اعتراض أخطاء الاستدلال وتحويل المعالجة للوضع الآمن المباشر. | **حرجة (Critical)** |
+| **آلية الاحتياط الآمن Fail-safe** | إغلاق أو تعطل خدمات محرك AEGIS بشكل مفاجئ. | تراجع النظام لتطبيق سياسات الحظر الصلبة التقليدية للجدار الناري. | التحقق من اعتراض أخطاء الاستدلال وتحويل المعالجة للوضع الآمن المباشر. | **حرجة (Critical)** |
 
 ---
 
@@ -670,7 +670,7 @@ graph TD
 تم تصميم الوحدة وفق معايير هندسية متطورة لتسهيل أعمال التطوير المستقبلية:
 
 * **نمط التصميم الفاصل (Facade Design Pattern):**
-  * يعمل كلاس `OracleEngine` كواجهة وحيدة مغلفة تخفي خلفها تفاصيل العمليات المعقدة للمحركات الفرعية (ASE, AIS, CSO, DIE, UEBA). هذا يتيح ترقية أو تعديل أي محرك فرعي بشكل مستقل دون إدخال أي كسر برمجي في الأنظمة المركزية للجدار الناري.
+  * يعمل كلاس `AEGISEngine` كواجهة وحيدة مغلفة تخفي خلفها تفاصيل العمليات المعقدة للمحركات الفرعية (ASE, AIS, CSO, DIE, UEBA). هذا يتيح ترقية أو تعديل أي محرك فرعي بشكل مستقل دون إدخال أي كسر برمجي في الأنظمة المركزية للجدار الناري.
 * **بروتوكول حقن الاعتماديات (Dependency Injection):**
   * يتم حقن تغذيات استخبارات التهديدات CTI كبروتوكول موحد (`ThreatIntelFeedProtocol`). هذا يسمح باستبدال التغذية الافتراضية بأي تغذية حية متكاملة تدعم صيغ STIX/TAXII دون الحاجة لتعديل الكود البرمجي لمحرك TPE.
 
@@ -695,19 +695,19 @@ graph TD
 
 | اسم الميزة / المكون | مسار الملف البرمجي | الكلاس المسؤول (Class) | الدالة المنفذة (Function) | الغرض البرمجي الفعلي |
 | :--- | :--- | :--- | :--- | :--- |
-| **منسق دورة الاستنتاج** | [oracle_engine.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/oracle/core/oracle_engine.py) | `OracleEngine` | `process_event` | إدارة التنسيق التتابعي وتدفق البيانات لطبقات الاستجابة. |
+| **منسق دورة الاستنتاج** | [AEGIS_engine.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/AEGIS/core/AEGIS_engine.py) | `AEGISEngine` | `process_event` | إدارة التنسيق التتابعي وتدفق البيانات لطبقات الاستجابة. |
 | **تقييم المخاطر المسبق** | [threat_probability_engine.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/tpe/threat_probability_engine.py) | `ThreatProbabilityEngine` | `assess` | حساب التهديد الجيوسياسي والتنظيمي للمؤسسة وتوليد الـ Pre-arm Directive. |
-| **تحديث اعتقادات بايز** | [estimator.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/oracle/state/estimator.py) | `AdversarialStateEstimator` | `observe` | تحديث توزيع الاحتمالات اللحظية لموقع المهاجم في سلسلة الإيذاء. |
-| **التنبؤ بالـ Transformer** | [attention_predictor.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/oracle/intent/attention_predictor.py) | `TTPTransformerPredictor` | `predict_ttp_distribution` | حساب احتمالات التكتيك الشبكي التالي للهاكر استناداً لأخر 10 أحداث. |
-| **حساب توازن ناش** | [optimizer.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/oracle/strategy/optimizer.py) | `CounterStrategyOptimizer` | `optimize` | حساب دالة المنفعة للألعاب وخصم عقوبة خطر التصعيد لاختيار الدفاع الأمثل. |
-| **فلترة وتجاوز الإنذارات** | [verifier.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/oracle/ueba/verifier.py) | `UEBAVerifier` | `verify` | مراجعة القرار الدفاعي المختار ومقارنته بسلوك المستخدم لمنع الإيجابيات الكاذبة. |
-| **نشر وإدارة أصول الخداع** | [injector.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/oracle/deception/injector.py) | `DeceptionInjectionEngine` | `maybe_inject` | تفجير ونشر مصائد شبكية تناسب تموقع المهاجم التكتيكي في الشبكة. |
+| **تحديث اعتقادات بايز** | [estimator.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/AEGIS/state/estimator.py) | `AdversarialStateEstimator` | `observe` | تحديث توزيع الاحتمالات اللحظية لموقع المهاجم في سلسلة الإيذاء. |
+| **التنبؤ بالـ Transformer** | [attention_predictor.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/AEGIS/intent/attention_predictor.py) | `TTPTransformerPredictor` | `predict_ttp_distribution` | حساب احتمالات التكتيك الشبكي التالي للهاكر استناداً لأخر 10 أحداث. |
+| **حساب توازن ناش** | [optimizer.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/AEGIS/strategy/optimizer.py) | `CounterStrategyOptimizer` | `optimize` | حساب دالة المنفعة للألعاب وخصم عقوبة خطر التصعيد لاختيار الدفاع الأمثل. |
+| **فلترة وتجاوز الإنذارات** | [verifier.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/AEGIS/ueba/verifier.py) | `UEBAVerifier` | `verify` | مراجعة القرار الدفاعي المختار ومقارنته بسلوك المستخدم لمنع الإيجابيات الكاذبة. |
+| **نشر وإدارة أصول الخداع** | [injector.py](file:///f:/enterprise_ngfw/modules/predictive_ai/engine/AEGIS/deception/injector.py) | `DeceptionInjectionEngine` | `maybe_inject` | تفجير ونشر مصائد شبكية تناسب تموقع المهاجم التكتيكي في الشبكة. |
 
 ---
 
 ## 31. الخاتمة (CONCLUSION)
 
-تُمثل وحدة الذكاء الاصطناعي الاستباقي (Predictive AI) بمحركها المتطور ORACLE v3 نقلة تكنولوجية هامة تخرج بنظام الجدار الناري Enterprise NGFW من قيود الدفاع التقليدية القائمة على رد الفعل إلى آفاق الدفاع التكيفي الاستباقي القائم على سياق وبيئات التهديد.
+تُمثل وحدة الذكاء الاصطناعي الاستباقي (Predictive AI) بمحركها المتطور AEGIS v3 نقلة تكنولوجية هامة تخرج بنظام الجدار الناري Enterprise NGFW من قيود الدفاع التقليدية القائمة على رد الفعل إلى آفاق الدفاع التكيفي الاستباقي القائم على سياق وبيئات التهديد.
 
 من خلال الدمج المبتكر للمؤشرات الجيوسياسية واستخبارات التهديدات (Stage 1) مع قوة التنبؤ التكتيكي للمحولات وحساب توازن ناش في نظرية الألعاب لتجنب تصعيد الهجمات (Stage 2)، يثبت النظام إمكانية توفير دفاع ذاتي متكامل قادر على احتواء وإحباط التهديدات السيبرانية المتقدمة (APTs) خلال زمن يقل عن مللي ثانية واحدة. تؤكد الوحدة جاهزيتها الكاملة للانتقال لبيئات الإنتاج الفعلي، مقدمة حلاً هندسياً عملياً للمقولة البحثية الثابتة: **"دقة الأمن تتطلب سياقاً"**.
 
