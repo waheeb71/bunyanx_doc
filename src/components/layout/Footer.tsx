@@ -64,13 +64,7 @@ export const Footer: React.FC = () => {
               <li>
                 <Link href="/demo" className="hover:text-cyan-400 transition-colors flex items-center gap-2">
                   <PlayCircle className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>العروض التجريبية والأدلة</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/testing" className="hover:text-cyan-400 transition-colors flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>مصفوفة الاختبارات والنتائج</span>
+                  <span>العروض التجريبية والوسائط</span>
                 </Link>
               </li>
             </ul>

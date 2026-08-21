@@ -39,7 +39,6 @@ export const Header: React.FC<HeaderProps> = ({ docs = [] }) => {
     { href: '/architecture', label: t('nav.architecture'), icon: Cpu },
     { href: '/modules', label: t('nav.modules'), icon: Layers },
     { href: '/demo', label: t('nav.demo'), icon: PlayCircle },
-    { href: '/testing', label: t('nav.testing'), icon: CheckCircle2 },
     { href: '/docs', label: t('nav.documentation'), icon: BookOpen },
     { href: '/team', label: t('nav.team'), icon: Users },
   ];

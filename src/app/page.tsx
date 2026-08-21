@@ -388,17 +388,17 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 6. SECTION: DEMO & TESTING EVIDENCE PREVIEW */}
+      {/* 6. SECTION: DEMO & MEDIA GALLERY PREVIEW */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="glass-panel p-6 sm:p-8 bg-[#0B1528] border-cyan-500/30 space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="space-y-1">
-              <div className="cyber-badge">Demonstrations & Evidence</div>
+              <div className="cyber-badge">Demonstrations & Media Gallery</div>
               <h2 className="text-xl sm:text-2xl font-bold text-slate-100">
-                العروض التجريبية وأدلة الاختبار الحقيقية
+                معرض العروض التجريبية والوسائط
               </h2>
               <p className="text-xs text-slate-400">
-                تم اختبار المنظومة ضد سيناريوهات هجوم حقيقية مع تسجيل دقيق للأدلة والمخرجات الطرفية.
+                استعراض مرئي للتجارب الحية، لقطات الشاشة، ومقاطع الفيديو التوضيحية لمنظومة BUNYANX.
               </p>
             </div>
             <div className="flex items-center gap-3">
@@ -407,13 +407,7 @@ export default async function HomePage() {
                 className="px-4 py-2.5 rounded-xl bg-cyan-500 text-black font-bold text-xs hover:bg-cyan-400 active:scale-95 transition-all flex items-center gap-1.5 shrink-0"
               >
                 <PlayCircle className="w-4 h-4" />
-                <span>شاهد العروض التجريبية</span>
-              </Link>
-              <Link
-                href="/testing"
-                className="px-4 py-2.5 rounded-xl bg-dark-surface border border-dark-border text-slate-200 hover:text-cyan-400 active:scale-95 transition-all text-xs font-semibold shrink-0"
-              >
-                <span>مصفوفة النتائج</span>
+                <span>فتح معرض الوسائط والعروض</span>
               </Link>
             </div>
           </div>
