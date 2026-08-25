@@ -128,7 +128,7 @@ export const Header: React.FC<HeaderProps> = ({ docs = [] }) => {
               </kbd>
             </button>
 
-            <LanguageSwitcher />
+       {  /*  <LanguageSwitcher />*/}
             <ThemeToggle />
 
             {/* Mobile Menu Toggle Button (minimum 44px touch target) */}

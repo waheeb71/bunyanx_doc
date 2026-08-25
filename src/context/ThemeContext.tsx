@@ -18,32 +18,33 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [theme, setTheme] = useState<Theme>('dark');
 
   useEffect(() => {
-    const saved = localStorage.getItem('bunyanx_theme') as Theme;
-    if (saved && (saved === 'dark' || saved === 'light')) {
-      setTheme(saved);
-      if (saved === 'light') {
-        document.documentElement.classList.remove('dark');
-        document.documentElement.classList.add('light');
-      } else {
-        document.documentElement.classList.remove('light');
-        document.documentElement.classList.add('dark');
-      }
-    } else {
+    const saved = localStorage.getItem('bunyanx_theme') as Theme | null;
+    const initialTheme: Theme =
+      saved === 'light' || saved === 'dark' ? saved : 'dark';
+
+    setTheme(initialTheme);
+
+    if (initialTheme === 'dark') {
       document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
     }
   }, []);
 
   const toggleTheme = () => {
-    const next = theme === 'dark' ? 'light' : 'dark';
-    setTheme(next);
-    localStorage.setItem('bunyanx_theme', next);
-    if (next === 'light') {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('light');
-    } else {
-      document.documentElement.classList.remove('light');
-      document.documentElement.classList.add('dark');
-    }
+    setTheme((currentTheme) => {
+      const nextTheme: Theme = currentTheme === 'dark' ? 'light' : 'dark';
+
+      localStorage.setItem('bunyanx_theme', nextTheme);
+
+      if (nextTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+
+      return nextTheme;
+    });
   };
 
   return (
