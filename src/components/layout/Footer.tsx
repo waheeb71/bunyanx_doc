@@ -88,6 +88,12 @@ export const Footer: React.FC = () => {
                   <span>رسالة مشروع التخرج الماستر</span>
                 </Link>
               </li>
+               <li>
+                <Link href="/contact" className="hover:text-cyan-400 transition-colors flex items-center gap-2">
+                  <FileText className="w-3.5 h-3.5 text-cyan-400" />
+                 <span>التواصل </span>
+                </Link>
+              </li>
               <li>
                 <Link href="/team" className="hover:text-cyan-400 transition-colors flex items-center gap-2">
                   <Users className="w-3.5 h-3.5 text-cyan-400" />
