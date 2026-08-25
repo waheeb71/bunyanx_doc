@@ -57,8 +57,15 @@ export default async function HomePage() {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-dark-surface border border-cyan-500/30 text-cyan-400 text-xs font-semibold font-mono">
             <Shield className="w-3.5 h-3.5 text-cyan-400" />
             <span>Cybersecurity Graduation Project — 2026</span>
+
+            
           </div>
         </div>
+        <div className="flex items-center gap-2 text-xs text-slate-400 font-mono">
+  <Globe className="w-3.5 h-3.5 text-cyan-400" />
+  <span>Taiz, Yemen — Republic of Yemen</span>
+  <span>تعز، الجمهورية اليمنية — 2026</span>
+</div>
 
         {/* Hero Headings */}
         <div className="space-y-3 max-w-3xl mx-auto">
