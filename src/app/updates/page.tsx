@@ -2,7 +2,7 @@ import React from 'react';
 import { GitBranch, Clock, CheckCircle2 } from 'lucide-react';
 
 export const metadata = {
-  title: 'سجل التحديثات والإصدارات | BunyanX Enterprise NGFW',
+  title: 'سجل التحديثات والإصدارات | BUNYANX Intelligent Response System to Cyberattacks',
   description: 'سجل إصدارات وتحديثات مشروع التخرج الأكاديمي.',
 };
 
@@ -29,7 +29,7 @@ export default function UpdatesPage() {
           سجل الإصدارات والتحديثات الأكاديمية
         </h1>
         <p className="text-sm text-slate-400">
-          تتبع المحطات والتطويرات المستمرة لمنصة BunyanX Enterprise NGFW.
+          تتبع المحطات والتطويرات المستمرةلمنظومة BunyanX.
         </p>
       </div>
 

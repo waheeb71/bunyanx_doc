@@ -64,7 +64,8 @@ function NavigationLoadingSpinnerContent() {
             {language === 'ar' ? 'جاري فتح الوثيقة...' : 'Loading Document...'}
           </div>
           <div className="text-[11px] font-mono text-cyan-400/90">
-            BunyanX Enterprise NGFW
+            BUNYANX
+            Intelligent Response System to Cyberattacks
           </div>
         </div>
       </div>

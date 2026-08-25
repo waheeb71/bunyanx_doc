@@ -2,7 +2,7 @@
 
 ## `email_security` Module — Academic Technical Documentation
 
-### منصة: bunyanx Cybersecurity Platform
+### منظومة: bunyanx Cybersecurity Platform
 
 ### المسار: `F:\enterprise_ngfw\modules\email_security`
 
@@ -48,7 +48,7 @@ v_baseline_new = (1 - α) × v_baseline_old + α × v_current     [α = 0.10]
 #### عتبة Youden's J المُعايَرة
 
 | المقياس | القيمة |
-|---------|--------|
+| --------- | -------- |
 | λ_opt (Youden's J) | **0.451** |
 | Accuracy | **94.47%** |
 | ROC-AUC | **98.72%** (95% CI: [98.63%, 98.82%]) |
@@ -114,7 +114,7 @@ R = Jaccard_Distance(T_DOM, T_Visual)
 #### الهجمات التي يرصدها
 
 | نمط الهجوم | الكشف |
-|-----------|-------|
+| ----------- | ------- |
 | `font-size: 0px/pt/em` | CSS Zero-Font Regex |
 | `color: white / #fff / rgb(255,255,255)` | White-on-White Text |
 | `display: none / visibility: hidden` | CSS Hidden Elements |
@@ -229,7 +229,7 @@ def reload_singleton():
 ### ملخص المساهمات الأصلية
 
 | # | المساهمة | النوع | المقياس الرئيسي |
-|---|---------|-------|----------------|
+| --- | --------- | ------- | ---------------- |
 | **OC-1** | PLSF — بصمة المرسل اللغوية-النفسية | خوارزمية AI أصيلة | F1=94.53%, ROC-AUC=98.72% |
 | **OC-2** | VSDE — كشف التحايل البصري بـ Jaccard | خوارزمية رياضية أصيلة | Threshold R=0.35, Standard F1=1.00 |
 | **OC-3** | BECEnsemble OOF Stacking | تصحيح Data Leakage | تقييم صادق بلا bias |
@@ -241,7 +241,7 @@ def reload_singleton():
 
 ### 1.1 تعريف الوحدة
 
-وحدة **`email_security`** هي نظام فحص بريد إلكتروني من الجيل التالي (Next-Generation Email Inspection System) مُدمج داخل منصة **bunyanx Cybersecurity Platform**. تعتمد الوحدة على خط أنابيب تحليلي من سبع طبقات (7-Layer AI Detection Pipeline) يجمع بين الكشف القائم على القواعد الاستدلالية (Heuristic Detection) وتقنيات الذكاء الاصطناعي التوليدية والتمييزية، بهدف التعرف على التهديدات المتقدمة الموجهة عبر قناة البريد الإلكتروني قبل وصولها إلى المستخدم النهائي.
+وحدة **`email_security`** هي نظام فحص بريد إلكتروني من الجيل التالي (Next-Generation Email Inspection System) مُدمج داخل منظومة **bunyanx Cybersecurity Platform**. تعتمد الوحدة على خط أنابيب تحليلي من سبع طبقات (7-Layer AI Detection Pipeline) يجمع بين الكشف القائم على القواعد الاستدلالية (Heuristic Detection) وتقنيات الذكاء الاصطناعي التوليدية والتمييزية، بهدف التعرف على التهديدات المتقدمة الموجهة عبر قناة البريد الإلكتروني قبل وصولها إلى المستخدم النهائي.
 
 ### 1.2 الهدف الرئيسي
 
@@ -263,7 +263,7 @@ def reload_singleton():
 3. **هجمات التحايل الجديدة**: استخدام CSS Zero-Font وHTML Smuggling لإخفاء المحتوى الخبيث عن المحللين اللغويين التقليديين.
 4. **حجم البيانات**: معالجة آلاف الرسائل يومياً في زمن حقيقي دون تدهور في الأداء.
 
-### 1.4 دورها داخل منصة bunyanx
+### 1.4 دورها داخل منظومة bunyanx
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -296,7 +296,7 @@ def reload_singleton():
 ### 2.1 الأهداف الوظيفية (Functional Objectives)
 
 | # | الهدف | الوصف |
-|---|-------|-------|
+| --- | ------- | ------- |
 | F1 | كشف التصيد | التعرف على رسائل Phishing بدقة ≥ 97% |
 | F2 | فحص الروابط | تحليل كل رابط داخل الرسالة وتقييم سمعته |
 | F3 | حماية المرفقات | فحص الامتداد + Entropy Analysis لكشف الملفات المشفرة |
@@ -336,7 +336,7 @@ def reload_singleton():
 ## 3. MODULE RESPONSIBILITIES — المسؤوليات
 
 | المسؤولية | الوظيفة التفصيلية | المكوّن المنفذ |
-|-----------|------------------|----------------|
+| ----------- | ------------------ | ---------------- |
 | **استقبال حركة البريد** | اعتراض حزم SMTP/IMAP/POP3 تلقائياً | `EmailInspectorPlugin.can_inspect()` |
 | **تفكيك MIME** | فك ترميز Base64/QP، استخراج Body/URLs/Attachments | `EmailPreprocessor.parse()` |
 | **كشف التصيد** | تحليل الكلمات الدالة + انتحال العلامات التجارية | `PhishingDetector.detect()` |
@@ -366,7 +366,7 @@ def reload_singleton():
 ### 4.2 المخاطر المرتبطة
 
 | المخاطرة | الاحتمالية | الأثر | مستوى الخطر |
-|----------|-----------|-------|-------------|
+| ---------- | ----------- | ------- | ------------- |
 | BEC ناجح | عالية | اختراق مالي مباشر | 🔴 حرج |
 | Credential Phishing | عالية | اختراق الحسابات | 🔴 حرج |
 | Ransomware عبر مرفق | متوسطة | تشفير البنية التحتية | 🔴 حرج |
@@ -387,7 +387,7 @@ def reload_singleton():
 ### 5.1 Functional Requirements
 
 | المعرف | المتطلب |
-|--------|---------|
+| -------- | --------- |
 | FR-01 | يجب أن تعترض الوحدة جميع حزم البريد على المنافذ: 25, 587, 465, 143, 993, 110, 995 |
 | FR-02 | يجب تطبيق 7 طبقات فحص بالترتيب على كل رسالة قابلة للتحليل |
 | FR-03 | يجب أن تُنتج الوحدة قرار ALLOW أو QUARANTINE أو BLOCK لكل رسالة |
@@ -400,7 +400,7 @@ def reload_singleton():
 ### 5.2 Non-Functional Requirements
 
 | المعرف | المتطلب | القيمة المستهدفة |
-|--------|---------|----------------|
+| -------- | --------- | ---------------- |
 | NFR-01 | زمن معالجة الرسالة | < 500ms (بدون PLSF) |
 | NFR-02 | توفر الوحدة | 99.9% uptime |
 | NFR-03 | إعادة الضبط | Hot-Reload بدون restart |
@@ -409,7 +409,7 @@ def reload_singleton():
 ### 5.3 Security Requirements
 
 | المعرف | المتطلب |
-|--------|---------|
+| -------- | --------- |
 | SR-01 | إخفاء جزئي لـ PII (sender/subject) لغير Admin |
 | SR-02 | تطبيق `min_baseline_count=3` لمنع BEC Baseline Poisoning |
 | SR-03 | الفحص الإجباري على IP الشبكة (لا X-Forwarded-For) |
@@ -419,7 +419,7 @@ def reload_singleton():
 ### 5.4 Performance Requirements
 
 | المعرف | المتطلب | الحل التقني |
-|--------|---------|-------------|
+| -------- | --------- | ------------- |
 | PR-01 | Entropy Analysis لمرفق 25MB | Sampling 64KB بدلاً من full scan |
 | PR-02 | PLSF model memory | LRU Cache حد أقصى 2 نماذج |
 | PR-03 | DB write non-blocking | ThreadPoolExecutor منفصل |
@@ -471,7 +471,7 @@ graph TB
 ### 6.2 طبقات المعمارية
 
 | الطبقة | المكوّن | الملف |
-|--------|---------|-------|
+| -------- | --------- | ------- |
 | **Plugin Layer** | EmailInspectorPlugin | `engine/core/email_inspector.py` |
 | **Config Layer** | EmailSettings + YAML | `engine/core/settings.py` + `config/email.yaml` |
 | **Processing Layer** | EmailPreprocessor | `engine/utils/preprocessor.py` |
@@ -512,7 +512,7 @@ graph TB
 **تأثير القرارات**:
 
 | البُعد | التأثير |
-|--------|---------|
+| -------- | --------- |
 | **الأداء** | إيجابي — كل scanner مستقل، يمكن تعطيل الثقيل (PLSF) |
 | **الأمان** | إيجابي — Defense in Depth، فشل scanner واحد لا يُبطل الفحص |
 | **القابلية للتوسع** | إيجابي — إضافة scanner جديد بدون تغيير في الـ core |
@@ -539,7 +539,7 @@ graph TB
 **الدوال الرئيسية**:
 
 | الدالة | الوظيفة |
-|--------|---------|
+| -------- | --------- |
 | `__init__()` | تهيئة جميع المحللين من الإعدادات |
 | `can_inspect(context)` | تحديد ما إذا كانت الحزمة بريداً إلكترونياً |
 | `inspect(context, data)` | تشغيل خط الأنابيب كاملاً — يُعيد InspectionResult |
@@ -627,7 +627,7 @@ R > 0.35 → هجوم بصري مؤكد
 ### 9.1 EmailLog — جدول التدقيق الرئيسي
 
 | الحقل | النوع | الوظيفة | المصدر |
-|-------|-------|---------|--------|
+| ------- | ------- | --------- | -------- |
 | `id` | Integer PK | معرف فريد | Auto |
 | `src_ip` | String(45) | IP المرسل الشبكي | `context.src_ip` |
 | `dst_port` | Integer | منفذ الوجهة | `context.dst_port` |
@@ -870,7 +870,7 @@ flowchart LR
 ## 14. CONFIGURATION ANALYSIS — تحليل الإعدادات
 
 | الإعداد | الوظيفة | القيمة الافتراضية | التأثير عند التغيير |
-|---------|---------|-----------------|-------------------|
+| --------- | --------- | ----------------- | ------------------- |
 | `enabled` | مفتاح رئيسي | `true` | إيقاف كامل للوحدة |
 | `mode` | وضع التشغيل | `enforce` | `monitor` → لا حجب، تسجيل فقط |
 | `monitored_ports` | منافذ الاعتراض | [25,587,465,143,993,110,995] | إضافة/حذف منافذ مراقبة |
@@ -897,12 +897,12 @@ flowchart LR
 ### 15.1 التكامل مع المكونات الأساسية
 
 | المكوّن | نوع التكامل | التفاصيل |
-|---------|-----------|---------|
+| --------- | ----------- | --------- |
 | **Inspection Pipeline** | Plugin Interface | يرث `InspectorPlugin`، يُسجَّل في Pipeline تلقائياً |
 | **ThreatIntel Cache** | Direct Reference | URLScanner + SenderReputation تستدعيان `get_domain_score()` و `get_ip_score()` |
 | **Database (SQLAlchemy)** | Shared SessionLocal | `_log_to_db` يستخدم `SessionLocal` المشترك |
 | **Auth System** | FastAPI Depends | `require_admin` / `require_email` لحماية الـ API |
-| **IDS/IPS** | Indirect | ناتج الفحص يُغذي المنصة للتحليل المشترك |
+| **IDS/IPS** | Indirect | ناتج الفحص يُغذي المنظومة للتحليل المشترك |
 | **Logging System** | Python logging | `logger.info/warning/critical/debug` على كل مرحلة |
 
 ### 15.2 APIs المُصدَّرة للأنظمة الأخرى
@@ -922,7 +922,7 @@ plsf.export_for_predictive_ai(sender, model_tag) -> Optional[dict]
 ## 16. API ANALYSIS — تحليل نقاط النهاية
 
 | Endpoint | Method | الوصف | Auth | المدخلات | المخرجات |
-|----------|--------|-------|------|---------|---------|
+| ---------- | -------- | ------- | ------ | --------- | --------- |
 | `/api/v1/email_security/status` | GET | حالة الوحدة + إحصائيات Plugin | operator | — | `{module, status, version, plugin}` |
 | `/api/v1/email_security/config` | GET | قراءة الإعدادات المحفوظة | operator | — | `EmailConfigDict` |
 | `/api/v1/email_security/config` | PUT | تعديل الإعدادات | **admin** | `EmailConfigUpdate` | `{status, config}` |
@@ -952,7 +952,7 @@ plsf.export_for_predictive_ai(sender, model_tag) -> Optional[dict]
 **الاستعمالات**:
 
 | الاستخدام | الاستعلام |
-|---------|---------|
+| --------- | --------- |
 | سجل أحدث الرسائل | `ORDER BY inspected_at DESC LIMIT 50` |
 | إحصاء حسب القرار | `COUNT(*) GROUP BY decision` |
 | أعلى مرسلين محجوبين | `GROUP BY sender WHERE decision='block'` |
@@ -988,7 +988,7 @@ Level : INFO (default) | DEBUG (تشغيل تطوير)
 ### 18.2 ماذا يُسجَّل؟
 
 | الحدث | المستوى | المحتوى | المتى |
-|------|---------|---------|-------|
+| ------ | --------- | --------- | ------- |
 | نتيجة فحص كل رسالة | INFO | `src_ip → dst_port → action (risk=X.XX) latency=Xms` | بعد كل فحص |
 | تفاصيل المرسل/الموضوع | DEBUG | `from=XXX*** subject=XXX***` (مقنَّع) | بعد كل فحص |
 | VSDE تحايل بصري | WARNING | `Visual-Semantic Desync R=X.XXX > 0.35! Forcing BLOCK` | عند الكشف |
@@ -1037,7 +1037,7 @@ plugin._blocked_count    # رسائل محجوبة
 ### 19.3 مراقبة الوحدة في الـ Dashboard
 
 | اللوحة | المحتوى |
-|--------|---------|
+| -------- | --------- |
 | **نظرة عامة** | KPI strip (اليوم/تصيد/spam/حجب) + إحصائيات مجمَّعة |
 | **التنبيهات** | آخر رسائل محجوبة/معزولة مع breakdown كامل |
 | **محركات AI** | PLSF/VSDE stats + Engine Health Indicators |
@@ -1075,7 +1075,7 @@ graph LR
 #### سيناريوهات الهجوم
 
 | # | السيناريو | المخاطر | الإجراء المضاد |
-|---|-----------|---------|--------------|
+| --- | ----------- | --------- | -------------- |
 | A1 | BEC مولَّد بـ GPT-4 | 🔴 حرج | PLSF + min_baseline_count=3 |
 | A2 | Phishing ذو صفحة وهمية | 🔴 حرج | URLScanner + ThreatIntel |
 | A3 | Ransomware عبر .docm | 🔴 حرج | AttachmentGuard Block فوري |
@@ -1087,7 +1087,7 @@ graph LR
 ### 20.2 تحليل ضوابط التحكم
 
 | الضابط | التطبيق |
-|--------|---------|
+| -------- | --------- |
 | **Authentication** | JWT Bearer Token على كل API endpoint |
 | **Authorization** | RBAC ثنائي: `admin` (كتابة) / `email` (قراءة) |
 | **Input Validation** | Pydantic models على كل POST/PUT |
@@ -1103,7 +1103,7 @@ graph LR
 ### 21.1 Preventive Controls (وقائية)
 
 | الضابط | الآلية |
-|--------|--------|
+| -------- | -------- |
 | Whitelist Gate | فحص IP/Email/Domain قبل أي معالجة |
 | Extension Blocking | حجب فوري لـ 16 امتداد خطير |
 | Force Block Rules | VSDE R>0.35 أو PLSF>0.70 → حجب فوري |
@@ -1112,7 +1112,7 @@ graph LR
 ### 21.2 Detective Controls (كشفية)
 
 | الضابط | الآلية |
-|--------|--------|
+| -------- | -------- |
 | PLSF Anomaly Detection | مقارنة أسلوب المرسل الحالي ببصمته التاريخية |
 | VSDE Evasion Detection | Jaccard distance DOM/Visual |
 | SPF/DKIM/DMARC | رصد انتحال هوية المرسل |
@@ -1122,7 +1122,7 @@ graph LR
 ### 21.3 Corrective Controls (تصحيحية)
 
 | الضابط | الآلية |
-|--------|--------|
+| -------- | -------- |
 | Retry with Audit | 3 محاولات + CRITICAL log عند فشل DB |
 | Hot-Reload Config | تطبيق إعدادات جديدة دون إيقاف الخدمة |
 | Mode Toggle | التحويل لـ `monitor` دون فقدان الوحدة |
@@ -1134,7 +1134,7 @@ graph LR
 ### 22.1 زمن المعالجة (Latency)
 
 | المرحلة | الزمن المتوقع |
-|---------|-------------|
+| --------- | ------------- |
 | MIME Parsing | 1–5ms |
 | Phishing Detection | 2–10ms |
 | URL Scanning (no ThreatIntel) | 3–15ms |
@@ -1151,7 +1151,7 @@ graph LR
 ### 22.2 استخدام الذاكرة
 
 | المكوّن | الاستخدام |
-|---------|----------|
+| --------- | ---------- |
 | `all-MiniLM-L6-v2` | ~90MB RAM |
 | `paraphrase-multilingual-MiniLM-L12-v2` | ~480MB RAM |
 | LRU Cache (max 2 نماذج) | ≤ 570MB |
@@ -1229,7 +1229,7 @@ graph LR
 ## 25. TEST SCENARIOS — سيناريوهات الاختبار
 
 | السيناريو | المدخل | النتيجة المتوقعة | مستوى الخطر |
-|-----------|--------|----------------|-------------|
+| ----------- | -------- | ---------------- | ------------- |
 | رسالة نظيفة | body="Hello, meeting tomorrow" | ALLOW, risk<0.25 | منخفض |
 | BEC مع baseline | 4 رسائل سابقة + رسالة مريبة | QUARANTINE/BLOCK | 🔴 حرج |
 | BEC بلا baseline | أول رسالة من مرسل | QUARANTINE (lexical only) | 🟠 عالٍ |
@@ -1247,7 +1247,7 @@ graph LR
 ## 26. FAILURE ANALYSIS — تحليل نقاط الفشل
 
 | نقطة الفشل | السيناريو | الإجراء المضاد | الأثر |
-|-----------|---------|--------------|-------|
+| ----------- | --------- | -------------- | ------- |
 | PLSF model لا يُحمَّل | `ImportError` | `_PLSF_AVAILABLE = False` | يستمر بدون PLSF |
 | DB write fail | Connection refused | Retry × 3 + CRITICAL log | فقدان سجل واحد |
 | DNS timeout (SPF) | جدار ناري يحجب DNS | timeout=2s → status="unknown" | درجة خطر أقل دقة |
@@ -1260,7 +1260,7 @@ graph LR
 ## 27. CHALLENGES & SOLUTIONS — التحديات والحلول
 
 | التحدي | الصعوبة | الحل المُطبَّق |
-|--------|---------|--------------|
+| -------- | --------- | -------------- |
 | asyncio داخل FastAPI thread | RuntimeError عند `asyncio.run()` | Thread منفصل يملك loop خاصاً (`_run_in_own_loop`) |
 | 25MB Entropy = تجميد | O(n) يُجمد Thread Pool | Sampling 64KB موزعة (FIX-9) |
 | BEC Baseline Poisoning | مهاجم يبني Baseline نظيف | `min_baseline_count=3` يمنع إصدار حكم مبكر |
@@ -1293,7 +1293,7 @@ graph LR
 ### قصيرة المدى (0–3 أشهر)
 
 | التحسين | الأثر |
-|---------|-------|
+| --------- | ------- |
 | تفعيل `headless_browser=true` في الإنتاج | دقة VSDE أعلى مع OCR حقيقي |
 | SIEM Export Endpoint | إرسال مباشر لـ Splunk/Elastic |
 | Rate Limiting على API | حماية من Brute Force على `/logs` |
@@ -1302,7 +1302,7 @@ graph LR
 ### متوسطة المدى (3–12 شهراً)
 
 | التحسين | الأثر |
-|---------|-------|
+| --------- | ------- |
 | PLSF Fine-tuning على بيانات المؤسسة | دقة كشف BEC أعلى |
 | دمج BECEnsemble في Pipeline الإنتاج | طبقة كشف إضافية |
 | ML-based Spam Detection | استبدال keyword-based بـ NLP |
@@ -1311,7 +1311,7 @@ graph LR
 ### طويلة المدى (12+ شهراً)
 
 | التحسين | الأثر |
-|---------|-------|
+| --------- | ------- |
 | Real-time DKIM Verification | التحقق الكريبتوغرافي الكامل |
 | Federated PLSF Profiles | مشاركة بصمات بين أفرع المؤسسة |
 | Email Sandbox Integration | تشغيل المرفقات في Sandbox |
@@ -1321,7 +1321,7 @@ graph LR
 ## 30. CODE REFERENCE MAPPING — خريطة الكود
 
 | الميزة | مسار الملف | الفئة | الدالة | الوظيفة |
-|--------|-----------|-------|--------|---------|
+| -------- | ----------- | ------- | -------- | --------- |
 | نقطة الدخول | `engine/core/email_inspector.py` | `EmailInspectorPlugin` | `inspect()` | تشغيل خط الأنابيب الكامل |
 | تحديد البريد | `engine/core/email_inspector.py` | `EmailInspectorPlugin` | `can_inspect()` | رصد منافذ البريد |
 | كشف التصيد | `engine/scanners/phishing_detector.py` | `PhishingDetector` | `detect()` | تحليل Keywords + Brand Spoof |
@@ -1378,7 +1378,7 @@ graph LR
 ### 32.1 جدول الدرجات
 
 | البُعد | الدرجة | التقييم |
-|--------|--------|---------|
+| -------- | -------- | --------- |
 | **Architecture Score** | **88 / 100** | Plugin-Based Design ممتاز، OOF Stacking صحيح |
 | **Security Score** | **86 / 100** | Defense in Depth + Threat Model شامل، DKIM غير مكتمل |
 | **Performance Score** | **83 / 100** | Entropy Sampling + LRU Cache ممتاز، PLSF cold start بطيء |

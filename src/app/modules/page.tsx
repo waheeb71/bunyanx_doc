@@ -5,7 +5,7 @@ import { Layers } from 'lucide-react';
 
 export const metadata = {
   title: 'منظومة الوحدات الأمنية الـ 17',
-  description: 'استعراض المحركات والوحدات الأمنية الـ 17 المكونة لمنظومة BUNYANX Enterprise NGFW مع تفاصيل المعالجة والتقنيات والأدلة.',
+  description: 'استعراض المحركات والوحدات الأمنية الـ 17 المكونة لمنظومة BUNYANX  مع تفاصيل المعالجة والتقنيات والأدلة.',
 };
 
 export default async function ModulesPage() {

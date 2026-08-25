@@ -18,7 +18,8 @@ import {
 
 export const metadata = {
   title: 'عن مشروع BUNYANX',
-  description: 'الرؤية الهندسية، المشكلة البحثية، والركائز الابتكارية لمنظومة BUNYANX Enterprise NGFW.',
+  description: 'الرؤية الهندسية، المشكلة البحثية، والركائز الابتكارية لمنظومة BUNYANX
+Intelligent Response System to Cyberattacks.',
 };
 
 export default function AboutPage() {
@@ -31,7 +32,8 @@ export default function AboutPage() {
           <span>Project Vision & Engineering Foundations</span>
         </div>
         <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-100">
-          عن منصة BUNYANX Enterprise NGFW
+          عن منظومة BUNYANX
+          Intelligent Response System to Cyberattacks
         </h1>
         <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
           مشروع تخرج أكاديمي يهدف إلى بناء جدار ناري متطور للمؤسسات يجمع بين سرعة معالجة النواة وفحص الطبقات المتعددة والذكاء الاصطناعي التنبؤي.

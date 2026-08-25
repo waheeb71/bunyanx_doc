@@ -1,7 +1,7 @@
 {
-  "name": "BunyanX Enterprise NGFW Documentation Portal",
+  "name": "BunyanX  Documentation Portal",
   "short_name": "BunyanX Docs",
-  "description": "Graduation Project Technical & Academic Documentation Portal for BunyanX Enterprise NGFW",
+  "description": "Graduation Project Technical & Academic Documentation Portal for BunyanX ",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#070a12",

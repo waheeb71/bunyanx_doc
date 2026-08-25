@@ -24,12 +24,13 @@ export function generateDocSchema(doc: DocItem, lang: 'ar' | 'en') {
     },
     'publisher': {
       '@type': 'Organization',
-      'name': 'BunyanX Enterprise NGFW',
+      'name': 'BUNYANX
+Intelligent Response System to Cyberattacks',
       'logo': {
-        '@type': 'ImageObject',
-        'url': `${SITE_URL}/logo.png`,
+    '@type': 'ImageObject',
+      'url': `${SITE_URL}/logo.png`,
       },
-    },
+},
   };
 }
 
@@ -50,7 +51,8 @@ export function generateWebsiteSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    'name': 'BunyanX Enterprise NGFW Documentation Portal',
+    'name': 'BUNYANX
+Intelligent Response System to Cyberattacks Documentation Portal',
     'url': SITE_URL,
     'potentialAction': {
       '@type': 'SearchAction',

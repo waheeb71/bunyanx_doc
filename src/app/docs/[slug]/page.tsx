@@ -29,7 +29,8 @@ export async function generateMetadata({ params }: PageProps) {
   if (!doc) return {};
 
   return {
-    title: `${doc.titleAr} | BunyanX Enterprise NGFW`,
+    title: `${doc.titleAr} | BUNYANX
+Intelligent Response System to Cyberattacks`,
     description: doc.summaryAr,
     keywords: doc.keywords,
     openGraph: {

@@ -1,17 +1,20 @@
 # توثيق وحدة جودة الخدمة (QoS Module Documentation)
-## مشروع منصة الجيل القادم لجدار الحماية المؤسسي (Enterprise NGFW Cybersecurity Platform)
+
+## مشروع منظومة الجيل القادم لجدار الحماية المؤسسي (Enterprise NGFW Cybersecurity Platform)
 
 ---
 
 ## 1. INTRODUCTION (المقدمة)
 
-تمثل وحدة **جودة الخدمة (Quality of Service - QoS)** طبقة برمجية أساسية ومنظمة لعرض النطاق الترددي (Bandwidth Control) ضمن منصة **Enterprise NGFW Cybersecurity Platform**. تهدف هذه الوحدة إلى موازنة وتوزيع مقدرات عرض النطاق الترددي للشبكة بشكل عادل بين المستخدمين الفعليين ومنع احتكار القنوات الاتصالية.
+تمثل وحدة **جودة الخدمة (Quality of Service - QoS)** طبقة برمجية أساسية ومنظمة لعرض النطاق الترددي (Bandwidth Control) ضمن منظومة **Enterprise NGFW Cybersecurity Platform**. تهدف هذه الوحدة إلى موازنة وتوزيع مقدرات عرض النطاق الترددي للشبكة بشكل عادل بين المستخدمين الفعليين ومنع احتكار القنوات الاتصالية.
 
 تقوم الوحدة بمعالجة مشكلتين رئيسيتين:
+
 1. **احتكار النطاق الترددي (Bandwidth Hogging)**: استهلاك بعض الأجهزة للسرعة المتاحة بالكامل.
 2. **استنزاف موارد جدار الحماية (DDoS / Memory Exhaustion)**: غمر جدار الحماية بطلبات اتصالية بعناوين مزيفة لحجز ذاكرة النظام.
 
-### المساهمة العلمية والتصميمية:
+### المساهمة العلمية والتصميمية
+
 تقدم الوحدة معمارية فريدة تسمى **التشغيل المزدوج المتزامن وغير المتزامن (Dual Sync/Async Execution Model)** تعتمد على خوارزمية **دلو الرموز (Token Bucket)**. على عكس أنظمة جودة الخدمة التقليدية (مثل tc/HTB في Linux kernel) التي تعمل بشكل مستقل عن طبقة التطبيقات، تندمج هذه الوحدة بشكل عميق ومضمن (Inline) داخل خط أنابيب الفحص الأمني الساخن للـ NGFW وعملية البروكسي الشفاف، مما يتيح تطبيق قواعد تشكيل النطاق الترددي (Traffic Shaping) بناءً على نتائج التحليل الأمني للمستخدمين في الوقت الفعلي.
 
 ---
@@ -45,6 +48,7 @@
 ## 4. PROBLEM ANALYSIS (تحليل المشكلة)
 
 تعد السيطرة على حركة البيانات في الشبكات المؤسسية تحدياً معقداً نظراً لـ:
+
 1. **طبيعة حركة مرور الشبكة (Network Burstiness)**: صفحات الويب والملفات تتطلب تدفقاً سريعاً للمعلومات لفترة قصيرة (Burst)، يتبعها فترة خمول. الحد الصارم يسبب بطء التصفح؛ لذا تم استخدام خوارزمية **Token Bucket** بدلاً من Leaky Bucket لأنها تسمح بالانفجارات المرورية المؤقتة بمعدل الـ Burst المحدد.
 2. **هجمات Spoofed IP Flooding**: المهاجمون يرسلون حزمًا بعناوين مصدرية عشوائية. لو قام جدار الحماية بإنشاء دلو رموز لكل عنوان، ستنفد ذاكرة الخادم فوراً.
 3. **تعدد العمليات (Concurrency and Multi-processing)**: خوادم الويب الحديثة تعمل بعدة عمليات منفصلة، مما يجعل مشاركة متغيرات QoS في الذاكرة العشوائية مستحيلاً بدون آلية مزامنة مرنة.
@@ -87,7 +91,8 @@ M -->|Manage| TB[TokenBucket]
 end
 ```
 
-### العلاقات بين المكونات:
+### العلاقات بين المكونات
+
 * `QoSPlugin` يستدعي `QoSManager` للتحقق المتزامن من حركة المرور (`check_traffic`).
 * البروكسي الشفاف يستدعي `QoSManager.throttle` للتقييد غير المتزامن.
 * خيط جمع القمامة `QoSMgr-GC` يتولى تصفية الحاويات الخاملة واستيراد الإعدادات المحدثة من قاعدة البيانات لمزامنة العمليات.
@@ -97,9 +102,12 @@ end
 ## 7. ARCHITECTURAL DECISIONS (القرارات المعمارية)
 
 1. **تصميم Singleton لـ QoSManager**:
+
 * *السبب*: ضمان مشاركة حالة استهلاك الحاويات النشطة بين البروكسي وفحص الحزم في نفس العملية.
 * *المزايا*: اتساق كامل للبيانات، سرعة استرجاع الحاويات بـ $O(1)$ من القاموس.
+
 2. **آلية المزامنة غير المتزامنة للملفات المتعددة (Database Polling)**:
+
 * *السبب*: بدلاً من الاتصالات المعقدة عبر IPC sockets والتي تزيد استهلاك الـ CPU، يقوم خيط الـ GC بقراءة طابع تحديث قاعدة البيانات `updated_at` كل 5 ثوانٍ لتعديل المتغيرات الحية.
 * *التأثير*: لا تأثير مطلقاً على زمن معالجة الحزم الساخنة (Zero Jitter on Hot-Path).
 
@@ -119,14 +127,14 @@ end
 
 تستخدم الوحدة جدولاً مركزياً واحداً في قاعدة البيانات متمثلاً في `QoSConfig` ومخطط Pydantic المسمى `QoSConfigRequest` للتحقق من المدخلات عبر الـ API.
 
-### نموذج قاعدة البيانات `QoSConfig` (في [database.py](file:///F:/enterprise_ngfw/system/database/database.py#L180-L200)):
+### نموذج قاعدة البيانات `QoSConfig` (في [database.py](file:///F:/enterprise_ngfw/system/database/database.py#L180-L200))
 
 | الحقل (Column) | النوع (Type) | القيمة الافتراضية | الوصف |
 | :--- | :--- | :--- | :--- |
 | **id** | Integer | Primary Key (Auto) | المعرّف الفريد للصف. |
 | **enabled** | Boolean | `False` | مفتاح التفعيل الرئيسي للخدمة. |
-| **default_user_rate_bytes**| Integer | `1,250,000` | سرعة تعبئة الرموز المستدامة لكل IP (~10 Mbps). |
-| **default_user_burst_bytes**| Integer | `2,500,000` | سعة الدلو القصوى المسموحة للانفجارات المرورية (~20 Mbps). |
+| **default_user_rate_bytes** | Integer | `1,250,000` | سرعة تعبئة الرموز المستدامة لكل IP (~10 Mbps). |
+| **default_user_burst_bytes** | Integer | `2,500,000` | سعة الدلو القصوى المسموحة للانفجارات المرورية (~20 Mbps). |
 | **global_rate_bytes** | Integer | `0` | سقف استهلاك الشبكة بالكامل (0 تعني غير محدود). |
 | **traffic_classes** | JSON | `[]` | أولويات حركة المرور (مستقبلي). |
 | **updated_at** | DateTime | UTC Timestamp | وقت آخر تحديث للإعدادات (يستخدم لمزامنة العمليات). |
@@ -279,6 +287,7 @@ Mgr->>SIEM: إرسال تقرير إحصائي عن تنظيف الدلاء ال
 ## 17. DATABASE ANALYSIS (تحليل قاعدة البيانات)
 
 تستخدم الوحدة جدولاً واحداً باسم `qos_config` في قاعدة بيانات SQLAlchemy.
+
 * **الفهارس (Indexes)**: الفهرس الافتراضي هو المفتاح الرئيسي `id`.
 * **العلاقات**: لا توجد علاقات خارجية مباشرة (Foreign Keys) مع جداول أخرى، مما يعزز أداء المعالجة وسهولة التوسعة.
 
@@ -287,10 +296,14 @@ Mgr->>SIEM: إرسال تقرير إحصائي عن تنظيف الدلاء ال
 ## 18. LOGGING & AUDITING (السجلات والتدقيق الجنائي)
 
 تتبنى الوحدة نظام تسجيل أمني ذو اتجاهين:
+
 1. **سجلات الأحداث الأمنية (Security Event Logs)**:
+
 * يتم إصدار سجل بمستوى `WARNING` يحمل الرمز 🚫 في وضع `enforce` عندما يتجاوز مستخدم حد النطاق الترددي ويتم حظر حزمته.
 * يتم إصدار سجل بمستوى `INFO` يحمل الرمز ⚠️ في وضع `monitor` للإشارة لتجاوز النطاق الترددي دون حظر.
+
 2. **سجلات تدقيق الإدارة (Admin Audit Logs)**:
+
 * تسجل دالة `AuditLog.log_event` أي تغيير في إعدادات QoS (تفعيل/تعطيل أو تعديل سرعات)، وأي عملية تصفير يدوية لحاوية عميل (`reset_bucket`).
 
 ---
@@ -298,6 +311,7 @@ Mgr->>SIEM: إرسال تقرير إحصائي عن تنظيف الدلاء ال
 ## 19. MONITORING & OBSERVABILITY (المراقبة والرصد)
 
 تتيح الواجهة الرسومية مراقبة فورية لـ:
+
 * **مؤشرات الأداء**: أعلى نسبة استهلاك للدلاء (Top Utilization) وعدد العملاء النشطين حالياً.
 * **صحة المكون (Health Check)**: عرض حالة خيط جامع القمامة في الخلفية (GC Thread) لضمان استقرار الخدمة وعدم توقفها.
 * **الإنذارات الفورية (Alerts)**: قائمة بالأجهزة التي تجاوزت نسبة استهلاكها 80% من سعة عرض النطاق المتاح لها للتدخل الإداري.
@@ -306,13 +320,14 @@ Mgr->>SIEM: إرسال تقرير إحصائي عن تنظيف الدلاء ال
 
 ## 20. SECURITY ANALYSIS (التحليل الأمني وتهديدات النظام)
 
-### Threat Model (نموذج التهديدات):
+### Threat Model (نموذج التهديدات)
 
 1. **الأصل المستهدف (Asset)**: النطاق الترددي للشبكة وموارد ذاكرة جدار الحماية.
 2. **التهديد الأساسي**: هجمات DDoS المعتمِدة على تزييف عناوين IP المصدرية لإغراق قاموس الحاويات بالذاكرة المؤقتة.
 3. **مستوى الخطورة**: مرتفع (High) قبل الإصلاح، ومنخفض جداً (Low) بعد تطبيق حدود `max_buckets` والإخلاء الطردي الفوري للذاكرة.
 
-### تحليل آليات الحماية والدفاع (Security Analysis):
+### تحليل آليات الحماية والدفاع (Security Analysis)
+
 * **التحقق من المدخلات (Input Validation)**: يمنع التحقق بـ Regex في خادم الـ API أي محاولات لحقن نصوص برمجية خبيثة عبر متغيرات الـ IP في مسار Refill.
 * **التحقق من الصلاحيات (Authorization)**: جميع واجهات التحكم الحساسة محمية بـ `require_admin` لمنع المستخدمين غير المصرح لهم من رفع قيود السرعة الخاصة بهم.
 
@@ -320,7 +335,7 @@ Mgr->>SIEM: إرسال تقرير إحصائي عن تنظيف الدلاء ال
 
 ## 21. SECURITY CONTROLS (آليات التحكم الأمني)
 
-* **الضوابط الوقائية (Preventive)**: 
+* **الضوابط الوقائية (Preventive)**:
 * الإخلاء الطردي (Batch Eviction) الذي يمنع تجاوز الذاكرة لـ 50,000 دلو.
 * حماية التخطي للـ `proxied` تمنع إسقاط حزم البروكسي الشريكة.
 * **الضوابط الكاشفة (Detective)**:
@@ -341,13 +356,16 @@ Mgr->>SIEM: إرسال تقرير إحصائي عن تنظيف الدلاء ال
 ## 23. USE CASES (حالات الاستخدام الرئيسية)
 
 ### حالة الاستخدام 1: مستخدم يقوم بتحميل ملف ضخم (Bandwidth Shaping)
+
 * **الممثل (Actor)**: عميل شبكة محلي (LAN Client).
 * **الشروط المسبقة**: خدمة QoS مفعلة في وضع التنفيذ `enforce`.
 * **مسار العمل الرئيسي**:
+
 1. يبدأ العميل بتحميل ملف بحجم 50 ميجابايت.
 2. يستهلك العميل سعة الانفجار الأولى (2.5 ميجابايت) بسرعة عالية.
 3. تنفد رموز الدلو، وتبدأ دالة `throttle` بتأخير الحزم عبر البروكسي بواسطة `asyncio.sleep`.
 4. يستقر التحميل عند معدل السرعة المستدام المحدد (~10 Mbps).
+
 * **النتيجة المتوقعة**: حماية النطاق الترددي للشبكة واستمرار تصفح بقية المستخدمين بنعومة.
 
 ---
@@ -355,6 +373,7 @@ Mgr->>SIEM: إرسال تقرير إحصائي عن تنظيف الدلاء ال
 ## 24. TESTING STRATEGY (استراتيجية الاختبار والتأكيد)
 
 تعتمد استراتيجية التأكيد على فحص جودة الخدمة عبر ثلاثة مستويات متكاملة:
+
 1. **اختبارات الوحدة (Unit Testing)**: فحص دقة خوارزمية Token Bucket الرياضية، والتأكد من عدم تجاوز السعة القصوى عند الشحن.
 2. **اختبارات التكامل (Integration Testing)**: فحص التزامن والتخطي البرمجي بين خط الفحص والبروكسي، والتأكد من انعكاس تحديثات قاعدة البيانات الفورية.
 3. **اختبارات الاستقرار (Stress Testing)**: محاكاة امتلاء الذاكرة بـ 50,000 دلو والتأكد من إطلاق عملية الإخلاء الطردي الفورية وحماية الذاكرة.
@@ -389,8 +408,11 @@ Mgr->>SIEM: إرسال تقرير إحصائي عن تنظيف الدلاء ال
 ## 27. CHALLENGES & SOLUTIONS (التحديات والحلول التقنية)
 
 1. **التحدي**: حدوث خصم مزدوج للحزم المارة عبر البروكسي في خط أنابيب الفحص الأمني الساخن.
+
 * *الحل*: وسم حزم البروكسي بـ `proxied=True` وتخطي فحصها في QoSPlugin.
+
 2. **التحدي**: تعليق خيط الفحص الأساسي أثناء قيام خيط جمع القمامة بفحص وحذف الدلاء الخاملة.
+
 * *الحل*: إجراء shallow snapshot لقاموس الدلاء خارج القفل، والفرز والتحقق أمنياً بدون قفل، وإعادة القفل فقط لحذف الدلاء التي ثبت خمولها الفعلي.
 
 ---
@@ -415,16 +437,16 @@ Mgr->>SIEM: إرسال تقرير إحصائي عن تنظيف الدلاء ال
 
 ## 30. CODE REFERENCE MAPPING (خريطة مرجع الكود الفعلي)
 
-تم ربط ميزات الوحدة بأماكن تنفيذها في الأكواد المصدرية للمنصة في الجدول التالي:
+تم ربط ميزات الوحدة بأماكن تنفيذها في الأكواد المصدرية للمنظومة في الجدول التالي:
 
 | الميزة البرمجية | مسار الملف المصدر | الفئة البرمجية (Class) | الدالة البرمجية (Function) | الغرض والهدف الوظيفي |
 | :--- | :--- | :--- | :--- | :--- |
 | **Token Bucket** | [qos_manager.py](file:///F:/enterprise_ngfw/modules/qos/qos_manager.py#L7-L47) | `TokenBucket` | `_replenish`, `consume_sync` | الحساب الرياضي للرموز وخصمها المتزامن. |
 | **Async Throttle** | [qos_manager.py](file:///F:/enterprise_ngfw/modules/qos/qos_manager.py#L37-L46) | `TokenBucket` | `consume_async` | تأخير البروكسي غير المتزامن لحين توفر الرموز. |
-| **Eviction Policy**| [qos_manager.py](file:///F:/enterprise_ngfw/modules/qos/qos_manager.py#L121-L140) | `QoSManager` | `get_bucket_for_ip` | الإخلاء الطردي لأقدم الدلاء عند امتلاء السعة. |
+| **Eviction Policy** | [qos_manager.py](file:///F:/enterprise_ngfw/modules/qos/qos_manager.py#L121-L140) | `QoSManager` | `get_bucket_for_ip` | الإخلاء الطردي لأقدم الدلاء عند امتلاء السعة. |
 | **DB Sync** | [qos_manager.py](file:///F:/enterprise_ngfw/modules/qos/qos_manager.py#L142-L170) | `QoSManager` | `_sync_config_from_db` | مزامنة إعدادات الـ API الفورية عبر قاعدة البيانات. |
 | **GC Pruning** | [qos_manager.py](file:///F:/enterprise_ngfw/modules/qos/qos_manager.py#L172-L215) | `QoSManager` | `_prune_inactive_buckets` | فحص خمول الحاويات خارج الأقفال ومعالجة الأخطاء. |
-| **Directional Check**| [qos_plugin.py](file:///F:/enterprise_ngfw/modules/qos/engine/qos_plugin.py#L71-L91) | `QoSPlugin` | `inspect` | تحديد الـ IP المقيد بناء على اتجاه المرور. |
+| **Directional Check** | [qos_plugin.py](file:///F:/enterprise_ngfw/modules/qos/engine/qos_plugin.py#L71-L91) | `QoSPlugin` | `inspect` | تحديد الـ IP المقيد بناء على اتجاه المرور. |
 | **Proxied Skip** | [qos_plugin.py](file:///F:/enterprise_ngfw/modules/qos/engine/qos_plugin.py#L65-L70) | `QoSPlugin` | `can_inspect` | تخطي فحص اتصالات البروكسي المفحوصة مسبقاً. |
 | **REST Control** | [router.py](file:///F:/enterprise_ngfw/modules/qos/api/router.py#L110-L149) | None | `update_config` | واجهة تعديل الإعدادات وحفظها في قاعدة البيانات. |
 | **UI Control** | [QoS.jsx](file:///F:/enterprise_ngfw/web-ui/src/modules/qos/QoS.jsx#L185-L245) | `QoS` | `handleSave`, `handleCancel` | لوحة تحكم الويب الرسومية لتعديل الإعدادات والإنذارات. |
@@ -433,7 +455,7 @@ Mgr->>SIEM: إرسال تقرير إحصائي عن تنظيف الدلاء ال
 
 ## 31. CONCLUSION (الخاتمة)
 
-تعد وحدة **جودة الخدمة (QoS)** في منصة **Enterprise NGFW Platform** نموذجاً برمجياً ممتازاً يجمع بين الأداء الشبكي الفائق والتحكم المعماري الصارم وحماية الموارد الأمنية.
+تعد وحدة **جودة الخدمة (QoS)** في منظومة **Enterprise NGFW Platform** نموذجاً برمجياً ممتازاً يجمع بين الأداء الشبكي الفائق والتحكم المعماري الصارم وحماية الموارد الأمنية.
 
 * **نقاط القوة**:
 * خوارزمية Token Bucket صحيحة ودقيقة برمجياً ورياضياً.
@@ -458,6 +480,7 @@ Mgr->>SIEM: إرسال تقرير إحصائي عن تنظيف الدلاء ال
 * **Overall Module Score**: **97.7 / 100**
 
 ### **FINAL PROFESSIONAL ASSESSMENT (التقييم المهني النهائي):**
+
 تتمتع وحدة QoS بمستوى نضج برمعي ممتاز (**Excellent Software Maturity Level**) بعد إجراء كافة التعديلات والتصحيحات الأمنية. مع وجود تغطية اختبارات برمجية كاملة بنسبة نجاح 100%، وتفادي عيوب الأقفال وتحسين زمن الاستجابة الشبكي، وتصميم واجهة رسومية شاملة مع شاشات رصد فورية، تعد هذه الوحدة جاهزة تماماً للمناقشة الأكاديمية والعملية في مشاريع التخرج والأنظمة المؤسسية بكل فخر واعتزاز.
 
 ---
@@ -467,12 +490,14 @@ Mgr->>SIEM: إرسال تقرير إحصائي عن تنظيف الدلاء ال
 يضم هذا القسم توثيقاً لكافة المساهمات البشرية والتقنية التي شاركت في تصميم وتطوير وتحصين وحدة جودة الخدمة (QoS) في النظام:
 
 ### 1. المهندس/ وهيب الحميري (waheeb Al-Humaeri)
+
 * **الدور**: المطور التأسيسي (Founding Developer).
 * **المساهمات البرمجية والتصميمية**:
   * قام ببناء الهيكل التأسيسي المبدئي للوحدة (Initial Commit) وتصميم دلاء الرموز الأساسية.
   * وضع التصور الأولي لعمليات التحقق من العناوين وقواعد التمرير الأساسية وتجهيز تهيئة البيئة وتجاهل ملفات المشروع الزائدة عبر `gitignore`.
 
 ### 2. المساعد البرمجي الذكي/ Antigravity (AI Security Architect & Senior Engineer)
+
 * **الدور**: خبير التدقيق الأمني وهندسة النظم (Cybersecurity Audit & Remediation Engineer).
 * **المساهمات البرمجية والتصميمية**:
   * **معالجة الثغرات والعيوب المعمارية الحرجة**:
@@ -491,7 +516,7 @@ Mgr->>SIEM: إرسال تقرير إحصائي عن تنظيف الدلاء ال
 
 ## المراجع الأكاديمية والصناعية (Academic & Industry References)
 
-1. J.L. Valenzuela, A. Monleon, I. San Esteban, et al., "A hierarchical token bucket algorithm to enhance QoS in IEEE 802.11:proposal, implementation and evaluation,"  2005. https://doi.org/10.1109/vetecf.2004.1400539
-2. Ahmed Nasrallah, Akhilesh S. Thyagaturu, Ziyad Alharbi, et al., "Performance Comparison of IEEE 802.1 TSN Time Aware Shaper (TAS) and Asynchronous Traffic Shaper (ATS)," in IEEE Access, 2019. https://doi.org/10.1109/access.2019.2908613
-3. Ted H. Szymanski, Dave Gilbert, "Provisioning mission-critical telerobotic control systems over internet backbone networks with essentially-perfect QoS," in IEEE Journal on Selected Areas in Communications, 2010. https://doi.org/10.1109/jsac.2010.100602
-4. Zifan Zhou, Juho Lee, Michael Berger, et al., "Simulating TSN traffic scheduling and shaping for future automotive Ethernet," in Journal of Communications and Networks, 2021. https://doi.org/10.23919/jcn.2021.000001
+1. J.L. Valenzuela, A. Monleon, I. San Esteban, et al., "A hierarchical token bucket algorithm to enhance QoS in IEEE 802.11:proposal, implementation and evaluation,"  2005. <https://doi.org/10.1109/vetecf.2004.1400539>
+2. Ahmed Nasrallah, Akhilesh S. Thyagaturu, Ziyad Alharbi, et al., "Performance Comparison of IEEE 802.1 TSN Time Aware Shaper (TAS) and Asynchronous Traffic Shaper (ATS)," in IEEE Access, 2019. <https://doi.org/10.1109/access.2019.2908613>
+3. Ted H. Szymanski, Dave Gilbert, "Provisioning mission-critical telerobotic control systems over internet backbone networks with essentially-perfect QoS," in IEEE Journal on Selected Areas in Communications, 2010. <https://doi.org/10.1109/jsac.2010.100602>
+4. Zifan Zhou, Juho Lee, Michael Berger, et al., "Simulating TSN traffic scheduling and shaping for future automotive Ethernet," in Journal of Communications and Networks, 2021. <https://doi.org/10.23919/jcn.2021.000001>

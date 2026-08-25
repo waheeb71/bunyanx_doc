@@ -3,7 +3,7 @@ import { PlayCircle, Video, Image as ImageIcon, Sparkles, UploadCloud } from 'lu
 
 export const metadata = {
   title: 'العروض التجريبية والوسائط',
-  description: 'معرض الفيديوهات والصور والعروض الحية لمنظومة BUNYANX Enterprise NGFW.',
+  description: 'معرض الفيديوهات والصور والعروض الحية لمنظومة BUNYANX Intelligent Response System to Cyberattacks.',
 };
 
 export default function DemoPage() {

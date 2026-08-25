@@ -1,10 +1,15 @@
 {
-  "siteTitle": "BUNYANX — Enterprise NGFW",
-  "siteSubTitle": "Multi-Layer Enterprise Next-Generation Firewall — Graduation Project 2026",
-  "heroTitle": "BUNYANX Enterprise NGFW",
-  "heroTagline": "Cybersecurity Graduation Project — 2026",
-  "heroDescription": "An enterprise next-generation firewall combining network defense, threat analytics, and deep packet inspection within a unified multi-layer architecture.",
-  "exploreSystem": "Explore System",
+  "siteTitle": "BUNYANX — Intelligent Response System to Cyberattacks",
+
+  "siteSubTitle": "Advanced Multi-Layer Cybersecurity System — Graduation Project 2026",
+
+  "heroTitle": "BUNYANX",
+
+  "heroTagline": "Intelligent Response System to Cyberattacks — Cybersecurity Graduation Project 2026",
+
+  "heroDescription": "An advanced multi-layer cybersecurity system designed to analyze threats, detect cyberattacks, and support intelligent security response through integrated defensive components for network protection, threat analysis, and traffic inspection.",
+
+  "exploreSystem": "Explore the System",
   "viewArchitecture": "Architecture",
   "viewDocs": "Documentation",
   "searchPlaceholder": "Search docs and modules... (Ctrl + K)",
@@ -51,6 +56,6 @@
     "quickLinks": "System Sections",
     "resources": "Evidence & Documentation",
     "university": "Faculty of Engineering — Cybersecurity & Network Engineering Department",
-    "copyright": "BUNYANX Enterprise NGFW Graduation Project © 2026 — All Rights Reserved"
+    "copyright": "BUNYANX Graduation Project © 2026 — All Rights Reserved"
   }
 }

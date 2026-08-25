@@ -1,6 +1,6 @@
 # 📄 وثيقة التوثيق الهندسي والأكاديمي لوحدة جدار حماية تطبيقات الويب (WAF/WAAP)
 
-## مشروع منصة Enterprise NGFW Cybersecurity Platform
+## مشروع منظومة Enterprise NGFW Cybersecurity Platform
 
 ---
 
@@ -16,7 +16,7 @@
 
 تخفق جدران الحماية التقليدية المستندة إلى الشبكة (Network-level Firewalls) في فحص الحمولات المشفرة وتفسير المنطق الداخلي لطلبات الويب، مما يجعلها عاجزة عن التصدي لثغرات مثل حقن SQL (SQLi)، وثغرات الحقن الموجه للذكاء الاصطناعي (Prompt Injections)، والبرمجيات الخبيثة النصية (XSS)، وهجمات تجاوز الواجهات (GraphQL/API Evasion)، وهجمات القوة الغاشمة وسرقة الحسابات (ATO).
 
-### دورها داخل منصة Enterprise NGFW
+### دورها داخل منظومة Enterprise NGFW
 
 تعمل الوحدة كـ **Plugin** عالي الأولوية داخل خط معالجة الحزم (Inspection Pipeline). تُحقن الوحدة ديناميكياً لفحص البيانات الواردة للمنافذ المحددة (مثل `80`, `443`, `8080`, `8443`) قبل توجيه الحزمة للشبكة الداخلية أو التطبيق الهدف.
 
@@ -82,7 +82,7 @@
 
 تتلخص المسؤوليات الأساسية للوحدة وعلاقتها ببنية النظام في الجدول التالي:
 
-| المسؤولية البرمجية | الوظيفة التقنية | القيمة المضافة للمنصة |
+| المسؤولية البرمجية | الوظيفة التقنية | القيمة المضافة للمنظومة |
 | :--- | :--- | :--- |
 | **فك وتطبيع المدخلات** | استخدام [WAFPreprocessor](file:///f:/enterprise_ngfw/modules/waf/engine/core/analysis/preprocessor.py) لتطبيع وترجمة التشفيرات المتعددة (URL, Base64, HTML Entity, Hex) | إحباط هجمات التهرب والتخفي بالترميز المزدوج. |
 | **استخلاص الخصائص** | استخراج الخصائص الرياضية والهيورستية عبر [WafFeatureExtractor](file:///f:/enterprise_ngfw/modules/waf/engine/core/analysis/feature_extractor.py) | توليد مدخلات رقمية خفيفة الوزن للمصنفات السريعة. |
@@ -168,7 +168,7 @@ graph TD
 
 ### العلاقات والتباعيات (Dependency Mapping)
 
-* يعتمد المحرك على `system.core.framework.plugin_base.InspectorPlugin` كفئة أساسية للتكامل مع المنصة.
+* يعتمد المحرك على `system.core.framework.plugin_base.InspectorPlugin` كفئة أساسية للتكامل مع المنظومة.
 * تتكامل الوحدة مع قاعدة البيانات الرئيسية عبر `system.database.database.SessionLocal` لحفظ بيانات التعلم الذاتي.
 * تبث الأحداث المباشرة عبر WebSocket باستخدام كائن `waf_dispatcher` المعرف في `modules.waf.api.live_monitor`.
 
@@ -375,7 +375,7 @@ graph LR
 
 ## 15. INTEGRATION ANALYSIS (التكامل مع النظام الأساسي)
 
-تتكامل وحدة الـ WAF مع باقي مكونات منصة الـ NGFW من خلال:
+تتكامل وحدة الـ WAF مع باقي مكونات منظومة الـ NGFW من خلال:
 
 * **النظام الأساسي (Core Pipeline):** تتكامل الوحدة كـ `InspectorPlugin` من خلال تنفيذ واجهة `inspect` واستلام كائن `InspectionContext` الغني ببيانات الاتصال ومخرجات الفحص اللاحقة.
 * **محرك الـ IDS/IPS:** مشاركة السمعة وتحديث قوائم العناوين السيئة محلياً عبر فئة `ThreatIntelligence`.
@@ -390,8 +390,8 @@ graph LR
 | نقطة النهاية (Endpoint) | الطريقة (Method) | المدخلات (Input) | المخرجات المتوقعة (Output) | التوثيق والصلاحيات |
 | :--- | :--- | :--- | :--- | :--- |
 | `/api/v1/waf/status` | `GET` | لا يوجد | الإحصائيات الحالية لحجم الفحص والحظر والمصادر الموثقة | WAF JWT Token |
-| `/api/v1/waf/waap/toggle/{feature}`| `PUT` | `{"enabled": true/false}` | حالة الميزة الجديدة وتأكيد التحديث | Admin only |
-| `/api/v1/waf/waap/api_schema/upload`| `POST` | `{"endpoint": str, "schema_definition": dict}`| تأكيد قبول وحفظ المخطط على القرص وحقنه بالذاكرة | Admin only |
+| `/api/v1/waf/waap/toggle/{feature}` | `PUT` | `{"enabled": true/false}` | حالة الميزة الجديدة وتأكيد التحديث | Admin only |
+| `/api/v1/waf/waap/api_schema/upload` | `POST` | `{"endpoint": str, "schema_definition": dict}` | تأكيد قبول وحفظ المخطط على القرص وحقنه بالذاكرة | Admin only |
 | `/api/v1/waf/gnn/train` | `POST` | `{"epochs": int, "n_synthetic": int}` | تأكيد بدء تدريب نموذج الـ GNN في الخلفية | Admin only |
 
 ---
@@ -566,9 +566,9 @@ graph TD
 | الميزة الأمنية | مسار الملف البرمجي | الفئة البرمجية (Class) | الدالة الفنية (Function) | الغرض التقني |
 | :--- | :--- | :--- | :--- | :--- |
 | **تطهير MySQL التنفيذي** | [preprocessor.py](file:///f:/enterprise_ngfw/modules/waf/engine/core/analysis/preprocessor.py) | `WAFPreprocessor` | `_strip_sql_comments` | كشف وحفظ الحمولات داخل تعليقات MySQL التنفيذية لمنع التهرب. |
-| **كشف aliases الـ GraphQL**| [graphql_inspector.py](file:///f:/enterprise_ngfw/modules/waf/engine/core/defenses/graphql_inspector.py) | `GraphQLInspector` | `_strip_strings_and_parentheses` | تجريد الحجج والنصوص لعد وفحص الـ aliases الحقيقية بدقة. |
+| **كشف aliases الـ GraphQL** | [graphql_inspector.py](file:///f:/enterprise_ngfw/modules/waf/engine/core/defenses/graphql_inspector.py) | `GraphQLInspector` | `_strip_strings_and_parentheses` | تجريد الحجج والنصوص لعد وفحص الـ aliases الحقيقية بدقة. |
 | **قياس المهلة وأمان الوقت** | [waf_inspector.py](file:///f:/enterprise_ngfw/modules/waf/engine/waf_inspector.py) | `WAFInspectorPlugin` | `inspect` -> `check_timeout` | مراقبة زمن الفحص الفعلي وتطبيق سياسة Fail-Open/Fail-Closed. |
-| **حظر الـ WebSockets الآمن**| [router.py](file:///f:/enterprise_ngfw/modules/waf/api/router.py) | `WAF WebSocket Endpoint` | `waf_live_events` | توثيق الجلسات وحظر المستخدمين غير الموثقين برمز ASGI `1008`. |
+| **حظر الـ WebSockets الآمن** | [router.py](file:///f:/enterprise_ngfw/modules/waf/api/router.py) | `WAF WebSocket Endpoint` | `waf_live_events` | توثيق الجلسات وحظر المستخدمين غير الموثقين برمز ASGI `1008`. |
 | **تحسين قاعدة البيانات** | [self_learning_logger.py](file:///f:/enterprise_ngfw/modules/waf/engine/core/decision/self_learning_logger.py) | `WAFSelfLearningLogger` | `_flush` | إدراج دفعي للسجلات وتقييد عمليات تنظيف قاعدة البيانات لتفادي أقفال الكتابة. |
 
 ---
@@ -577,7 +577,7 @@ graph TD
 
 تمثل وحدة الـ WAF (WAAP) نموذجاً متطوراً لجدران حماية تطبيقات الويب التي تدمج بنجاح بين قدرات الهيورستيات والتعلم الآلي المتطور. أثبتت الاختبارات الشاملة زوال كافة المشاكل البرمجية والتجاوزات الأمنية التي تم رصدها في التدقيق السابق.
 
-نجحت التعديلات الأخيرة في إكساب النظام متانة فائقة ضد الهجمات المتطورة والتهرب بالترميز، كما عززت استقرار وأداء النظام في ظل العمل المتزامن ومعدل الطلبات المرتفع، مما يجعل الوحدة **جاهزة تماماً ومؤهلة للإنتاج الفعلي (Production-Ready) داخل المنصة المؤسسية**.
+نجحت التعديلات الأخيرة في إكساب النظام متانة فائقة ضد الهجمات المتطورة والتهرب بالترميز، كما عززت استقرار وأداء النظام في ظل العمل المتزامن ومعدل الطلبات المرتفع، مما يجعل الوحدة **جاهزة تماماً ومؤهلة للإنتاج الفعلي (Production-Ready) داخل المنظومة المؤسسية**.
 
 ---
 

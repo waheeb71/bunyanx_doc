@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { Award, BookOpen, BrainCircuit, Shield, Zap, ArrowLeft } from 'lucide-react';
 
 export const metadata = {
-  title: 'الأبحاث الأكاديمية والابتكارات | BunyanX Enterprise NGFW',
+  title: 'الأبحاث الأكاديمية والابتكارات | BUNYANX
+Intelligent Response System to Cyberattacks',
   description: 'المساهمات والابتكارات العلمية والأكاديمية لمشروع التخرج BunyanX.',
 };
 
@@ -16,7 +17,8 @@ export default function ResearchPage() {
           الأبحاث العلمية والابتكارات الأكاديمية
         </h1>
         <p className="text-sm text-slate-400 leading-relaxed">
-          استعراض أهم الابتكارات والمساهمات البحثية الهندسية الصادرة عن مشروع تخرج منصة BunyanX Enterprise NGFW في مجالات أمن الشبكات والذكاء الاصطناعي التنبؤي وتفتيش الحركة المشفرة.
+          استعراض أهم الابتكارات والمساهمات البحثية الهندسية الصادرة عن مشروع تخرج منظومة BUNYANX
+          Intelligent Response System to Cyberattacks في مجالات أمن الشبكات والذكاء الاصطناعي التنبؤي وتفتيش الحركة المشفرة.
         </p>
       </div>
 

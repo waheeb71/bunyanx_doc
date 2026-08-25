@@ -17,7 +17,7 @@
 
 ### 1.2 تعريف الوحدة
 
-تعد وحدة **ids_ips (Intrusion Detection and Prevention System)** العصب المركزي للتحليل السلوكي العميق وفحص الحزم في منصة **bunyanx Cybersecurity Platform**. تدمج هذه الوحدة بين الأساليب التقليدية القائمة على مطابقة التواقيع والأبعاد الحديثة القائمة على الذكاء الاصطناعي السلوكي لتوفير خط دفاعي متقدم وقادر على صد الهجمات المستمرة والمعقدة (APTs) بشكل فوري.
+تعد وحدة **ids_ips (Intrusion Detection and Prevention System)** العصب المركزي للتحليل السلوكي العميق وفحص الحزم في منظومة **bunyanx Cybersecurity Platform**. تدمج هذه الوحدة بين الأساليب التقليدية القائمة على مطابقة التواقيع والأبعاد الحديثة القائمة على الذكاء الاصطناعي السلوكي لتوفير خط دفاعي متقدم وقادر على صد الهجمات المستمرة والمعقدة (APTs) بشكل فوري.
 
 ### 1.3 الهدف الرئيسي
 
@@ -321,7 +321,7 @@ F:\enterprise_ngfw\modules\ids_ips\
 ├── help.md                      # دليل الاستخدام والملاحظات التشغيلية للوحدة
 ├── ids_ips_system_documentation.md # وثيقة التصميم المعماري والتحليل البرمجي الشاملة
 ├── manifest.yaml                # البيان الرسمي لإعلان الموديول وأولويته وأحداثه
-├── module.py                    # الموديول الرئيسي (IDSIPSModule) وتكامله مع نظام المنصة
+├── module.py                    # الموديول الرئيسي (IDSIPSModule) وتكامله مع نظام المنظومة
 ├── api/
 │   ├── __init__.py
 │   └── router.py                # نقاط واجهات REST API الـ 12 للتحكم والتهيئة وإدارة التواقيع
@@ -527,9 +527,9 @@ graph LR
 
 ---
 
-## 15. INTEGRATION ANALYSIS (التكامل والتنسيق مع المنصة)
+## 15. INTEGRATION ANALYSIS (التكامل والتنسيق مع المنظومة)
 
-تتكامل وحدة `ids_ips` بشكل متين مع بقية مكونات منصة **Enterprise NGFW**:
+تتكامل وحدة `ids_ips` بشكل متين مع بقية مكونات منظومة **Enterprise NGFW**:
 
 * **التكامل مع Firewall Core:** إرجاع استجابات `InspectionResult` بنوع العمل الفعلي (`ALLOW`, `BLOCK`, `DECEIVE`) والتي تترجمها النواة لقرارات تحكم فورية.
 * **التكامل مع eBPF / XDP:** يتم إرسال أحداث المنع فوراً عبر `EventBus` تحت موضوع `RESPONSE_BLOCK` لتقوم النواة بحقن عناوين IP المهاجمين في جداول الحظر بنواة نظام التشغيل للتعامل معها عتادياً وتجنب استهلاك موارد المعالج.
@@ -796,7 +796,7 @@ graph LR
 
 | الميزة الأمنية والتقنية | مسار الملف الفعلي | الكلاس المعني | الدالة البرمجية الفعالة | الغرض التقني الدقيق |
 | :--- | :--- | :--- | :--- | :--- |
-| **تسجيل الوحدة بالمنصة** | [module.py](file:///F:/enterprise_ngfw/modules/ids_ips/module.py) | `IDSIPSModule` | `initialize(...)` | تسجيل الوحدة بحاوية الخدمات وربط `IPSEngine` في `PolicyManager` بأولوية 20. |
+| **تسجيل الوحدة بالمنظومة** | [module.py](file:///F:/enterprise_ngfw/modules/ids_ips/module.py) | `IDSIPSModule` | `initialize(...)` | تسجيل الوحدة بحاوية الخدمات وربط `IPSEngine` في `PolicyManager` بأولوية 20. |
 | **دمج القرارات وحقن الحزم** | [phantom_plugin.py](file:///F:/enterprise_ngfw/modules/ids_ips/engine/phantom_plugin.py) | `PHANTOMPlugin` | `inspect(...)` | التقييم المتسلسل للحزم وتجميع نتائج الذكاء الاصطناعي والمحركات التقليدية وقائمة الحظر. |
 | **دمج قرار الحظر النهائي** | [phantom_plugin.py](file:///F:/enterprise_ngfw/modules/ids_ips/engine/phantom_plugin.py) | `PHANTOMPlugin` | `_fuse_decision(...)` | اتخاذ قرار الحجب بناءً على عتبات الثقة، الكثافة السببية، وتأكيدات المحرك القديم. |
 | **الحظر الديناميكي الفوري** | [dynamic_blocklist.py](file:///F:/enterprise_ngfw/modules/ids_ips/engine/blocklist/dynamic_blocklist.py) | `DynamicBlocklist` | `check_and_update(...)` | فحص العناوين والنطاقات المكررة وحظرها فورياً (< 1ms) عند التجاوز دون تشغيل الـ ML. |
@@ -807,10 +807,10 @@ graph LR
 | **إدخال المؤشرات والتحديث الآمن** | [threat_intel.py](file:///F:/enterprise_ngfw/modules/ids_ips/engine/core/threat_intel.py) | `ThreatIntelligence` | `_upsert(...)` | إدراج مؤشرات التهديد أمنياً مع تفعيل حماية الأقفال لمنع أخطاء التزامن وقفل الجدول. |
 | **تحسين الرسم وتصفية المنتهية** | [ctgb.py](file:///F:/enterprise_ngfw/modules/ids_ips/engine/graph/ctgb.py) | `CausalTemporalGraphBuilder` | `_discover_causal_edges(...)` | مقارنة البصمات الطيفية للأجهزة مع تسريع الأداء المسبق وتصفية الروابط التالفة زمنياً. |
 | **تثبيط تنظيف الرسوم دورياً** | [ctgb.py](file:///F:/enterprise_ngfw/modules/ids_ips/engine/graph/ctgb.py) | `CausalTemporalGraphBuilder` | `update(...)` | إدارة نقاط الرسم وتأخير عمليات التنظيف (Pruning) لتتم بحد أقصى مرة كل 5 ثوانٍ. |
-| **التكيف التلقائي للموديل بالدراسة**| [ocl_engine.py](file:///F:/enterprise_ngfw/modules/ids_ips/engine/learning/ocl_engine.py) | `OnlineContinualLearner` | `observe(...)` | رصد الانحراف وتمرير التحديث التكيفي للموديل بـ 5 دورات تدريبية متدرجة. |
-| **التحميل القياسي للميزات الإحصائية**| [anomaly_detector.py](file:///F:/enterprise_ngfw/modules/ids_ips/engine/anomaly_detector.py) | `AnomalyDetector` | `_load_scaler(...)` | تحميل ملفات `l3_anomaly_scaler.pkl` و `l7_dpi_scaler.pkl` لتوحيد مصفوفات ML. |
+| **التكيف التلقائي للموديل بالدراسة** | [ocl_engine.py](file:///F:/enterprise_ngfw/modules/ids_ips/engine/learning/ocl_engine.py) | `OnlineContinualLearner` | `observe(...)` | رصد الانحراف وتمرير التحديث التكيفي للموديل بـ 5 دورات تدريبية متدرجة. |
+| **التحميل القياسي للميزات الإحصائية** | [anomaly_detector.py](file:///F:/enterprise_ngfw/modules/ids_ips/engine/anomaly_detector.py) | `AnomalyDetector` | `_load_scaler(...)` | تحميل ملفات `l3_anomaly_scaler.pkl` و `l7_dpi_scaler.pkl` لتوحيد مصفوفات ML. |
 | **محرك دمج الحجب الذكي** | [decision_engine.py](file:///F:/enterprise_ngfw/modules/ids_ips/policy/smart_blocker/decision_engine.py) | `DecisionEngine` | `evaluate(...)` | دمج التقييمات الجغرافية والسمعة واستخبارات التهديدات لإصدار قرار الحجب النهائي. |
-| **استعلام حالة PHANTOM بالـ API**| [router.py](file:///F:/enterprise_ngfw/modules/ids_ips/api/router.py) | `APIRouter` | `phantom_status(...)` | إرجاع إحصائيات التشغيل المباشرة لطبقات SBE و CTGB والـ OCL عبر الـ API. |
+| **استعلام حالة PHANTOM بالـ API** | [router.py](file:///F:/enterprise_ngfw/modules/ids_ips/api/router.py) | `APIRouter` | `phantom_status(...)` | إرجاع إحصائيات التشغيل المباشرة لطبقات SBE و CTGB والـ OCL عبر الـ API. |
 | **إضافة مؤشرات التهديد بالـ API** | [router.py](file:///F:/enterprise_ngfw/modules/ids_ips/api/router.py) | `APIRouter` | `threat_intel_add(...)` | إدخال مؤشر تهديد يدوي بالـ API مع تحديد صلاحية حظر آمنة تصل إلى 7 أيام. |
 | **تصدير مقاييس Prometheus** | [phantom_metrics.py](file:///F:/enterprise_ngfw/modules/ids_ips/monitoring/phantom_metrics.py) | `Metrics API` | `record_packet(...)` / `record_block(...)` | قياس أزمنة المعالجة وإجمالي الحزم والمحجوبات للانبعاث المباشر نحو Grafana. |
 | **تتبع التدفق الموزع** | [phantom_tracer.py](file:///F:/enterprise_ngfw/modules/ids_ips/tracing/phantom_tracer.py) | `PHANTOMTracer` | `trace_inspection(...)` | إنشاء OpenTelemetry Spans لتتبع سريان الحزم الفردية في الطبقات الأربعة. |

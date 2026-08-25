@@ -69,9 +69,7 @@ export const Header: React.FC<HeaderProps> = ({ docs = [] }) => {
               <div className="font-extrabold text-base sm:text-lg tracking-wider text-slate-100 group-hover:text-cyan-400 transition-colors flex items-center gap-1">
                 <span>BUNYAN<span className="text-cyan-400">X</span></span>
               </div>
-              <span className="text-[10px] font-mono text-cyan-400/80 block -mt-1 font-semibold">
-                ENTERPRISE NGFW
-              </span>
+             
             </div>
           </Link>
 

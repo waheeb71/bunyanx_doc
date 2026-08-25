@@ -25,7 +25,7 @@ import {
 } from 'lucide-react';
 
 export const metadata = {
-  title: 'BUNYANX — Enterprise NGFW | Cybersecurity Graduation Project',
+  title: 'BUNYANX| Cybersecurity Graduation Project',
   description: 'منظومة جدار ناري مؤسسية تجمع بين حماية الشبكة، تحليل التهديدات، وفحص حركة البيانات ضمن بنية أمنية متعددة الطبقات. مشروع التخرج الأكاديمي 2026.',
 };
 
@@ -63,10 +63,17 @@ export default async function HomePage() {
         {/* Hero Headings */}
         <div className="space-y-3 max-w-3xl mx-auto">
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-100 font-sans">
-            BUNYAN<span className="text-cyan-400">X</span> Enterprise NGFW
+            BUNYAN<span className="text-cyan-400">X</span>
           </h1>
+
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-200">
+            نظام الاستجابة الذكي للهجمات السيبرانية
+          </h2>
+
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl mx-auto">
-            منظومة جدار ناري مؤسسية تجمع بين حماية الشبكة، تحليل التهديدات، وفحص حركة البيانات ضمن بنية أمنية متعددة الطبقات.
+            منظومة أمن سيبراني متقدمة متعددة الطبقات لتحليل التهديدات، كشف الهجمات،
+            والاستجابة الذكية لها، مع دمج تقنيات الذكاء الاصطناعي وحماية الشبكات
+            وفحص حركة البيانات ضمن بنية دفاعية متكاملة.
           </p>
         </div>
 
@@ -170,7 +177,7 @@ export default async function HomePage() {
                 <span>النتيجة المتحققة</span>
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                بيئة أمنية مؤسسية موحدة تجمع 17 آلية دفاع ومحرك فحص داخل منصة واحدة تحقق زمن استجابة متناهي الصغر وتتخذ قرارات استجابة استباقية وتكيفية.
+                بيئة أمنية مؤسسية موحدة تجمع 17 آلية دفاع ومحرك فحص داخل منظومة واحدة تحقق زمن استجابة متناهي الصغر وتتخذ قرارات استجابة استباقية وتكيفية.
               </p>
             </div>
           </div>

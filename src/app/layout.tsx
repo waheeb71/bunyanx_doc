@@ -13,14 +13,39 @@ const SITE_ORIGIN = process.env.NEXT_PUBLIC_SITE_URL || 'https://bunyanx-doc.net
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_ORIGIN),
   title: {
-    default: 'BUNYANX — Enterprise NGFW | Cybersecurity Graduation Project',
-    template: '%s | BUNYANX Enterprise NGFW',
+    default: 'BUNYANX | Cybersecurity Graduation Project',
+    template: '%s | BUNYANX ',
   },
-  description: 'منظومة جدار ناري مؤسسية تجمع بين حماية الشبكة، تحليل التهديدات، وفحص حركة البيانات ضمن بنية أمنية متعددة الطبقات — مشروع التخرج الأكاديمي 2026.',
+  description: 'نظام استجابة ذكي للهجمات السيبرانية يجمع بين تحليل التهديدات، كشف الهجمات، الاستجابة الأمنية، حماية الشبكات، وفحص حركة البيانات ضمن بنية دفاعية متعددة الطبقات — مشروع التخرج الأكاديمي BUNYANX 2026.',
+
   keywords: [
-    'BUNYANX', 'Enterprise NGFW', 'Next Generation Firewall', 'Cybersecurity',
-    'eBPF', 'XDP', 'PHANTOM', 'IDS', 'IPS', 'WAF', 'DLP', 'UEBA', 'AEGIS v3',
-    'DART', 'SSL Inspection', 'Proxy', 'مشروع تخرج', 'أمن سيبراني', 'جدار ناري'
+    'BUNYANX',
+    'Intelligent Response System to Cyberattacks',
+    'Cyberattack Response',
+    'Cybersecurity',
+    'Threat Detection',
+    'Threat Analysis',
+    'Intelligent Security',
+    'AI Cybersecurity',
+    'NGFW',
+    'Next Generation Firewall',
+    'eBPF',
+    'XDP',
+    'PHANTOM',
+    'IDS',
+    'IPS',
+    'WAF',
+    'DLP',
+    'UEBA',
+    'AEGIS v3',
+    'DART',
+    'SSL Inspection',
+    'MemoryBIO',
+    'Active Directory',
+    'LDAP',
+    'مشروع تخرج',
+    'نظام استجابة ذكي للهجمات السيبرانية',
+    'أمن سيبراني'
   ],
   authors: [{ name: 'فريق مشروع BunyanX' }],
   icons: {
@@ -29,16 +54,19 @@ export const metadata: Metadata = {
     apple: '/logo.png',
   },
   openGraph: {
-    title: 'منصة BunyanX للأمن السيبراني — الجدار الناري المتقدم للمؤسسات',
-    description: 'بوابة التوثيق الأكاديمي والتقني الشاملة لمشروع تخرج منصة BunyanX Enterprise NGFW. معمارية النظام، وحدات الذكاء الاصطناعي الـ 17، الأبحاث واختبارات الأداء.',
+    title: 'BUNYANX — نظام الاستجابة الذكي للهجمات السيبرانية',
+
+    description: 'البوابة الرسمية للتوثيق الأكاديمي والتقني لمشروع BUNYANX — نظام الاستجابة الذكي للهجمات السيبرانية. تستعرض المنظومة معمارية النظام، مكوناته الأمنية، محركات الذكاء الاصطناعي، الأبحاث العلمية، والاختبارات والتقييمات المعملية.',
+
     url: SITE_ORIGIN,
-    siteName: 'منصة BunyanX للأمن السيبراني',
+
+    siteName: 'BUNYANX — نظام الاستجابة الذكي للهجمات السيبرانية',
     images: [
       {
         url: `${SITE_ORIGIN}/logo.png`,
         width: 512,
         height: 512,
-        alt: 'شعار منصة BunyanX Enterprise NGFW',
+        alt: 'شعار منظومة BUNYANX Intelligent Response System to Cyberattacks',
       },
     ],
     locale: 'ar_SA',
@@ -46,8 +74,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'منصة BunyanX للأمن السيبراني — BunyanX Enterprise NGFW',
-    description: 'بوابة التوثيق الأكاديمي والتقني الشاملة لمشروع تخرج منصة BunyanX Enterprise NGFW.',
+    title: 'منظومة BunyanX للأمن السيبراني — BUNYANX Intelligent Response System to Cyberattacks',
+    description: 'بوابة التوثيق الأكاديمي والتقني الشاملة لمشروع تخرج منظومة BUNYANXIntelligent Response System to Cyberattacks.',
     images: [`${SITE_ORIGIN}/logo.png`],
   },
   robots: {

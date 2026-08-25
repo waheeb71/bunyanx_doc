@@ -12,7 +12,7 @@ import {
 
 export const metadata = {
   title: 'فريق العمل والمشرف الأكاديمي',
-  description: 'فريق مهندسي مشروع تخرج منصة BUNYANX Enterprise NGFW والمشرف الهندسي — كلية الهندسة دفعة 2026.',
+  description: 'فريق مشروع تخرج نظام الاستجابة الذكي للهجمات السيبرانية BUNYANX والمشرف الهندسي — كلية الهندسة، قسم الأمن السيبراني، دفعة 2026.',
 };
 
 export default function TeamPage() {
@@ -29,7 +29,7 @@ export default function TeamPage() {
     },
     {
       name: 'عمرو عبده الله علي',
-      telegramHandle: '@@XXHGX',
+      telegramHandle: '@XXHGX',
       telegramUrl: 'https://t.me/XXXHGX',
     },
     {
@@ -48,7 +48,7 @@ export default function TeamPage() {
     name: 'المهندس يحيى الصبري',
     role: 'المشرف الهندسي والأكاديمي على مشروع التخرج',
     department: 'كلية الهندسة — قسم أمن المعلومات وهندسة الشبكات',
-    desc: 'الإشراف الهندسي المباشر، التوجيه الأكاديمي، والمراجعة الفنية لمعمارية منظومة BUNYANX Enterprise NGFW ونتائج الاختبارات والتوثيق المعتمد.',
+    desc: 'الإشراف الهندسي المباشر، التوجيه الأكاديمي، والمراجعة الفنية لمعمارية منظومة BUNYANX Intelligent Response System to Cyberattacks ونتائج الاختبارات والتوثيق المعتمد.',
   };
 
   return (
@@ -63,7 +63,8 @@ export default function TeamPage() {
           فريق العمل والمشرف الأكاديمي
         </h1>
         <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-          نخبة مهندسي مشروع تخرج منظومة BUNYANX Enterprise NGFW تحت الإشراف الأكاديمي المباشر في كلية الهندسة.
+          نخبة مهندسي مشروع تخرج منظومة BUNYANX
+          Intelligent Response System to Cyberattacks تحت الإشراف الأكاديمي المباشر في كلية الهندسة.
         </p>
       </div>
 

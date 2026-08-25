@@ -19,7 +19,8 @@ import {
 
 export const metadata = {
   title: 'مركز التوثيق الأكاديمي الشامل',
-  description: 'فهرس ملفات التوثيق الأكاديمي الـ 18 لمنظومة BUNYANX Enterprise NGFW مقسمة حسب التخصصات والمحركات الأمنية.',
+  description: 'فهرس ملفات التوثيق الأكاديمي الـ 18 لمنظومة BUNYANX
+Intelligent Response System to Cyberattacks مقسمة حسب التخصصات والمحركات الأمنية.',
 };
 
 const DOC_CATEGORIES = [

@@ -27,7 +27,7 @@ export const Footer: React.FC = () => {
               </div>
               <div>
                 <span className="font-extrabold text-base sm:text-lg text-slate-100">
-                  BUNYAN<span className="text-cyan-400">X</span> Enterprise NGFW
+                  BUNYAN<span className="text-cyan-400">X</span> 
                 </span>
                 <span className="text-[10px] font-mono text-cyan-400 block -mt-1 font-semibold">
                   Cybersecurity Graduation Project — 2026

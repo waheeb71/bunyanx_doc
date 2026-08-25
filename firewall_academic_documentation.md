@@ -1,6 +1,6 @@
 # وثيقة التوثيق الأكاديمي الشامل — وحدة الجدار الناري (Firewall Module)
 
-## bunyanx Enterprise NGFW Cybersecurity Platform
+## bunyanx Cybersecurity Platform
 
 **Module Path:** `F:\enterprise_ngfw\modules\firewall`
 **Document Version:** 1.0
@@ -12,7 +12,7 @@
 
 ## 1.1 المساهمة العلمية الأصلية والابتكار الجديد
 
-تقدم وحدة الجدار الناري في منصة bunyanx مساهمات علمية وتقنية أصلية تتجاوز أنظمة الجدران النارية التقليدية:
+تقدم وحدة الجدار الناري في منظومة bunyanx مساهمات علمية وتقنية أصلية تتجاوز أنظمة الجدران النارية التقليدية:
 
 1. **محرك تقييم موحد متعدد الطبقات (Unified Multi-Layer Evaluation Engine):** تصميم أصيل يدمج تقييم GeoIP → ACL (Layer 3/4) → App Control (Layer 7) في خط أنابيب متسلسل واحد (Pipeline)، بدلاً من الفصل التقليدي بين الطبقات. هذا يحقق قرار أمني شامل لكل حزمة بيانات خلال عملية تقييم واحدة.
 
@@ -26,7 +26,7 @@
 
 ## 1.2 تعريف الوحدة
 
-وحدة الجدار الناري (Firewall Module) هي المكون الأمني الأساسي في منصة bunyanx Enterprise NGFW. تعمل كخط الدفاع الأول في خط أنابيب فحص حركة المرور (Inspection Pipeline)، وتتولى اتخاذ قرارات السماح/الحظر/الرفض لكل حزمة بيانات تمر عبر النظام.
+وحدة الجدار الناري (Firewall Module) هي المكون الأمني الأساسي في منظومة bunyanx . تعمل كخط الدفاع الأول في خط أنابيب فحص حركة المرور (Inspection Pipeline)، وتتولى اتخاذ قرارات السماح/الحظر/الرفض لكل حزمة بيانات تمر عبر النظام.
 
 ## 1.3 الهدف الرئيسي
 
@@ -47,14 +47,14 @@
 - حظر حركة المرور من مناطق جغرافية معادية
 - اتخاذ قرارات أمنية بزمن استجابة أقل من ملي ثانية على مستوى الخط (Line-Rate)
 
-## 1.5 الدور داخل منصة Enterprise NGFW
+## 1.5 الدور داخل منظومة
 
 تعمل كـ `InspectorPlugin` مسجل في خط أنابيب الفحص بأولوية `HIGHEST`، مما يعني أنها أول وحدة تُقيّم كل حزمة. قراراتها ملزمة لبقية خط الأنابيب.
 
 ## 1.6 الأهمية الأمنية والتشغيلية
 
 | البُعد | الأهمية |
-|--------|---------|
+| -------- | --------- |
 | **أمنياً** | خط الدفاع الأول — أي ثغرة هنا تكشف النظام بالكامل |
 | **تشغيلياً** | تعالج كل حزمة — أي مشكلة أداء تؤثر على الشبكة كاملة |
 | **معمارياً** | تتكامل مع كل وحدة أخرى (IDS، VPN، DLP، AI Engine) |
@@ -106,7 +106,7 @@
 # 3. MODULE RESPONSIBILITIES — مسؤوليات الوحدة
 
 | # | المسؤولية | الوظيفة | القيمة المضافة |
-|---|-----------|---------|----------------|
+| --- | ----------- | --------- | ---------------- |
 | 1 | **تقييم السياسات** | تقييم كل حزمة ضد GeoIP → ACL → AppControl | قرار أمني شامل متعدد الطبقات |
 | 2 | **تتبع الحالة** | إدارة دورة حياة اتصالات TCP/UDP/ICMP | تجاوز سريع للاتصالات المؤسسة |
 | 3 | **حظر IP** | حظر/إلغاء حظر فوري (eBPF/Software) | استجابة لحظية للتهديدات |
@@ -136,7 +136,7 @@
 ## 4.3 التحديات التقنية
 
 | التحدي | الوصف |
-|--------|-------|
+| -------- | ------- |
 | **الأداء مقابل العمق** | تقييم عميق (GeoIP + ACL + L7) مع الحفاظ على زمن < 1ms |
 | **التوازي** | خيوط فحص متعددة تصل لجدول حالة مشترك |
 | **الاتساق** | تغيير القواعد أثناء التشغيل (Hot-Reload) بدون فقدان حزم |
@@ -157,7 +157,7 @@
 ## Functional Requirements (FR)
 
 | ID | المتطلب | الحالة |
-|----|---------|--------|
+| ---- | --------- | -------- |
 | FR-01 | تقييم كل حزمة TCP/UDP/ICMP ضد مجموعة القواعد | ✅ متحقق |
 | FR-02 | دعم قواعد L3/L4 (IP, Port, Protocol, Zone) | ✅ متحقق |
 | FR-03 | دعم قواعد L7 (Application, Category, User/Group) | ✅ متحقق |
@@ -171,7 +171,7 @@
 ## Non-Functional Requirements (NFR)
 
 | ID | المتطلب | القيمة المستهدفة |
-|----|---------|------------------|
+| ---- | --------- | ------------------ |
 | NFR-01 | زمن التقييم لكل حزمة | < 1 ms |
 | NFR-02 | أقصى اتصالات متتبعة | 100,000 |
 | NFR-03 | أقصى حجم ذاكرة تخزين GeoIP | 100,000 سجل LRU |
@@ -180,7 +180,7 @@
 ## Security Requirements (SR)
 
 | ID | المتطلب | التنفيذ |
-|----|---------|---------|
+| ---- | --------- | --------- |
 | SR-01 | Zero Trust Default Deny | `default_action = Action.BLOCK` في ACL و AppControl |
 | SR-02 | Fail-Closed on Error | `InspectionAction.BLOCK` عند أي استثناء |
 | SR-03 | Input Validation | Pydantic field_validators لـ IP/Port على API |
@@ -253,7 +253,7 @@ graph TB
 ## 6.2 Dependency Mapping
 
 | المكون | يعتمد على |
-|--------|-----------|
+| -------- | ----------- |
 | `FirewallPlugin` | `UnifiedEvaluator`, `StateTracker`, `CircuitBreaker`, `validate_firewall_config` |
 | `UnifiedEvaluator` | `ACLEngine`, `GeoIPFilter`, `AppControlEngine`, `ZoneManager`, `firewall_telemetry`, ORM Model |
 | `ACLEngine` | `system.policy.schema` (FirewallRule, PolicyContext, Action, Protocol) |
@@ -387,7 +387,7 @@ graph TB
 ### FirewallRule ORM ([models/**init**.py](file:///F:/enterprise_ngfw/modules/firewall/models/__init__.py))
 
 | الحقل | النوع | القيمة الافتراضية | الوصف |
-|-------|------|------------------|-------|
+| ------- | ------ | ------------------ | ------- |
 | `id` | Integer (PK) | Auto-increment | المعرف الفريد |
 | `name` | String(100) | — | اسم القاعدة (فريد) |
 | `description` | String(255) | None | وصف القاعدة |
@@ -432,7 +432,7 @@ FirewallConfig
 ## 9.3 Pydantic API Schemas
 
 | Schema | الاستخدام |
-|--------|-----------|
+| -------- | ----------- |
 | `FirewallRuleBase` | Base model مع field_validators لـ IP/Port |
 | `FirewallRuleCreate` | إنشاء قاعدة (يرث FirewallRuleBase) |
 | `FirewallRuleResponse` | استجابة مع id + timestamps (orm_mode) |
@@ -668,7 +668,7 @@ flowchart LR
 محقق التكوين: [validator.py](file:///F:/enterprise_ngfw/modules/firewall/config/validator.py)
 
 | الإعداد | الوظيفة | القيمة الافتراضية | التأثير |
-|---------|---------|------------------|---------|
+| --------- | --------- | ------------------ | --------- |
 | `enabled` | تفعيل/تعطيل الوحدة | `true` | تعطيل كامل للجدار الناري |
 | `mode` | وضع التشغيل | `"enforce"` | `monitor` = تسجيل فقط، `enforce` = حظر فعلي |
 | `default_policy` | السياسة الافتراضية | `"DROP"` | `DROP` = Zero Trust، `ALLOW` = Permissive |
@@ -684,7 +684,7 @@ flowchart LR
 # 15. INTEGRATION ANALYSIS — تحليل التكامل
 
 | المكون | نوع التكامل | التفاصيل |
-|--------|-------------|----------|
+| -------- | ------------- | ---------- |
 | **Core System** | Plugin Registration | `InspectorPlugin` مسجل بأولوية HIGHEST في `ModuleManager` |
 | **Circuit Breaker** | `breaker_registry.get_or_create("firewall")` | يعزل أعطال المقيّم |
 | **Database** | SQLAlchemy ORM | `DatabaseManager.session()` لتحميل القواعد |
@@ -700,7 +700,7 @@ flowchart LR
 مصدر: [router.py](file:///F:/enterprise_ngfw/modules/firewall/api/router.py)
 
 | Endpoint | Method | الوصف | Auth | Input | Output |
-|----------|--------|-------|------|-------|--------|
+| ---------- | -------- | ------- | ------ | ------- | -------- |
 | `/api/v1/rules` | GET | قائمة القواعد | `require_firewall` | `skip`, `limit` | `List[FirewallRuleResponse]` |
 | `/api/v1/rules` | POST | إنشاء قاعدة | `require_admin` | `FirewallRuleCreate` | `FirewallRuleResponse` (201) |
 | `/api/v1/rules/{id}` | GET | استرجاع قاعدة | `require_firewall` | `rule_id` | `FirewallRuleResponse` |
@@ -754,7 +754,7 @@ AsyncFirewallLogger (Singleton)
 ## ما يتم تسجيله
 
 | الحدث | المستوى | متى | لماذا |
-|-------|---------|-----|-------|
+| ------- | --------- | ----- | ------- |
 | حكم الجدار الناري | INFO | كل حزمة مُقيّمة | رؤية أمنية + ارتباط flow_id |
 | تحول حالة TCP | DEBUG | عند تغيير الحالة | تحليل أمني + AI telemetry |
 | فشل المقيّم | ERROR | عند استثناء | تتبع الأعطال |
@@ -790,7 +790,7 @@ AsyncFirewallLogger (Singleton)
 # 19. MONITORING & OBSERVABILITY — المراقبة
 
 | المقياس | المصدر | الوصف |
-|---------|--------|-------|
+| --------- | -------- | ------- |
 | `active_connections` | StateTracker.get_stats() | عدد الاتصالات النشطة |
 | `tcp_timeout` / `udp_timeout` | StateTracker | قيم المهلات الحالية |
 | `circuit_breaker.state` | breaker.stats | CLOSED/OPEN/HALF_OPEN |
@@ -808,7 +808,7 @@ AsyncFirewallLogger (Singleton)
 ## 20.1 Threat Model
 
 | الأصل | التهديد | سطح الهجوم | سيناريو الهجوم | مستوى الخطر |
-|-------|---------|------------|----------------|-------------|
+| ------- | --------- | ------------ | ---------------- | ------------- |
 | جدول القواعد (DB) | Unauthorized Rule Modification | REST API | مهاجم يحصل على JWT admin ويُعدّل القواعد | 🔴 Critical |
 | جدول الحالة | Memory Exhaustion DoS | Network Packets | إغراق بـ SYN packets لملء الجدول | 🟡 Medium (mitigated: LRU eviction) |
 | GeoIP Cache | Cache Poisoning | — | GeoIP DB مُعدّلة | 🟡 Medium (mitigated: read-only MMDB) |
@@ -819,7 +819,7 @@ AsyncFirewallLogger (Singleton)
 ## 20.2 Security Controls Implemented
 
 | الآلية | النوع | التنفيذ |
-|--------|------|---------|
+| -------- | ------ | --------- |
 | JWT Authentication | Preventive | `require_admin` / `require_firewall` |
 | Input Validation | Preventive | Pydantic field_validators لـ IP/CIDR/Port |
 | Rate Limiting | Preventive | 20 ops/min per user |
@@ -868,7 +868,7 @@ AsyncFirewallLogger (Singleton)
 # 22. PERFORMANCE ANALYSIS — تحليل الأداء
 
 | المقياس | التصميم | التأثير |
-|---------|---------|---------|
+| --------- | --------- | --------- |
 | **CPU** | Integer comparison بدل String parsing | خفض 80%+ في وقت المطابقة |
 | **Memory** | LRU eviction بحد 100K | ~50 MB لجدول الحالة |
 | **Concurrency** | `threading.RLock` + Double-Checked Locking | Thread-safe بدون Contention عالي |
@@ -898,7 +898,7 @@ protocol_index = {
 ## UC-01: تقييم حزمة واردة
 
 | العنصر | التفاصيل |
-|--------|----------|
+| -------- | ---------- |
 | **Actor** | Network Packet (عبر Inspection Pipeline) |
 | **Preconditions** | النظام مُفعّل، القواعد محمّلة |
 | **Workflow** | Pipeline → `can_inspect()` → `inspect()` → StateTracker → CircuitBreaker → Evaluator → Result |
@@ -908,7 +908,7 @@ protocol_index = {
 ## UC-02: إنشاء قاعدة جدار ناري
 
 | العنصر | التفاصيل |
-|--------|----------|
+| -------- | ---------- |
 | **Actor** | مسؤول النظام (Admin) |
 | **Preconditions** | JWT صالح مع صلاحية admin |
 | **Workflow** | POST `/api/v1/rules` → Validate (Pydantic) → Check duplicate name → INSERT → Invalidate cache |
@@ -918,7 +918,7 @@ protocol_index = {
 ## UC-03: حظر IP فوري
 
 | العنصر | التفاصيل |
-|--------|----------|
+| -------- | ---------- |
 | **Actor** | مسؤول النظام أو نظام آلي (IDS) |
 | **Preconditions** | JWT صالح، Rate limit لم يُتجاوز |
 | **Workflow** | POST `/block/{ip}` → Validate IP → Rate check → Create BlockedEntry → eBPF/Software → Save to disk |
@@ -932,14 +932,14 @@ protocol_index = {
 ## الاختبارات الموجودة
 
 | الملف | النوع | عدد الاختبارات | التغطية |
-|-------|------|----------------|---------|
+| ------- | ------ | ---------------- | --------- |
 | [test_acl_engine.py](file:///F:/enterprise_ngfw/modules/firewall/tests/test_acl_engine.py) | Unit | 2 | مطابقة IP + معالجة NULL |
 | [test_state_tracker.py](file:///F:/enterprise_ngfw/modules/firewall/tests/test_state_tracker.py) | Unit | 2 | دورة TCP كاملة + LRU eviction |
 
 ## التغطية المطلوبة
 
 | المستوى | الحالة | الملاحظة |
-|---------|--------|----------|
+| --------- | -------- | ---------- |
 | Unit Testing | ⚠️ جزئي (4 اختبارات) | يغطي ACL و StateTracker فقط |
 | Integration Testing | ❌ مفقود | Pipeline → Plugin → Evaluator |
 | Security Testing | ❌ مفقود | Fail-closed, Circuit Breaker, Input Validation |
@@ -951,7 +951,7 @@ protocol_index = {
 # 25. TEST SCENARIOS — سيناريوهات الاختبار
 
 | السيناريو | المدخلات | النتيجة المتوقعة | المنطق | مستوى الخطر |
-|-----------|----------|------------------|--------|-------------|
+| ----------- | ---------- | ------------------ | -------- | ------------- |
 | IP مطابق لقاعدة ACL | src=192.168.1.100, dst=10.0.0.5, port=3306 | ALLOW | CompiledRule IP range match | 🟢 Low |
 | IP خارج نطاق CIDR | src=10.0.0.1, dst=10.0.0.6, port=3306 | BLOCK (default) | No rule match → default deny | 🟡 Medium |
 | Port = NULL (حزمة مشوهة) | dst_port=None, rule expects 80 | BLOCK (default) | Port match fails → no rule match | 🟡 Medium |
@@ -967,7 +967,7 @@ protocol_index = {
 # 26. FAILURE ANALYSIS — تحليل الأعطال
 
 | نقطة الفشل | السيناريو | آلية الاسترداد |
-|------------|-----------|----------------|
+| ------------ | ----------- | ---------------- |
 | **UnifiedEvaluator crash** | خطأ في تحميل القواعد أو تقييمها | Fail-closed + Circuit Breaker trip |
 | **DB session stale** | جلسة DB منتهية الصلاحية | `reload_rules()` يغلق الجلسة القديمة ويُنشئ جديدة |
 | **StateTracker memory full** | 100K+ اتصالات | LRU eviction (أقدم اتصال يُطرد) |
@@ -982,7 +982,7 @@ protocol_index = {
 # 27. CHALLENGES & SOLUTIONS — التحديات والحلول
 
 | التحدي | الحل | الدرس المستفاد |
-|--------|------|----------------|
+| -------- | ------ | ---------------- |
 | Thread Safety عبر RLock | استخدام `threading.RLock` + Double-Checked Locking | Never assume single-threaded في Pipeline |
 | Fail-Open الأصلي | تحويل إلى Fail-Closed مع Circuit Breaker | Security defaults يجب أن تكون pessimistic |
 | ACL Priority Ordering | Pre-merge "any" rules مع protocol-specific عند التحميل | Lazy merging يسبب ترتيب خاطئ |
@@ -1038,7 +1038,7 @@ protocol_index = {
 # 30. CODE REFERENCE MAPPING — ربط الميزات بالكود
 
 | الميزة | الملف | الفئة | الدالة | الغرض |
-|--------|-------|-------|--------|-------|
+| -------- | ------- | ------- | -------- | ------- |
 | Pipeline Entry | [firewall_plugin.py](file:///F:/enterprise_ngfw/modules/firewall/engine/firewall_plugin.py) | `FirewallPlugin` | `inspect()` | نقطة الدخول لكل حزمة |
 | Fast-Path Bypass | [state_tracker.py](file:///F:/enterprise_ngfw/modules/firewall/engine/state_tracker.py) | `StateTracker` | `get_or_update_state()` | تجاوز الاتصالات المؤسسة |
 | TCP State Machine | [state_tracker.py](file:///F:/enterprise_ngfw/modules/firewall/engine/state_tracker.py) | `StateTracker` | `_advance_tcp_state()` | تتبع حالة TCP |
@@ -1063,7 +1063,7 @@ protocol_index = {
 
 ## 31.1 تقييم الوحدة
 
-وحدة الجدار الناري في منصة bunyanx تُمثل تصميماً معمارياً ناضجاً يجمع بين عمق التغطية الأمنية وسرعة الأداء. التصميم الطبقي (Engine → Policy → API → Data) يحقق فصلاً واضحاً للمسؤوليات، بينما تحقق الخوارزميات المبتكرة (Integer Boundary Checking, Bidirectional Hashing, Pre-Merged Protocol Index) أداءً يتنافس مع الأنظمة التجارية.
+وحدة الجدار الناري في منظومة bunyanx تُمثل تصميماً معمارياً ناضجاً يجمع بين عمق التغطية الأمنية وسرعة الأداء. التصميم الطبقي (Engine → Policy → API → Data) يحقق فصلاً واضحاً للمسؤوليات، بينما تحقق الخوارزميات المبتكرة (Integer Boundary Checking, Bidirectional Hashing, Pre-Merged Protocol Index) أداءً يتنافس مع الأنظمة التجارية.
 
 ## 31.2 نقاط القوة
 
@@ -1096,7 +1096,7 @@ protocol_index = {
 # 32. FINAL EVALUATION — التقييم النهائي
 
 | المعيار | الدرجة (/100) | الملاحظة |
-|---------|--------------|----------|
+| --------- | -------------- | ---------- |
 | **Architecture Score** | **85** | تصميم طبقي محكم + Plugin Pattern + Repository Pattern |
 | **Security Score** | **78** | Fail-closed + Circuit Breaker + Input Validation + RBAC + Rate Limiting. ناقص: HMAC, real AD |
 | **Performance Score** | **82** | Integer Fast-Path + LRU Cache + Async Logging + StateTracker bypass |
