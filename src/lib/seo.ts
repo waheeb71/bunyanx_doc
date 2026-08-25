@@ -24,8 +24,7 @@ export function generateDocSchema(doc: DocItem, lang: 'ar' | 'en') {
     },
     'publisher': {
       '@type': 'Organization',
-      'name': 'BUNYANX
-Intelligent Response System to Cyberattacks',
+      'name': 'BUNYANX Intelligent Response System to Cyberattacks',
       'logo': {
     '@type': 'ImageObject',
       'url': `${SITE_URL}/logo.png`,
