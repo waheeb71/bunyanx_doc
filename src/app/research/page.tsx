@@ -3,8 +3,7 @@ import Link from 'next/link';
 import { Award, BookOpen, BrainCircuit, Shield, Zap, ArrowLeft } from 'lucide-react';
 
 export const metadata = {
-  title: 'الأبحاث الأكاديمية والابتكارات | BUNYANX
-Intelligent Response System to Cyberattacks',
+  title: 'الأبحاث الأكاديمية والابتكارات | BUNYANX Intelligent Response System to Cyberattacks',
   description: 'المساهمات والابتكارات العلمية والأكاديمية لمشروع التخرج BunyanX.',
 };
 

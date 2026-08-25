@@ -5,8 +5,7 @@ import Link from 'next/link';
 
 export const metadata = {
   title: 'مركز التحميلات والمصادر الأكاديمية',
-  description: 'تحميل الرسالة الماستر الموحدة وملفات التوثيق الأكاديمي المنفردة لمنظومة BUNYANX
-Intelligent Response System to Cyberattacks.',
+  description: 'تحميل الرسالة الماستر الموحدة وملفات التوثيق الأكاديمي المنفردة لمنظومة BUNYANX Intelligent Response System to Cyberattacks.',
 };
 
 export default async function DownloadsPage() {

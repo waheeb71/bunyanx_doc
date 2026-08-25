@@ -1,3 +1,4 @@
+'use client';
 
 import React, { useState } from 'react';
 import {
@@ -9,11 +10,6 @@ import {
   ChevronRight,
 } from 'lucide-react';
 
-export const metadata = {
-  title: 'العروض التجريبية والوسائط',
-  description:
-    'معرض الفيديوهات والصور والعروض الحية لمنظومة BUNYANX Intelligent Response System to Cyberattacks.',
-};
 
 export default function DemoPage() {
   // =========================
