@@ -19,8 +19,7 @@ import {
 
 export const metadata = {
   title: 'مركز التوثيق الأكاديمي الشامل',
-  description: 'فهرس ملفات التوثيق الأكاديمي الـ 18 لمنظومة BUNYANX
-Intelligent Response System to Cyberattacks مقسمة حسب التخصصات والمحركات الأمنية.',
+  description: 'فهرس ملفات التوثيق الأكاديمي الـ 18 لمنظومة BUNYANX Intelligent Response System to Cyberattacks مقسمة حسب التخصصات والمحركات الأمنية.',
 };
 
 const DOC_CATEGORIES = [
@@ -93,6 +92,85 @@ export default async function DocsLandingPage() {
           بوابة التوثيق التقني والأكاديمي المعتمدة لمشروع التخرج. تضم 18 وثيقة مفصلة تشمل التحليل الرياضي، المعمارية البرمجية، وسيناريوهات الاختبار لكل محرك أمني.
         </p>
       </div>
+
+{/* Short Documentation */}
+<div className="glass-panel p-5 sm:p-6 bg-dark-surface/90 border border-red-500/25 hover:border-red-500/50 transition-all rounded-2xl">
+  <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
+
+    {/* Info */}
+    <div className="flex items-center gap-4 text-center sm:text-right">
+
+      <div className="w-12 h-12 shrink-0 rounded-xl bg-red-950/40 border border-red-500/30 flex items-center justify-center text-red-400">
+        <BookOpen className="w-6 h-6" />
+      </div>
+
+      <div>
+        <h2 className="text-base sm:text-lg font-bold text-slate-100">
+          التوثيق المختصر
+        </h2>
+
+        <p className="text-xs sm:text-sm text-slate-400 mt-1">
+          نسخة مختصرة وسريعة لاستعراض فكرة المشروع وآلية عمل المنظومة.
+        </p>
+      </div>
+
+    </div>
+
+    {/* Red Button */}
+    <a
+      href="/short-documentation.html"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="w-full sm:w-auto px-6 py-3 rounded-xl bg-red-600 hover:bg-red-500 active:scale-95 transition-all shadow-lg shadow-red-900/30 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shrink-0"
+    >
+      <BookOpen className="w-4 h-4" />
+      <span>دخول إلى التوثيق المختصر</span>
+      <ArrowLeft className="w-4 h-4" />
+    </a>
+
+  </div>
+</div>
+
+
+
+{/* Short Documentation */}
+<div className="glass-panel p-5 sm:p-6 bg-dark-surface/90 border border-red-500/25 hover:border-red-500/50 transition-all rounded-2xl">
+  <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
+
+    {/* Info */}
+    <div className="flex items-center gap-4 text-center sm:text-right">
+
+      <div className="w-12 h-12 shrink-0 rounded-xl bg-red-950/40 border border-red-500/30 flex items-center justify-center text-red-400">
+        <BookOpen className="w-6 h-6" />
+      </div>
+
+      <div>
+        <h2 className="text-base sm:text-lg font-bold text-slate-100">
+          التوثيق المختصر
+        </h2>
+
+        <p className="text-xs sm:text-sm text-slate-400 mt-1">
+          نسخة مختصرة وسريعة لاستعراض فكرة المشروع وآلية عمل المنظومة.
+        </p>
+      </div>
+
+    </div>
+
+    {/* Red Button */}
+    <a
+      href="/short-documentation.html"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="w-full sm:w-auto px-6 py-3 rounded-xl bg-red-600 hover:bg-red-500 active:scale-95 transition-all shadow-lg shadow-red-900/30 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shrink-0"
+    >
+      <BookOpen className="w-4 h-4" />
+      <span>دخول إلى التوثيق المختصر</span>
+      <ArrowLeft className="w-4 h-4" />
+    </a>
+
+  </div>
+</div>
+
 
       {/* Featured Master Thesis Highlight Card */}
       {docs.find((d) => d.slug === 'master-thesis') && (
