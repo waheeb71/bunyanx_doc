@@ -50,8 +50,7 @@ export function generateWebsiteSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    'name': 'BUNYANX
-Intelligent Response System to Cyberattacks Documentation Portal',
+    'name': 'BUNYANX Intelligent Response System to Cyberattacks Documentation Portal',
     'url': SITE_URL,
     'potentialAction': {
       '@type': 'SearchAction',
