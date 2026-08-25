@@ -18,8 +18,7 @@ import {
 
 export const metadata = {
   title: 'عن مشروع BUNYANX',
-  description: 'الرؤية الهندسية، المشكلة البحثية، والركائز الابتكارية لمنظومة BUNYANX
-Intelligent Response System to Cyberattacks.',
+  description: 'الرؤية الهندسية، المشكلة البحثية، والركائز الابتكارية لمنظومة BUNYANX Intelligent Response System to Cyberattacks.',
 };
 
 export default function AboutPage() {
