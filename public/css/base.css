@@ -1,0 +1,1025 @@
+/* ==============================================================================
+   BUNYANX DOCUMENTATION PUBLISHING SYSTEM — BASE STYLESHEET
+   National University - Taiz | Department of Information Security & Networks
+   A4 Academic Print & Screen Publishing Framework
+   ============================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700;800;900&family=Fira+Code:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Color Palette - Academic Navy & Emerald Gold */
+  --primary: #0f2b48;
+  --primary-light: #1a426d;
+  --primary-dark: #091b2e;
+  --secondary: #0d7377;
+  --secondary-light: #149b9e;
+  --accent: #c59b27;
+  --accent-light: #e5b945;
+  --accent-soft: rgba(197, 155, 39, 0.1);
+  
+  /* Neutrals */
+  --bg-page: #ffffff;
+  --bg-canvas: #e2e8f0;
+  --bg-surface: #f8fafc;
+  --bg-surface-alt: #f1f5f9;
+  --border-light: #e2e8f0;
+  --border-medium: #cbd5e1;
+  --border-dark: #94a3b8;
+  
+  /* Text */
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --text-heading: #0f2b48;
+  --text-on-primary: #ffffff;
+  
+  /* Status Colors */
+  --success: #10b981;
+  --success-bg: #ecfdf5;
+  --warning: #f59e0b;
+  --warning-bg: #fffbeb;
+  --danger: #ef4444;
+  --danger-bg: #fef2f2;
+  --info: #0284c7;
+  --info-bg: #f0f9ff;
+  
+  /* Typography Scale */
+  --font-arabic: 'Cairo', 'Amiri', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Amiri', 'Traditional Arabic', serif;
+  --font-mono: 'Fira Code', 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+  
+  /* Spacing */
+  --line-height-body: 1.75;
+  --line-height-heading: 1.35;
+}
+
+/* ==============================================================================
+   CSS RESET & CORE DEFAULTS
+   ============================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 15px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-arabic);
+  font-size: 1rem;
+  line-height: var(--line-height-body);
+  color: var(--text-main);
+  background-color: var(--bg-canvas);
+  direction: rtl;
+  text-align: right;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==============================================================================
+   A4 DOCUMENT WORKSPACE (SCREEN VIEW)
+   Renders pages as realistic A4 sheets in the browser
+   ============================================================================== */
+.document-container {
+  max-width: 210mm;
+  margin: 25px auto;
+  padding: 0;
+}
+
+.a4-page {
+  background: var(--bg-page);
+  width: 210mm;
+  min-height: 297mm;
+  padding: 22mm 20mm 22mm 22mm;
+  margin: 0 auto 30px auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.continuous-document {
+  background: var(--bg-page);
+  max-width: 210mm;
+  margin: 25px auto 40px auto;
+  padding: 25mm 22mm;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+}
+
+/* ==============================================================================
+   HEADER & FOOTER (ACADEMIC RUNNING HEADERS)
+   ============================================================================== */
+.doc-header {
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.doc-header .univ-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.doc-header .univ-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.doc-header .title-badge {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.doc-footer {
+  border-top: 1px solid var(--border-medium);
+  padding-top: 10px;
+  margin-top: 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.doc-footer .page-number::after {
+  content: counter(page);
+}
+
+/* ==============================================================================
+   TYPOGRAPHY HIERARCHY
+   ============================================================================== */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-heading);
+  font-weight: 700;
+  line-height: var(--line-height-heading);
+  direction: rtl;
+  text-align: right;
+  unicode-bidi: isolate;
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+.en-term {
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+  display: inline-block !important;
+}
+
+h1.chapter-title {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--primary);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 12px;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  text-align: center;
+  position: relative;
+}
+
+h1.chapter-title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: var(--secondary);
+  margin: 8px auto 0 auto;
+}
+
+h2 {
+  font-size: 1.45rem;
+  color: var(--primary-light);
+  border-right: 5px solid var(--accent);
+  padding-right: 12px;
+  margin-top: 30px;
+  margin-bottom: 16px;
+  background: linear-gradient(to left, var(--bg-surface-alt), transparent);
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+h3 {
+  font-size: 1.2rem;
+  color: var(--secondary);
+  border-right: 3px solid var(--secondary-light);
+  padding-right: 10px;
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
+h4 {
+  font-size: 1.05rem;
+  color: var(--primary-dark);
+  font-weight: 700;
+  margin-top: 18px;
+  margin-bottom: 10px;
+}
+
+p {
+  margin-bottom: 14px;
+  text-align: justify;
+  text-justify: inter-word;
+  word-spacing: 0.5px;
+}
+
+/* ==============================================================================
+   MIXED ARABIC + ENGLISH & BIDI ISOLATION (CRITICAL)
+   ============================================================================== */
+.bidi-isolate, [dir="ltr"], code, pre, kbd, samp, .ltr-text {
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+  text-align: left !important;
+  display: inline-block;
+}
+
+p code, li code, td code, th code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: #f1f5f9;
+  color: #094067;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #cbd5e1;
+  font-weight: 600;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.file-path {
+  font-family: var(--font-mono);
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+  background: #f8fafc;
+  color: #0f172a;
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px dashed #94a3b8;
+  font-size: 0.88em;
+  font-weight: 500;
+}
+
+/* Ensure parenthesis and brackets don't flip */
+.tech-term {
+  direction: ltr;
+  unicode-bidi: isolate;
+  display: inline;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* ==============================================================================
+   VS CODE / MAC STYLE CODE EDITOR WINDOW & SYNTAX HIGHLIGHTING
+   ============================================================================== */
+.code-editor-window {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
+  float: none !important;
+  clear: both !important;
+  background: #0f172a !important;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  margin: 20px 0 !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  direction: ltr !important;
+  text-align: left !important;
+  box-sizing: border-box !important;
+}
+
+/* شريط عنوان المحرر (Titlebar) */
+.editor-titlebar {
+  background: #1e293b;
+  border-bottom: 1px solid #334155;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  direction: ltr !important;
+}
+
+/* نقاط الماك الملونة (🔴 🟡 🟢) */
+.mac-dots {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+.mac-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.mac-dot.close { background: #ff5f56; border: 1px solid #e0443e; }
+.mac-dot.minimize { background: #ffbd2e; border: 1px solid #dea123; }
+.mac-dot.maximize { background: #27c93f; border: 1px solid #1aab29; }
+
+/* تبويب الملف (Editor Tab) */
+.editor-tab {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  padding: 4px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.file-tab-icon {
+  font-size: 0.95rem;
+}
+
+.file-tab-name {
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.editor-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.editor-lang-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.copy-code-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #94a3b8;
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-family: var(--font-arabic);
+  transition: all 0.2s ease;
+}
+
+.copy-code-btn:hover {
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  border-color: #38bdf8;
+}
+
+/* محتوى الكود المنسق وعزل الأسطر الصارم */
+.code-editor-window pre {
+  margin: 0 !important;
+  padding: 18px 22px !important;
+  background: #0f172a !important;
+  font-family: 'Fira Code', 'Consolas', 'JetBrains Mono', 'Courier New', monospace !important;
+  font-size: 0.92rem !important;
+  line-height: 1.75 !important;
+  color: #f8fafc !important;
+  overflow-x: auto !important;
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: isolate !important;
+  tab-size: 4 !important;
+}
+
+.code-editor-window pre code {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  color: inherit !important;
+  font-size: inherit !important;
+  white-space: pre !important;
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: isolate !important;
+  display: block !important;
+}
+
+.code-editor-window.code-lines-short pre { font-size: 0.90rem !important; line-height: 1.65 !important; padding: 14px 18px !important; }
+.code-editor-window.code-lines-medium pre { font-size: 0.82rem !important; line-height: 1.50 !important; padding: 12px 16px !important; }
+.code-editor-window.code-lines-long pre { font-size: 0.75rem !important; line-height: 1.40 !important; padding: 10px 14px !important; }
+.code-editor-window.code-lines-xlarge pre { font-size: 0.68rem !important; line-height: 1.30 !important; padding: 8px 12px !important; }
+.code-editor-window.code-lines-huge pre { font-size: 0.60rem !important; line-height: 1.20 !important; padding: 6px 10px !important; }
+
+/* ==============================================================================
+   PRISM.JS SYNTAX HIGHLIGHTING THEME (VS CODE DARK PRO)
+   ============================================================================== */
+/* الكلمات المفتاحية (def, async, return, class, import, from, if, else) */
+.token.keyword,
+.token.boolean,
+.token.important {
+  color: #f43f5e !important; /* وردي برّاق */
+  font-weight: 700 !important;
+}
+
+/* أسماء الدوال والكلاسات */
+.token.function,
+.token.class-name {
+  color: #38bdf8 !important; /* سماوي مشرق */
+  font-weight: 600 !important;
+}
+
+/* النصوص والقيم النصية */
+.token.string,
+.token.char,
+.token.attr-value {
+  color: #34d399 !important; /* زمردي ناصع */
+}
+
+/* التعليقات البرمجية العربية والمختلطة */
+.token.comment,
+.code-editor-window .token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #94a3b8 !important; /* رمادي ناصع مائل */
+  font-style: italic !important;
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+  text-align: left !important;
+}
+
+/* ==============================================================================
+   ASCII ARCHITECTURE & PIPELINE FLOW DIAGRAMS
+   ============================================================================== */
+.code-editor-window.ascii-diagram-window {
+  background: #09131f !important;
+  border: 1px solid #1e3a5f !important;
+  box-shadow: 0 10px 30px rgba(9, 27, 46, 0.35) !important;
+}
+
+.code-editor-window.ascii-diagram-window .editor-titlebar {
+  background: #0d2137 !important;
+  border-bottom: 1px solid #1e3a5f !important;
+}
+
+.code-editor-window.ascii-diagram-window pre {
+  background: #09131f !important;
+  color: #cbd5e1 !important;
+  font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace !important;
+  font-size: 0.90rem !important;
+  line-height: 1.6 !important;
+  text-align: center !important;
+  padding: 24px 20px !important;
+}
+
+.code-editor-window.ascii-diagram-window pre code {
+  text-align: center !important;
+  color: #e2e8f0 !important;
+}
+
+/* الأرقام والمعاملات الحسابية */
+.token.number {
+  color: #fbbf24 !important; /* ذهبي دافئ */
+  font-weight: 600 !important;
+}
+
+/* المعاملات والأقواس */
+.token.operator,
+.token.punctuation {
+  color: #94a3b8 !important;
+}
+
+/* المتغيرات والمعاملات والـ Decorators */
+.token.variable,
+.token.parameter,
+.token.decorator {
+  color: #e2e8f0 !important;
+}
+
+.token.builtin {
+  color: #a78bfa !important; /* أرجواني هادئ */
+}
+
+/* ==============================================================================
+   TABLES & MATRICES
+   ============================================================================== */
+.table-wrapper {
+  width: 100%;
+  margin: 20px 0;
+  overflow-x: auto;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 0.92rem;
+  background: var(--bg-page);
+  border: 1px solid var(--border-medium);
+}
+
+thead {
+  display: table-header-group;
+  background: var(--primary);
+  color: var(--text-on-primary);
+}
+
+th {
+  padding: 10px 12px;
+  font-weight: 700;
+  text-align: right;
+  border: 1px solid var(--primary-light);
+  letter-spacing: 0.3px;
+}
+
+td {
+  padding: 8px 12px;
+  border: 1px solid var(--border-light);
+  text-align: right;
+  vertical-align: middle;
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--bg-surface);
+}
+
+tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+/* Table Caption */
+.table-caption, caption {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+  text-align: right;
+  caption-side: top;
+}
+
+/* Algorithm & Mathematical Columns (Strict LTR & isolated BiDi) */
+td.col-algo,
+.col-algo,
+.algo-cell-content {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: isolate !important;
+  font-family: 'Fira Code', 'Consolas', 'Segoe UI', sans-serif !important;
+  font-size: 0.88rem !important;
+  line-height: 1.5 !important;
+}
+
+td.col-algo .katex,
+.col-algo .katex {
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+}
+
+/* ==============================================================================
+   FIGURES & MERMAID DIAGRAMS
+   ============================================================================== */
+figure, .figure-container {
+  margin: 24px auto;
+  text-align: center;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+figure img, .figure-container img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+figcaption, .figure-caption {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-align: center;
+}
+
+
+/* ==============================================================================
+   MERMAID DIAGRAMS & SEQUENCE WRAPPER (A4 PERFECT FIT)
+   ============================================================================== */
+.mermaid-wrapper {
+  background: #ffffff !important;
+  border: 1px solid var(--border-medium);
+  border-top: 4px solid var(--secondary);
+  border-radius: 10px;
+  padding: 20px 14px;
+  margin: 25px 0;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(15, 43, 72, 0.06);
+  break-inside: avoid;
+  page-break-inside: avoid;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+
+/* إلغاء الخلفية الداكنة */
+.mermaid-wrapper pre.mermaid,
+pre.mermaid {
+  background: transparent !important;
+  color: #0f2b48 !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 auto !important;
+  display: block !important;
+  text-align: center !important;
+}
+
+/* التناسب التام داخل عرض صفحة الـ A4 */
+.mermaid-wrapper svg {
+  display: block !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+
+/* وضوح النصوص والأسهم */
+.mermaid-wrapper text,
+.mermaid-wrapper .actor,
+.mermaid-wrapper .messageText,
+.mermaid-wrapper .nodeLabel,
+.mermaid-wrapper .label {
+  font-family: 'Cairo', 'Segoe UI', sans-serif !important;
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  fill: #0f2b48 !important;
+  direction: rtl !important;
+  unicode-bidi: plaintext !important;
+}
+
+.mermaid-wrapper .node rect,
+.mermaid-wrapper .node circle,
+.mermaid-wrapper .node polygon {
+  fill: #f0f9ff !important;
+  stroke: #0284c7 !important;
+  stroke-width: 2px !important;
+  rx: 6px !important; /* حواف دائرية أنيقة */
+  ry: 6px !important;
+
+}
+/* نصوص الأطراف (خط أبيض ناصع 100% يلمع) */
+.mermaid-wrapper text.actor,
+.mermaid-wrapper text.actor > tspan,
+.mermaid-wrapper g.actor text {
+  fill: #ffffff !important;
+  font-family: 'Cairo', sans-serif !important;
+  font-size: 13.5px !important;
+  font-weight: 800 !important;
+}
+/* نصوص الأسهم بين الأطراف (أزرق داكن واضح) */
+.mermaid-wrapper text.messageText,
+.mermaid-wrapper .messageText {
+  fill: #0c4a6e !important;
+  font-family: 'Cairo', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+/* خطوط وأسهم التتابع */
+.mermaid-wrapper .messageLine0,
+.mermaid-wrapper .messageLine1 {
+  stroke: #0284c7 !important;
+  stroke-width: 1.8px !important;
+}
+/* ألوان الملاحظات الصفراء (Notes) */
+.mermaid-wrapper rect.note,
+.mermaid-wrapper .note {
+  fill: #fef3c7 !important;
+  stroke: #f59e0b !important;
+}
+.mermaid-wrapper text.noteText,
+.mermaid-wrapper .noteText {
+  fill: #78350f !important;
+  font-weight: 700 !important;
+}
+
+/* ==============================================================================
+   MATHEMATICAL EQUATIONS (KATEX)
+   ============================================================================== */
+.math-block {
+  margin: 18px 0;
+  padding: 12px 16px;
+  background: #fdfefe;
+  border: 1px solid var(--border-light);
+  border-right: 4px solid var(--secondary);
+  border-radius: 4px;
+  text-align: center;
+  direction: ltr !important;
+  unicode-bidi: isolate;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  overflow-x: auto;
+}
+
+.katex-display {
+  margin: 8px 0 !important;
+}
+
+/* ==============================================================================
+   CALLOUTS & ALERTS
+   ============================================================================== */
+.callout {
+  margin: 18px 0;
+  padding: 14px 18px;
+  border-radius: 6px;
+  border-right: 4px solid;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  font-size: 0.94rem;
+}
+
+.callout-note {
+  background: var(--info-bg);
+  border-color: var(--info);
+  color: #0369a1;
+}
+
+.callout-important {
+  background: var(--warning-bg);
+  border-color: var(--warning);
+  color: #b45309;
+}
+
+.callout-tip {
+  background: var(--success-bg);
+  border-color: var(--success);
+  color: #047857;
+}
+
+.callout-warning {
+  background: var(--danger-bg);
+  border-color: var(--danger);
+  color: #b91c1c;
+}
+
+.callout-title {
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ==============================================================================
+   LISTS
+   ============================================================================== */
+ul, ol {
+  margin-right: 24px;
+  margin-bottom: 14px;
+}
+
+li {
+  margin-bottom: 6px;
+  text-align: justify;
+}
+
+/* ==============================================================================
+   HORIZONTAL DIVIDERS
+   ============================================================================== */
+hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border-medium), transparent);
+  margin: 28px 0;
+}
+
+/* ==============================================================================
+   SCREEN NAVIGATION BAR (BROWSER ONLY)
+   ============================================================================== */
+.screen-nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(15, 43, 72, 0.95);
+  backdrop-filter: blur(10px);
+  color: #ffffff;
+  padding: 10px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.nav-brand {
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--accent-light);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.nav-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.nav-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  font-family: var(--font-arabic);
+}
+
+.nav-btn:hover {
+  background: var(--accent);
+  color: var(--primary-dark);
+  border-color: var(--accent);
+}
+
+.nav-btn-primary {
+  background: var(--accent);
+  color: var(--primary-dark);
+  border-color: var(--accent);
+}
+
+.nav-btn-primary:hover {
+  background: var(--accent-light);
+}
+
+.chapter-select {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-family: var(--font-arabic);
+  font-size: 0.88rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.chapter-select option {
+  background: var(--primary-dark);
+  color: #ffffff;
+}
+
+/* ==============================================================================
+   RESEARCH GAP QUADRANT MATRIX COMPONENT
+   ============================================================================== */
+.research-gap-matrix {
+  margin: 25px 0;
+  padding: 18px 20px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(15, 43, 72, 0.05);
+  box-sizing: border-box;
+}
+
+.matrix-title {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent);
+}
+
+.matrix-wrapper {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.matrix-y-axis {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--primary-light);
+  padding: 10px 0;
+  text-align: center;
+}
+
+.matrix-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 14px;
+}
+
+.matrix-cell {
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  border-radius: 6px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.matrix-cell .cell-badge {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  border-bottom: 1px dashed var(--border-light);
+  padding-bottom: 6px;
+}
+
+.matrix-cell ul.cell-points {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.matrix-cell ul.cell-points li {
+  font-size: 0.88rem;
+  color: var(--text-main);
+  line-height: 1.45;
+  position: relative;
+  padding-right: 14px;
+  margin: 0;
+}
+
+.matrix-cell ul.cell-points li::before {
+  content: "•";
+  position: absolute;
+  right: 0;
+  color: var(--secondary);
+  font-weight: bold;
+}
+
+/* Quadrant 1 (Target: BUNYANX) Highlight */
+.matrix-cell.target-cell {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border: 2px solid var(--info);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.12);
+}
+
+.matrix-cell.target-cell .target-badge {
+  color: #0369a1;
+  font-size: 0.88rem;
+  font-weight: 800;
+  border-bottom: 1px solid rgba(2, 132, 199, 0.3);
+}
+
+.target-card .target-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  margin-bottom: 6px;
+}
+
+.target-card .target-desc {
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: #0c4a6e;
+  font-weight: 600;
+}
+
+.matrix-x-axis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding-right: 46px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--primary-light);
+}

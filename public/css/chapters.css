@@ -1,0 +1,560 @@
+/* ==============================================================================
+   BUNYANX DOCUMENTATION PUBLISHING SYSTEM — CHAPTERS STYLESHEET
+   Academic Cards, Badges, Metrics & Feature Modules
+   ============================================================================== */
+
+/* Chapter Title & Number Banner */
+.chapter-hero {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px 10px;
+  background: linear-gradient(135deg, rgba(15, 43, 72, 0.04), rgba(13, 115, 119, 0.08));
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+}
+
+.chapter-number-badge {
+  display: inline-block;
+  background: var(--primary);
+  color: var(--accent-light);
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 4px 16px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+.chapter-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+/* Metadata Card */
+.metadata-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+  break-inside: avoid;
+}
+
+.metadata-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  border-radius: 6px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metadata-card .meta-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.metadata-card .meta-value {
+  font-size: 0.95rem;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* Metric / Stat Scoreboard */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+  break-inside: avoid;
+}
+
+.stat-card {
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  border-top: 4px solid var(--secondary);
+  border-radius: 6px;
+  padding: 14px 12px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.stat-card .stat-number {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--primary);
+  font-family: var(--font-mono);
+  direction: ltr;
+  display: block;
+}
+
+.stat-card .stat-label {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* Module Feature Cards */
+.feature-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-surface-alt);
+  border: 1px solid var(--border-medium);
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 2px 4px;
+}
+
+/* References List Item (IEEE Style - Strict LTR) */
+.reference-item {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: isolate !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+  margin-bottom: 12px;
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: var(--text-main);
+  background: #ffffff;
+  padding: 10px 14px !important;
+  border-radius: 6px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.reference-number {
+  flex-shrink: 0 !important;
+  font-weight: 700;
+  color: var(--primary);
+  font-family: var(--font-mono);
+  min-width: 38px;
+  text-align: left;
+}
+
+.reference-text {
+  flex: 1 1 auto;
+  display: block;
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: isolate !important;
+}
+
+.reference-text * {
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+}
+
+/* Screenshot & UI Proof Placeholder */
+.screenshot-placeholder {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  border: 2px dashed #0d7377;
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 26px 18px;
+  text-align: center;
+  margin: 16px 0 28px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  break-inside: avoid;
+  page-break-inside: avoid;
+  overflow: hidden;
+}
+
+.screenshot-placeholder .icon {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.screenshot-placeholder .placeholder-tag {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+
+.screenshot-placeholder .caption {
+  font-family: var(--font-mono);
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+  display: inline-block;
+  color: #0d7377;
+  font-size: 0.88rem;
+  font-weight: 600;
+  background: #ffffff;
+  padding: 4px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--border-medium);
+  margin-top: 6px;
+  max-width: 95%;
+  word-break: break-all;
+}
+
+/* ==============================================================================
+   THESIS FRONT MATTER PAGES (الصفحات التمهيدية الملكية للأطروحة)
+   ============================================================================== */
+
+.front-page {
+  padding: 40px 20px;
+  margin-bottom: 30px;
+  box-sizing: border-box;
+}
+
+/* 1. Bismillah Page */
+.bismillah-page {
+  min-height: 180mm;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.bismillah-wrapper {
+  padding: 45px 35px;
+  border: 2px solid var(--border-medium);
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(15, 43, 72, 0.05);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.bismillah-calligraphy {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 2.2;
+  letter-spacing: 1px;
+}
+
+.bismillah-decoration {
+  color: var(--accent);
+  font-size: 1.4rem;
+  margin-top: 20px;
+}
+
+/* 2. Epigraph Page */
+.epigraph-container {
+  max-width: 650px;
+  margin: 40px auto;
+}
+
+.quran-box {
+  background: #ffffff;
+  border-right: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: 24px 28px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+}
+
+.verse-text {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 2;
+  text-align: center;
+}
+
+.verse-reference {
+  text-align: left;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.hadith-box {
+  background: #f8fafc;
+  border: 1px solid var(--border-medium);
+  border-radius: 8px;
+  padding: 24px 28px;
+  text-align: center;
+}
+
+.hadith-intro {
+  font-weight: 700;
+  color: var(--secondary);
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.hadith-text {
+  font-family: 'Amiri', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.9;
+}
+
+.hadith-reference {
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+/* 3. Section Titles for Front Matter */
+.section-title-wrapper {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.front-section-title {
+  font-size: 1.85rem;
+  color: var(--primary);
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.title-line {
+  width: 80px;
+  height: 3px;
+  background: var(--accent);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+/* 4. Dedication Page */
+.dedication-body {
+  max-width: 650px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 35px 30px;
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+
+.dedication-paragraph {
+  font-size: 1.12rem;
+  line-height: 2;
+  color: var(--text-main);
+  margin-bottom: 18px;
+  text-align: justify;
+}
+
+.dedication-closing {
+  text-align: left;
+  font-size: 1.3rem;
+  color: var(--secondary);
+  margin-top: 30px;
+  padding-top: 15px;
+  border-top: 1px dashed var(--border-medium);
+}
+
+/* 5. Acknowledgments Page */
+.ack-body {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.ack-intro-verse {
+  text-align: center;
+  font-family: 'Amiri', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 20px;
+  padding: 10px;
+  background: #f8fafc;
+  border-radius: 6px;
+}
+
+.ack-text {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+.ack-card {
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  border-top: 3px solid var(--secondary);
+  border-radius: 8px;
+  padding: 20px 22px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.ack-subtitle {
+  font-size: 1.15rem;
+  color: var(--primary);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.ack-card p {
+  font-size: 0.98rem;
+  line-height: 1.85;
+  color: var(--text-main);
+  text-align: justify;
+  margin: 0;
+}
+
+.team-thanks-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 18px;
+  margin: 14px 0 16px 0;
+  padding: 0;
+  list-style-position: inside;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.team-thanks-list li {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.ack-closing {
+  text-align: center;
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 1.05rem;
+  margin-top: 25px;
+}
+
+/* 6. Abstract Page */
+.abstract-body {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.abstract-lead {
+  font-size: 1.08rem;
+  line-height: 2;
+  text-align: justify;
+  color: var(--text-main);
+  margin-bottom: 24px;
+}
+
+.abstract-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.abstract-pillar-card {
+  background: #ffffff;
+  border: 1px solid var(--border-medium);
+  border-radius: 6px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+
+.abstract-pillar-card h4 {
+  font-size: 1rem;
+  color: var(--primary);
+  margin: 0 0 6px 0;
+}
+
+.abstract-pillar-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.abstract-conclusion {
+  font-size: 1.02rem;
+  line-height: 1.9;
+  text-align: justify;
+  margin-top: 20px;
+}
+
+.keywords-box {
+  background: #f1f5f9;
+  border: 1px solid var(--border-medium);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin-top: 25px;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.keywords-box strong {
+  color: var(--primary);
+  margin-left: 6px;
+}
+
+/* 7. Table of Contents (TOC) Page */
+.toc-container {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.toc-chapter-block {
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 12px;
+}
+
+.toc-chap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.toc-chap-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.toc-chap-title:hover {
+  color: var(--secondary);
+  text-decoration: underline;
+}
+
+.toc-chap-page {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.toc-sub-list {
+  list-style: none;
+  padding-right: 20px;
+  margin: 0;
+}
+
+.toc-sub-list li {
+  display: flex;
+  align-items: baseline;
+  font-size: 0.9rem;
+  color: var(--text-main);
+  margin: 5px 0;
+}
+
+.toc-sub-list .dots {
+  flex-grow: 1;
+  border-bottom: 1px dotted #cbd5e1;
+  margin: 0 8px;
+}
+
+.toc-sub-list .p-num {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}

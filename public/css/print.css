@@ -1,0 +1,857 @@
+/* ==============================================================================
+   BUNYANX DOCUMENTATION PUBLISHING SYSTEM — PRINT STYLESHEET v3.0
+   Professional A4 Academic Print Engine (Word-Quality PDF Output)
+
+   المبادئ الأساسية لهذا الملف:
+   1. كل ما له خلفية داكنة يُحوَّل إلى أبيض في الطباعة
+   2. عناصر الشاشة (chapter-hero, nav, badges) تُضغط لتصبح عناوين أكاديمية بسيطة
+   3. مخططات Mermaid تُحجَّم لتسع في صفحة واحدة دائماً
+   4. كتل الكود تُطبع بخلفية فاتحة وخط صغير وتُسمح لها بالانقسام إذا كانت كبيرة
+   5. هوامش @page هي المرجع الوحيد للمسافات — لا هوامش مكررة
+   ============================================================================== */
+
+/* ============================================================
+   1. PAGE GEOMETRY — الهندسة الدقيقة لورقة A4
+   ============================================================ */
+
+@page {
+  size: A4 portrait;
+  margin: 25mm 20mm 25mm 25mm; /* علوي | يسار | سفلي | يمين (RTL) */
+
+  /* رأس وتذييل الصفحة الأكاديمي */
+  @top-center {
+    content: "توثيق مشروع التخرج — منظومة BUNYANX Enterprise NGFW";
+    font-family: 'Cairo', sans-serif;
+    font-size: 8pt;
+    color: #64748b;
+    border-bottom: 0.5pt solid #cbd5e1;
+    padding-bottom: 4pt;
+  }
+
+  @bottom-center {
+    content: counter(page);
+    font-family: 'Cairo', sans-serif;
+    font-size: 9pt;
+    color: #334155;
+    font-weight: 700;
+  }
+}
+
+@page :first {
+  margin-top: 30mm;
+  @top-center { content: ""; }
+}
+
+/* ============================================================
+   2. GLOBAL PRINT RESET — إعادة ضبط كاملة لبيئة الطباعة
+   ============================================================ */
+
+@media print {
+
+  /* --- إخفاء عناصر الشاشة --- */
+  .screen-nav-bar,
+  .nav-btn,
+  .chapter-select,
+  .interactive-btn,
+  .no-print,
+  .print-hide,
+  .mac-dots,
+  .editor-titlebar,
+  .editor-actions,
+  .file-tab-icon,
+  button {
+    display: none !important;
+  }
+
+  /* --- إعادة ضبط الجسم الكامل --- */
+  html, body {
+    width: 100% !important;
+    height: auto !important;
+    background: #ffffff !important;
+    color: #1e293b !important;
+    font-family: 'Cairo', 'Amiri', serif !important;
+    font-size: 11pt !important;
+    line-height: 1.7 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* --- حاوية الوثيقة — تملأ المساحة الكاملة --- */
+  .document-container,
+  .continuous-document,
+  .a4-page,
+  .chapter-body-content,
+  article {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+  }
+
+  /* --- رأس وتذييل الوثيقة (screen-only) --- */
+  .doc-header,
+  .doc-footer {
+    display: none !important;
+  }
+
+  /* ============================================================
+     3. FRONT MATTER & PRELIMINARY PAGES — الصفحات التمهيدية
+     ============================================================ */
+
+  .front-matter-section {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .front-page {
+    display: block !important;
+    break-after: page !important;
+    page-break-after: always !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    min-height: auto !important;
+    height: auto !important;
+    padding: 6mm 0 0 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .bismillah-page {
+    min-height: 180mm !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .bismillah-wrapper {
+    padding: 35px 30px !important;
+    margin: auto !important;
+    box-shadow: none !important;
+    border: 2pt solid #cbd5e1 !important;
+  }
+
+  .ack-card,
+  .quran-box,
+  .hadith-box,
+  .dedication-body,
+  .abstract-pillar-card,
+  .keywords-box {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .ack-card {
+    padding: 10pt 14pt !important;
+    margin-bottom: 10pt !important;
+    background: #ffffff !important;
+    border: 1pt solid #cbd5e1 !important;
+    border-top: 2.5pt solid #0d7377 !important;
+    border-radius: 4pt !important;
+  }
+
+  .team-thanks-list {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6pt 12pt !important;
+    margin: 8pt 0 !important;
+    padding: 0 !important;
+    list-style-position: inside !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .team-thanks-list li {
+    font-size: 9.5pt !important;
+    font-weight: 700 !important;
+    color: #0f2b48 !important;
+  }
+
+  .page-break {
+    display: none !important;
+  }
+
+  /* ============================================================
+     4. CHAPTER TITLE — بداية كل فصل في صفحة جديدة تماماً
+     ============================================================ */
+
+  /* كل قسم فصل في الأطروحة الكاملة يبدأ إجبارياً في رأس صفحة A4 جديدة */
+  .chapter-break-section {
+    break-before: page !important;
+    page-break-before: always !important;
+    display: block !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  /* بانر عنوان الفصل — مظهر أكاديمي أنيق مع منع الانفصال */
+  .chapter-hero {
+    display: block !important;
+    text-align: center !important;
+    padding: 12pt 10pt !important;
+    margin: 8pt 0 16pt 0 !important;
+    background: #f8fafc !important;
+    border: 1pt solid #cbd5e1 !important;
+    border-radius: 6pt !important;
+    break-after: avoid-page !important;
+    page-break-after: avoid !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* شارة رقم الفصل */
+  .chapter-number-badge {
+    display: inline-block !important;
+    background: #0f2b48 !important;
+    color: #ffffff !important;
+    font-size: 10pt !important;
+    font-weight: 700 !important;
+    padding: 3pt 14pt !important;
+    border-radius: 16pt !important;
+    margin-bottom: 8pt !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* عنوان الفصل الكبير */
+  h1.chapter-title {
+    font-size: 18pt !important;
+    font-weight: 800 !important;
+    color: #0f2b48 !important;
+    line-height: 1.3 !important;
+    margin: 0 0 6pt 0 !important;
+    padding: 0 0 6pt 0 !important;
+    border-bottom: 2pt solid #0f2b48 !important;
+    break-before: auto !important;
+    page-break-before: auto !important;
+    break-after: avoid-page !important;
+    page-break-after: avoid !important;
+  }
+
+  .chapter-subtitle {
+    font-size: 11pt !important;
+    color: #475569 !important;
+    margin-top: 4pt !important;
+    font-weight: 600 !important;
+  }
+
+  /* ============================================================
+     4. HEADINGS — العناوين الفرعية: بدون فاصل صفحة بعدها
+     ============================================================ */
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #0f2b48 !important;
+    direction: rtl !important;
+    text-align: right !important;
+    unicode-bidi: isolate !important;
+    break-after: avoid-page !important;
+    page-break-after: avoid !important;
+    break-inside: avoid !important;
+    background: transparent !important;
+    border-right: none !important;
+    padding: 0 !important;
+    margin-top: 14pt !important;
+    margin-bottom: 6pt !important;
+  }
+
+  .en-term {
+    direction: ltr !important;
+    unicode-bidi: isolate !important;
+    display: inline-block !important;
+  }
+
+  h2 {
+    font-size: 15pt !important;
+    border-bottom: 1pt solid #0d7377 !important;
+    padding-bottom: 3pt !important;
+  }
+
+  h3 {
+    font-size: 13pt !important;
+  }
+
+  h4 {
+    font-size: 12pt !important;
+  }
+
+  /* Figure & Image Sizing in Print */
+  figure, .figure-container {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    margin: 8pt 0 14pt 0 !important;
+    text-align: center !important;
+    display: block !important;
+  }
+
+  figure img, .figure-container img {
+    max-width: 100% !important;
+    max-height: 85mm !important;
+    height: auto !important;
+    object-fit: contain !important;
+    display: block !important;
+    margin: 0 auto !important;
+    border: 1pt solid #cbd5e1 !important;
+    border-radius: 4pt !important;
+    box-shadow: none !important;
+  }
+
+  figcaption, .figure-caption {
+    margin-top: 5pt !important;
+    font-size: 9pt !important;
+    font-weight: 700 !important;
+    color: #0f2b48 !important;
+    text-align: center !important;
+  }
+
+  /* ============================================================
+     5. PARAGRAPHS & TEXT — فقرات النص الأكاديمي
+     ============================================================ */
+
+  p {
+    margin: 0 0 8pt 0 !important;
+    text-align: justify !important;
+    orphans: 4 !important;
+    widows: 4 !important;
+  }
+
+  /* ============================================================
+     6. MERMAID DIAGRAMS — المخططات: ورقة واحدة إجباري
+     ============================================================ */
+
+  .mermaid-wrapper {
+    display: block !important;
+    width: 100% !important;
+    background: #ffffff !important;
+    border: 1pt solid #e2e8f0 !important;
+    border-radius: 4pt !important;
+    padding: 8pt !important;
+    margin: 10pt auto !important;
+    box-sizing: border-box !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    text-align: center !important;
+    overflow: visible !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* SVG تُضغط لتسع في الصفحة */
+  .mermaid-wrapper svg {
+    display: block !important;
+    margin: 0 auto !important;
+    max-width: 100% !important;
+    max-height: 185mm !important;
+    width: auto !important;
+    height: auto !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .mermaid-wrapper pre.mermaid,
+  pre.mermaid {
+    display: block !important;
+    visibility: visible !important;
+    background: transparent !important;
+    color: #0f2b48 !important;
+  }
+
+  .mermaid-wrapper text,
+  .mermaid-wrapper .actor,
+  .mermaid-wrapper .messageText,
+  .mermaid-wrapper .nodeLabel,
+  .mermaid-wrapper .label {
+    direction: rtl !important;
+    unicode-bidi: plaintext !important;
+  }
+
+  /* ============================================================
+     7. CODE BLOCKS — نوافذ الكود: خلفية فاتحة احترافية
+     ============================================================ */
+
+  /* نافذة المحرر الكاملة — تُحوَّل لتصميم أكاديمي فاتح وبحجم لا يتجاوز صفحة واحدة واتجاه إنجليزي صارم LTR */
+  .code-editor-window,
+  .code-editor-window * {
+    direction: ltr !important;
+    text-align: left !important;
+    unicode-bidi: isolate !important;
+  }
+
+  .code-editor-window {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
+    float: none !important;
+    clear: both !important;
+    background: #f8fafc !important;
+    border: 1pt solid #cbd5e1 !important;
+    border-top: 2.5pt solid #0f2b48 !important;
+    border-radius: 4pt !important;
+    margin: 6pt 0 8pt 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    overflow: hidden !important;
+    break-inside: avoid-page !important;
+    page-break-inside: avoid !important;
+    box-sizing: border-box !important;
+    direction: ltr !important;
+    text-align: left !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* شريط عنوان الملف — يبقى مرئياً وبسيطاً ومن اليسار لليمين */
+  .editor-titlebar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    background: #e2e8f0 !important;
+    border-bottom: 1pt solid #cbd5e1 !important;
+    padding: 2.5pt 8pt !important;
+    direction: ltr !important;
+    text-align: left !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .editor-tab {
+    display: inline-flex !important;
+    align-items: center !important;
+    background: transparent !important;
+    border: none !important;
+    color: #334155 !important;
+    font-size: 7.5pt !important;
+    font-weight: 700 !important;
+    padding: 0 !important;
+    font-family: 'Fira Code', monospace !important;
+    direction: ltr !important;
+    text-align: left !important;
+  }
+
+  .file-tab-name {
+    display: inline !important;
+    font-family: 'Fira Code', monospace !important;
+    direction: ltr !important;
+    text-align: left !important;
+  }
+
+  /* محتوى الكود — تحجيم وتصغير تلقائي ذكي يبدأ إجبارياً من اليسار كتلة واحدة */
+  .code-editor-window pre,
+  .code-editor-window pre code,
+  pre,
+  code {
+    background-color: #f8fafc !important;
+    color: #1e293b !important;
+    border: none !important;
+    font-family: 'Fira Code', 'Consolas', 'Courier New', monospace !important;
+    direction: ltr !important;
+    text-align: left !important;
+    unicode-bidi: isolate !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .code-editor-window pre {
+    margin: 0 !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    font-size: 7.5pt !important;
+    line-height: 1.25 !important;
+    padding: 4pt 6pt !important;
+  }
+
+  .code-editor-window pre code {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    white-space: inherit !important;
+    display: inline !important;
+  }
+
+  .code-editor-window.code-lines-short pre,
+  .code-editor-window.code-lines-short pre code {
+    font-size: 7.6pt !important;
+    line-height: 1.28 !important;
+  }
+  .code-editor-window.code-lines-short pre {
+    padding: 4pt 6pt !important;
+  }
+
+  .code-editor-window.code-lines-medium pre,
+  .code-editor-window.code-lines-medium pre code {
+    font-size: 6.6pt !important;
+    line-height: 1.18 !important;
+  }
+  .code-editor-window.code-lines-medium pre {
+    padding: 3.5pt 5pt !important;
+  }
+
+  .code-editor-window.code-lines-long pre,
+  .code-editor-window.code-lines-long pre code {
+    font-size: 5.6pt !important;
+    line-height: 1.10 !important;
+  }
+  .code-editor-window.code-lines-long pre {
+    padding: 3pt 5pt !important;
+  }
+
+  .code-editor-window.code-lines-xlarge pre,
+  .code-editor-window.code-lines-xlarge pre code {
+    font-size: 4.6pt !important;
+    line-height: 1.04 !important;
+  }
+  .code-editor-window.code-lines-xlarge pre {
+    padding: 2.5pt 4pt !important;
+  }
+
+  .code-editor-window.code-lines-huge pre,
+  .code-editor-window.code-lines-huge pre code {
+    font-size: 3.8pt !important;
+    line-height: 1.01 !important;
+  }
+  .code-editor-window.code-lines-huge pre {
+    padding: 2pt 3pt !important;
+  }
+
+  .code-editor-window.code-lines-giant pre,
+  .code-editor-window.code-lines-giant pre code {
+    font-size: 3.4pt !important;
+    line-height: 0.98 !important;
+  }
+  .code-editor-window.code-lines-giant pre {
+    padding: 1.5pt 2.5pt !important;
+  }
+
+  .code-editor-window.code-lines-mega pre,
+  .code-editor-window.code-lines-mega pre code {
+    font-size: 3.0pt !important;
+    line-height: 0.94 !important;
+  }
+  .code-editor-window.code-lines-mega pre {
+    padding: 1pt 2pt !important;
+  }
+
+  /* ألوان Syntax Highlighting — معدَّلة للطباعة الفاتحة */
+  .code-editor-window .token.keyword,
+  .code-editor-window .token.important {
+    color: #1d4ed8 !important; /* أزرق داكن بدلاً من البنفسجي الفاتح */
+    font-weight: 700 !important;
+    direction: ltr !important;
+  }
+
+  .code-editor-window .token.string,
+  .code-editor-window .token.char {
+    color: #15803d !important; /* أخضر داكن */
+    direction: ltr !important;
+  }
+
+  .code-editor-window .token.comment {
+    color: #64748b !important; /* رمادي */
+    font-style: italic !important;
+    font-family: 'Cairo', 'Fira Code', monospace !important;
+    direction: ltr !important;
+    text-align: left !important;
+    unicode-bidi: isolate !important;
+  }
+
+  .code-editor-window .token.function {
+    color: #0369a1 !important; /* أزرق */
+    direction: ltr !important;
+  }
+
+  .code-editor-window .token.number {
+    color: #b45309 !important; /* بني */
+    direction: ltr !important;
+  }
+
+  .code-editor-window .token.class-name {
+    color: #7c3aed !important; /* بنفسجي داكن */
+    direction: ltr !important;
+  }
+
+  .code-editor-window .token {
+    background: transparent !important;
+    direction: ltr !important;
+    text-align: left !important;
+  }
+
+  /* شارة اللغة — مرئية ومبسطة */
+  .editor-lang-badge {
+    display: none !important; /* مخفية في الطباعة — الملف يظهر في التاب */
+  }
+
+  /* ============================================================
+     8. TABLES — الجداول: كاملة وواضحة
+     ============================================================ */
+
+  table {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-collapse: collapse !important;
+    font-size: 9pt !important;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+    margin: 8pt 0 !important;
+  }
+
+  thead {
+    display: table-header-group !important;
+    background-color: #0f2b48 !important;
+    color: #ffffff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  tfoot {
+    display: table-footer-group !important;
+  }
+
+  th {
+    background-color: #0f2b48 !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    padding: 5pt 7pt !important;
+    border: 0.5pt solid #334155 !important;
+    text-align: center !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  td {
+    padding: 4pt 7pt !important;
+    border: 0.5pt solid #cbd5e1 !important;
+    vertical-align: top !important;
+  }
+
+  tr {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f8fafc !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Algorithm & Mathematical Columns (Strict LTR & isolated BiDi in Print) */
+  td.col-algo,
+  .col-algo,
+  .algo-cell-content {
+    direction: ltr !important;
+    text-align: left !important;
+    unicode-bidi: isolate !important;
+    font-family: 'Consolas', 'Segoe UI', monospace !important;
+    font-size: 7.8pt !important;
+    line-height: 1.35 !important;
+  }
+
+  td.col-algo .katex,
+  .col-algo .katex {
+    direction: ltr !important;
+    unicode-bidi: isolate !important;
+  }
+
+  /* ============================================================
+     9. MATH EQUATIONS — المعادلات الرياضية
+     ============================================================ */
+
+  .math-block,
+  .katex-display {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    margin: 8pt 0 !important;
+    text-align: center !important;
+    overflow: visible !important;
+  }
+
+  .katex {
+    font-size: 10pt !important;
+    color: #0f2b48 !important;
+  }
+
+  /* ============================================================
+     10. CALLOUTS & BLOCKQUOTES — الملاحظات والاقتباسات
+     ============================================================ */
+
+  .callout,
+  blockquote {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    margin: 8pt 0 !important;
+    padding: 8pt 12pt !important;
+    border-radius: 3pt !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .callout-note {
+    background-color: #f0f9ff !important;
+    border-right: 4pt solid #0284c7 !important;
+    border-left: none !important;
+  }
+
+  .callout-important {
+    background-color: #fffbeb !important;
+    border-right: 4pt solid #f59e0b !important;
+  }
+
+  .callout-tip {
+    background-color: #ecfdf5 !important;
+    border-right: 4pt solid #10b981 !important;
+  }
+
+  .callout-warning {
+    background-color: #fef2f2 !important;
+    border-right: 4pt solid #ef4444 !important;
+  }
+
+  /* ============================================================
+     11. FIGURES & STAT CARDS — الصور وبطاقات الإحصائيات
+     ============================================================ */
+
+  figure,
+  .figure-container {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    margin: 8pt auto !important;
+    text-align: center !important;
+  }
+
+  .stat-card,
+  .metadata-card {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    border: 0.5pt solid #cbd5e1 !important;
+    background: #f8fafc !important;
+    border-radius: 3pt !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .metrics-grid,
+  .metadata-grid {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* ============================================================
+     12. LINKS & MISC — الروابط والعناصر المتفرقة
+     ============================================================ */
+
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+
+  a[href]::after {
+    content: "" !important; /* لا نطبع روابط URL */
+  }
+
+  /* رموز التعداد النقطي */
+  li {
+    margin-bottom: 3pt !important;
+  }
+
+  ul, ol {
+    margin: 4pt 0 8pt 0 !important;
+    padding-right: 18pt !important;
+  }
+
+  /* شارات الكود الصغيرة داخل النص */
+  code {
+    background: #f1f5f9 !important;
+    color: #1e293b !important;
+    font-size: 9pt !important;
+    padding: 1pt 4pt !important;
+    border-radius: 2pt !important;
+    font-family: 'Fira Code', monospace !important;
+    border: 0.5pt solid #e2e8f0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* المراجع IEEE */
+  .reference-item {
+    direction: ltr !important;
+    text-align: left !important;
+    unicode-bidi: isolate !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 8pt !important;
+    font-size: 8.5pt !important;
+    line-height: 1.45 !important;
+    margin-bottom: 5pt !important;
+    padding: 6pt 10pt !important;
+    background: #ffffff !important;
+    border: 0.5pt solid #cbd5e1 !important;
+    border-radius: 4px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .reference-number {
+    flex-shrink: 0 !important;
+    font-weight: 700 !important;
+    color: #0f2d59 !important;
+    font-family: 'Consolas', monospace !important;
+    min-width: 32px !important;
+    text-align: left !important;
+  }
+
+  .reference-text {
+    flex: 1 1 auto !important;
+    direction: ltr !important;
+    text-align: left !important;
+    unicode-bidi: isolate !important;
+  }
+
+  /* --- مصفوفة الفجوة البحثية 2x2 --- */
+  .research-gap-matrix {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    margin: 8pt 0 !important;
+    padding: 10pt !important;
+    background: #ffffff !important;
+    border: 1pt solid #cbd5e1 !important;
+  }
+
+  .matrix-cell {
+    border: 0.5pt solid #cbd5e1 !important;
+    padding: 8pt !important;
+    background: #ffffff !important;
+  }
+
+  .matrix-cell.target-cell {
+    background: #f0f9ff !important;
+    border: 1.5pt solid #0284c7 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* --- ازالة الظلال والزوايا الزائدة --- */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+} /* نهاية @media print */
