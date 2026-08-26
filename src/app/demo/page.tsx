@@ -65,8 +65,7 @@ const prevImage = () => {
 
   const galleryVideos = [
     '/videos/demo-1.mp4',
-    '/videos/demo-2.mp4',
-    '/videos/demo-3.mp4',
+   
   ];
 
 const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
