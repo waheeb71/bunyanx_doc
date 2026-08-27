@@ -159,22 +159,22 @@ const prevVideo = () => {
                 key={video}
                 type="button"
                 onClick={() => setSelectedVideo(index)}
-                className="group relative aspect-video overflow-hidden rounded-xl border border-cyan-500/20 bg-black hover:border-cyan-500/60 transition-all duration-300"
+                className="group relative aspect-video overflow-hidden rounded-xl border border-cyan-500/20 bg-slate-950 hover:border-cyan-500/60 transition-all duration-300 cursor-pointer"
               >
 
                 <video
                   src={video}
                   muted
                   playsInline
-                  preload="metadata"
-                  className="w-full h-full object-cover"
+                  preload="none"
+                  className="w-full h-full object-cover opacity-70 group-hover:opacity-90 transition-opacity"
                 />
 
                 {/* Overlay */}
 
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors flex items-center justify-center">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/20 group-hover:from-black/90 transition-colors flex items-center justify-center">
 
-                  <div className="w-12 h-12 rounded-full bg-cyan-500/90 flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 rounded-full bg-cyan-500/90 flex items-center justify-center text-slate-950 shadow-[0_0_20px_rgba(6,182,212,0.5)] group-hover:scale-110 transition-transform">
 
                     <PlayCircle className="w-7 h-7" />
 
@@ -184,8 +184,8 @@ const prevVideo = () => {
 
                 {/* Number */}
 
-                <div className="absolute bottom-2 right-2 px-2 py-1 rounded-md bg-black/70 text-white text-[10px]">
-                  فيديو {index + 1}
+                <div className="absolute bottom-2 right-2 px-2 py-1 rounded-md bg-black/80 border border-cyan-500/30 text-cyan-300 text-[10px] font-mono font-bold">
+                  عرض الفيديو {index + 1}
                 </div>
 
               </button>
