@@ -22,6 +22,8 @@ import {
   Globe,
   Database,
   Users,
+  FileText,
+  ExternalLink,
 } from 'lucide-react';
 
 export const metadata = {
@@ -82,6 +84,20 @@ export default async function HomePage() {
             والاستجابة الذكية لها، مع دمج تقنيات الذكاء الاصطناعي وحماية الشبكات
             وفحص حركة البيانات ضمن بنية دفاعية متكاملة.
           </p>
+        </div>
+
+        {/* Prominent Large Button: Short Documentation */}
+        <div className="pt-2 flex flex-col items-center justify-center gap-2">
+          <a
+            href="https://bunyanx.netlify.app/short-documentation.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 text-base sm:text-xl font-extrabold text-slate-950 bg-gradient-to-r from-cyan-400 via-emerald-400 to-cyan-400 rounded-2xl shadow-[0_0_25px_rgba(34,211,238,0.4)] hover:shadow-[0_0_35px_rgba(34,211,238,0.7)] hover:scale-105 active:scale-95 transition-all duration-300 border border-cyan-200/50 cursor-pointer w-full sm:w-auto min-w-[280px]"
+          >
+            <FileText className="w-6 h-6 text-slate-950 group-hover:scale-110 transition-transform" />
+            <span>توثيق المشروع المختصر</span>
+            <ExternalLink className="w-5 h-5 text-slate-950 group-hover:-translate-x-1 transition-transform" />
+          </a>
         </div>
 
         {/* Hero Quick Action Buttons (Thumb-friendly touch targets) */}
