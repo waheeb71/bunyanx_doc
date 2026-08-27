@@ -96,11 +96,11 @@ export default async function HomePage() {
             href="https://bunyanx.netlify.app/short-documentation.html"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 text-base sm:text-xl font-extrabold text-slate-950 bg-gradient-to-r from-cyan-400 via-emerald-400 to-cyan-400 rounded-2xl shadow-[0_0_25px_rgba(34,211,238,0.4)] hover:shadow-[0_0_35px_rgba(34,211,238,0.7)] hover:scale-105 active:scale-95 transition-all duration-300 border border-cyan-200/50 cursor-pointer w-full sm:w-auto min-w-[280px]"
+            className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 text-base sm:text-xl font-extrabold text-white bg-gradient-to-r from-red-600 via-rose-600 to-red-600 hover:from-red-500 hover:to-rose-500 rounded-2xl shadow-[0_0_30px_rgba(225,29,72,0.6)] hover:shadow-[0_0_40px_rgba(244,63,94,0.9)] hover:scale-105 active:scale-95 transition-all duration-300 border border-rose-300/60 cursor-pointer w-full sm:w-auto min-w-[300px]"
           >
-            <FileText className="w-6 h-6 text-slate-950 group-hover:scale-110 transition-transform" />
-            <span>توثيق المشروع المختصر</span>
-            <ExternalLink className="w-5 h-5 text-slate-950 group-hover:-translate-x-1 transition-transform" />
+            <FileText className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+            <span>توثيق المشروع المختصر (انقر هنا)</span>
+            <ExternalLink className="w-5 h-5 text-white group-hover:-translate-x-1 transition-transform" />
           </a>
         </div>
 
