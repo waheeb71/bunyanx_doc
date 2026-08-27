@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getAllDocs } from '@/lib/docs';
 import { PipelineVisualizer } from '@/components/home/PipelineVisualizer';
+import { DocChoiceModal } from '@/components/home/DocChoiceModal';
 import {
   Shield,
   BookOpen,
@@ -37,6 +38,9 @@ export default async function HomePage() {
 
   return (
     <div className="relative overflow-hidden space-y-16 sm:space-y-24 pb-20">
+      {/* Modal Popup on Page Load */}
+      <DocChoiceModal />
+
       {/* Subtle Background Cyber Grid */}
       <div className="absolute inset-0 bg-cyber-grid bg-[size:30px_30px] pointer-events-none opacity-60" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-80 bg-hero-gradient pointer-events-none" />
