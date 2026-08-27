@@ -1023,3 +1023,312 @@ hr {
   font-weight: 700;
   color: var(--primary-light);
 }
+
+/* ==============================================================================
+   RESPONSIVE DESIGN & MOBILE OPTIMIZATION (< 992px & < 768px)
+   Provides an organized, elegant, and responsive reading experience on smartphones
+   ============================================================================== */
+
+@media screen and (max-width: 991px) {
+  .document-container {
+    max-width: 96%;
+    margin: 15px auto;
+  }
+
+  .continuous-document, .a4-page {
+    max-width: 100%;
+    width: 100%;
+    padding: 18mm 14mm;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  .document-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+
+  .continuous-document, .a4-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: auto !important;
+    margin: 0 !important;
+    padding: 16px 12px !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Responsive Screen Navigation Bar */
+  .screen-nav-bar {
+    padding: 10px 12px !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+  }
+
+  .nav-brand {
+    font-size: 0.95rem !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  .nav-controls {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+
+  .chapter-select {
+    width: 100% !important;
+    max-width: 100% !important;
+    font-size: 0.82rem !important;
+    padding: 8px 10px !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .nav-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 8px 12px !important;
+    font-size: 0.85rem !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Academic Running Header & Footer */
+  .doc-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+    font-size: 0.78rem !important;
+    margin-bottom: 16px !important;
+  }
+
+  .doc-footer {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 6px !important;
+    font-size: 0.78rem !important;
+    margin-top: 24px !important;
+    text-align: center !important;
+  }
+
+  /* Typography Scale for Phone Screens */
+  h1.chapter-title {
+    font-size: 1.35rem !important;
+    padding-bottom: 8px !important;
+    margin-bottom: 18px !important;
+    line-height: 1.4 !important;
+  }
+
+  h2 {
+    font-size: 1.15rem !important;
+    margin-top: 20px !important;
+    margin-bottom: 12px !important;
+    padding-right: 8px !important;
+    line-height: 1.4 !important;
+  }
+
+  h3 {
+    font-size: 1.02rem !important;
+    margin-top: 16px !important;
+    margin-bottom: 10px !important;
+  }
+
+  h4 {
+    font-size: 0.92rem !important;
+  }
+
+  p, li {
+    font-size: 0.92rem !important;
+    line-height: 1.7 !important;
+    text-align: right !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* Front Matter Pages (Bismillah, Quran, Hadith, Dedication, Abstract) */
+  .bismillah-page {
+    min-height: auto !important;
+    padding: 15px 0 !important;
+  }
+
+  .bismillah-wrapper {
+    padding: 20px 12px !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .bismillah-calligraphy {
+    font-size: 1.5rem !important;
+    line-height: 1.8 !important;
+  }
+
+  .bismillah-decoration {
+    font-size: 1.1rem !important;
+    margin-top: 12px !important;
+  }
+
+  .verse-text {
+    font-size: 1.15rem !important;
+    line-height: 1.8 !important;
+  }
+
+  .hadith-text {
+    font-size: 1.02rem !important;
+    line-height: 1.7 !important;
+  }
+
+  .epigraph-container, .dedication-body, .ack-body, .abstract-body, .toc-container {
+    max-width: 100% !important;
+    margin: 10px 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .quran-box, .hadith-box, .dedication-body, .ack-card, .abstract-pillar-card, .keywords-box {
+    padding: 14px 12px !important;
+    box-sizing: border-box !important;
+  }
+
+  .dedication-paragraph, .ack-text, .abstract-lead, .abstract-conclusion {
+    font-size: 0.94rem !important;
+    line-height: 1.8 !important;
+    text-align: right !important;
+  }
+
+  /* Research Gap Quadrant Matrix Component */
+  .research-gap-matrix {
+    padding: 12px 8px !important;
+    margin: 16px 0 !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  .matrix-wrapper {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+
+  .matrix-y-axis {
+    writing-mode: horizontal-tb !important;
+    transform: none !important;
+    flex-direction: row !important;
+    height: auto !important;
+    padding: 0 0 6px 0 !important;
+    font-size: 0.8rem !important;
+    border-bottom: 1px dashed var(--border-medium);
+  }
+
+  .matrix-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .matrix-x-axis {
+    flex-direction: column !important;
+    gap: 4px !important;
+    padding-right: 0 !important;
+    font-size: 0.8rem !important;
+  }
+
+  /* Code Editors & Pre Blocks */
+  .code-editor-window {
+    margin: 14px 0 !important;
+    border-radius: 6px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .editor-titlebar {
+    padding: 6px 10px !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+
+  .editor-tab {
+    padding: 3px 8px !important;
+    font-size: 0.78rem !important;
+  }
+
+  .code-editor-window pre {
+    padding: 12px 10px !important;
+    font-size: 0.78rem !important;
+    line-height: 1.5 !important;
+    white-space: pre !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .code-editor-window.ascii-diagram-window pre {
+    font-size: 0.68rem !important;
+    padding: 10px 6px !important;
+    text-align: left !important;
+  }
+
+  /* Tables & Responsive Wrappers */
+  .table-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    margin: 14px 0 !important;
+  }
+
+  table {
+    width: 100% !important;
+    display: block !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    font-size: 0.8rem !important;
+  }
+
+  th, td {
+    padding: 6px 8px !important;
+    font-size: 0.78rem !important;
+  }
+
+  /* Grid Layouts in Chapters */
+  .metadata-grid, .metrics-grid, .abstract-pillars-grid, .team-thanks-list {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  /* Figures, Images & Mermaid Diagrams */
+  figure, .figure-container, .screenshot-placeholder {
+    max-width: 100% !important;
+    margin: 14px 0 !important;
+    padding: 12px 8px !important;
+    overflow-x: auto !important;
+    box-sizing: border-box !important;
+  }
+
+  svg, img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Table of Contents */
+  .toc-sub-list {
+    padding-right: 8px !important;
+  }
+
+  .toc-sub-list li {
+    font-size: 0.82rem !important;
+  }
+
+  .toc-chap-title {
+    font-size: 0.95rem !important;
+  }
+}
