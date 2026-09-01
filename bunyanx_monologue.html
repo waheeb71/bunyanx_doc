@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منولوج السيادة الرقمية: بنيان-إكس (BUNYANX)</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #090d16;
+            --bg-card: rgba(17, 24, 39, 0.85);
+            --bg-card-hover: rgba(24, 34, 53, 0.95);
+            --accent-green: #10b981;
+            --accent-cyan: #06b6d4;
+            --accent-blue: #3b82f6;
+            --accent-amber: #f59e0b;
+            --accent-purple: #8b5cf6;
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --glass-glow: 0 0 25px rgba(16, 185, 129, 0.15);
+            --font-main: 'Tajawal', 'Cairo', sans-serif;
+            --font-title: 'Cairo', sans-serif;
+            --font-code: 'Fira Code', monospace;
+            --base-font-size: 19px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(16, 185, 129, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            font-size: var(--base-font-size);
+            line-height: 1.8;
+            padding-bottom: 80px;
+        }
+
+        /* Top Header Sticky Bar */
+        .sticky-toolbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(9, 13, 22, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        .toolbar-title {
+            font-family: var(--font-title);
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--accent-green);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toolbar-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 6px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: var(--font-main);
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn:hover {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--accent-green);
+            color: #fff;
+        }
+
+        .btn-active {
+            background: var(--accent-green) !important;
+            color: #000 !important;
+            font-weight: 700;
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--glass-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan), var(--accent-blue));
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: var(--accent-green);
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-family: var(--font-title);
+            font-size: 2.3rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .hero-subtitle {
+            color: var(--accent-cyan);
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .meta-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .meta-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .meta-val {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* Technical Highlights Badges */
+        .tech-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        .tech-pill {
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            color: var(--accent-cyan);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tech-pill span {
+            color: #fff;
+            font-family: var(--font-code);
+        }
+
+        /* Nav Quick Links */
+        .scene-nav {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 10px 0;
+            margin-bottom: 30px;
+            scrollbar-width: thin;
+        }
+
+        .scene-nav-link {
+            white-space: nowrap;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .scene-nav-link:hover {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: var(--accent-green);
+            color: #fff;
+        }
+
+        /* Scene Cards */
+        .scene-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 35px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .scene-card:hover {
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .scene-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .scene-title-group h2 {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .scene-time {
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            color: #c084fc;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            font-family: var(--font-code);
+        }
+
+        /* Director & Camera Cues Box */
+        .director-cue {
+            background: rgba(245, 158, 11, 0.1);
+            border-right: 4px solid var(--accent-amber);
+            border-radius: 8px 12px 12px 8px;
+            padding: 14px 18px;
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+            color: #fef08a;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .cue-icon {
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        /* Spoken Content (The Monologue Dialogue) */
+        .dialogue-box {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 24px;
+            font-size: 1.05em;
+            line-height: 1.9;
+        }
+
+        .dialogue-box p {
+            margin-bottom: 18px;
+            color: #e5e7eb;
+        }
+
+        .dialogue-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .dialogue-box strong {
+            color: var(--accent-green);
+            font-weight: 800;
+        }
+
+        /* Inline Stage Actions */
+        .stage-action {
+            display: block;
+            margin: 16px 0;
+            padding: 8px 16px;
+            background: rgba(59, 130, 246, 0.12);
+            border-right: 3px solid var(--accent-blue);
+            color: #93c5fd;
+            font-size: 0.92rem;
+            font-weight: 600;
+            border-radius: 4px 8px 8px 4px;
+            font-style: italic;
+        }
+
+        /* Key Metrics Grid inside Scene 3 */
+        .features-list {
+            list-style: none;
+            margin: 20px 0;
+            display: grid;
+            gap: 12px;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            padding: 14px 18px;
+        }
+
+        .feature-title {
+            color: var(--accent-cyan);
+            font-weight: 800;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Legal Disclaimer Box */
+        .disclaimer-card {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        .disclaimer-title {
+            color: var(--accent-blue);
+            font-family: var(--font-title);
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .disclaimer-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--accent-green);
+            color: #000;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Teleprompter Focus Mode */
+        body.teleprompter-mode {
+            background: #000;
+        }
+
+        body.teleprompter-mode .hero,
+        body.teleprompter-mode .meta-grid,
+        body.teleprompter-mode .tech-highlights,
+        body.teleprompter-mode .director-cue,
+        body.teleprompter-mode .disclaimer-card {
+            opacity: 0.3;
+        }
+
+        body.teleprompter-mode .dialogue-box {
+            background: transparent;
+            font-size: 1.35em;
+            line-height: 2.2;
+            border: none;
+        }
+
+        /* 17 Modules Card Grid & Flow Script */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .module-card {
+            background: rgba(17, 24, 39, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 22px;
+            transition: all 0.25s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .module-card:hover {
+            border-color: var(--accent-cyan);
+            background: rgba(24, 34, 53, 0.95);
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .module-num {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: rgba(6, 182, 212, 0.15);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            font-family: var(--font-code);
+            font-weight: 700;
+            font-size: 0.82rem;
+            padding: 2px 10px;
+            border-radius: 12px;
+        }
+
+        .module-title {
+            font-family: var(--font-title);
+            color: #fff;
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+            padding-left: 50px;
+            line-height: 1.4;
+        }
+
+        .module-summary {
+            background: rgba(59, 130, 246, 0.08);
+            border-right: 3px solid var(--accent-blue);
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 0.92rem;
+            color: #dbeafe;
+            line-height: 1.7;
+        }
+
+        .module-advantage {
+            background: rgba(16, 185, 129, 0.08);
+            border-right: 3px solid var(--accent-green);
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 0.92rem;
+            color: #d1fae5;
+            line-height: 1.7;
+        }
+
+        .module-advantage strong {
+            color: var(--accent-green);
+            font-weight: 700;
+        }
+
+        .module-search-box {
+            width: 100%;
+            padding: 12px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            color: #fff;
+            font-family: var(--font-main);
+            font-size: 1rem;
+            margin-bottom: 20px;
+            transition: border-color 0.2s ease;
+        }
+
+        .module-search-box:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+        }
+
+        /* Flow Script Step Cards */
+        .flow-step-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .flow-step-title {
+            color: var(--accent-amber);
+            font-family: var(--font-title);
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Q&A Defense Script Styles */
+        .qa-card {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            transition: border-color 0.2s ease;
+        }
+
+        .qa-card:hover {
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .qa-role-examiner {
+            background: rgba(239, 68, 68, 0.08);
+            border-right: 4px solid #ef4444;
+            border-radius: 8px 12px 12px 8px;
+            padding: 16px 20px;
+            margin-bottom: 18px;
+            color: #fca5a5;
+            line-height: 1.8;
+        }
+
+        .qa-role-engineer {
+            background: rgba(16, 185, 129, 0.08);
+            border-right: 4px solid var(--accent-green);
+            border-radius: 8px 12px 12px 8px;
+            padding: 16px 20px;
+            color: #d1fae5;
+            line-height: 1.85;
+        }
+
+        .role-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .badge-examiner {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+
+        .badge-engineer {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-green);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .scene-card {
+                padding: 20px;
+            }
+            .sticky-toolbar {
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Toolbar Controls -->
+    <div class="sticky-toolbar">
+        <div class="toolbar-title">
+            <span>🛡️</span> سكريبت المونولوج: بنيان-إكس (BUNYANX)
+        </div>
+        <div class="toolbar-controls">
+            <button class="btn" onclick="adjustFontSize(1)" title="تكبير الخط">A+</button>
+            <button class="btn" onclick="adjustFontSize(-1)" title="تصغير الخط">A-</button>
+            <button class="btn" onclick="resetFontSize()" title="إعادة ضبط الخط">إعادة ضبط</button>
+            <button class="btn" id="teleprompterBtn" onclick="toggleTeleprompter()">🎬 وضع تلقين القراءة (Teleprompter)</button>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- Hero Header -->
+        <header class="hero">
+            <span class="hero-badge">مشروع تخرج سيادي | قسم الأمن السيبراني - الجامعة الوطنية تعز</span>
+            <h1>🎬 سكريبت المونولوج الرقمي: "بنيان-إكس والسيادة الرقمية"</h1>
+            <div class="hero-subtitle">رؤية سيادية رقمية متكاملة لـ منصة دفاع واستجابة سيبرانية (100% On-Premise)</div>
+            
+            <!-- Key Metrics Summary Pills -->
+            <div class="tech-highlights">
+                <div class="tech-pill">⚡ سرعة الاستجابة: <span>8.5 µs</span></div>
+                <div class="tech-pill">🚀 تسريع التفتيش بالذاكرة: <span>+300%</span></div>
+                <div class="tech-pill">🧩 الوحدات الأمنية المدمجة: <span>17 وحدة</span></div>
+                <div class="tech-pill">🔒 معالجة متزامنة: <span>&lt; 0.28 ms</span></div>
+                <div class="tech-pill">🎯 دقة كشف التهديدات: <span>&gt; 99%</span></div>
+                <div class="tech-pill">🌐 السيادة الرقمية: <span>On-Premise 100%</span></div>
+            </div>
+
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <span class="meta-label">الجهة والأطروحة</span>
+                    <span class="meta-val">الجامعة الوطنية - تعز [1، 2]</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">المشرف الأكاديمي</span>
+                    <span class="meta-val">م. يحيى الصبري [1، 2]</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">المدة المتوقعة للإلقاء</span>
+                    <span class="meta-val">6 – 8 دقائق</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">المظهر والسينوغرافيا</span>
+                    <span class="meta-val">رسمي مريح، إضاءة خافتة، شاشة جانبية بلوحة تحكم حية</span>
+                </div>
+            </div>
+
+            <!-- Research & Scientific Vision Highlight Box -->
+            <div style="margin-top: 25px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 14px; padding: 20px 24px; position: relative;">
+                <div style="color: var(--accent-green); font-family: var(--font-title); font-weight: 800; font-size: 1.15rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                    <span>🎓</span> الرؤية والمساهمة البحثية لـ BUNYANX:
+                </div>
+                <p style="color: var(--text-primary); font-size: 1rem; line-height: 1.8; margin-bottom: 10px;">
+                    "المشروع يتضمن عدة وحدات أمنية مترابطة، وكل وحدة لها دور محدد ضمن دورة الحماية الكاملة. وما يميز المشروع أيضًا أن العمل لم يكن برمجيًا فقط، بل صاحبته مساهمات بحثية وعلمية أصلية، قمنا من خلالها بتطوير ودراسة عدد من الآليات والأساليب الأمنية، وتم توثيق هذه الأعمال في أوراق بحثية مرتبطة بالمشروع."
+                </p>
+                <p style="color: var(--accent-cyan); font-weight: 700; font-size: 1.05rem; margin-bottom: 0;">
+                    "بالتالي BUNYANX بالنسبة لنا ليست مجرد برنامج، وإنما منظومة بحثية وتطبيقية تجمع بين هندسة الأمن السيبراني والبحث العلمي والتطبيق العملي."
+                </p>
+            </div>
+        </header>
+
+        <!-- Quick Jump Scene Nav -->
+        <nav class="scene-nav">
+            <a href="#pitch60" class="scene-nav-link" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">⚡ عرض الدقيقة الواحدة (60ث)</a>
+            <a href="#scene1" class="scene-nav-link">المشهد 1: الافتتاحية</a>
+            <a href="#scene2" class="scene-nav-link">المشهد 2: تقديم بنيان-إكس</a>
+            <a href="#scene3" class="scene-nav-link">المشهد 3: القوة الابتكارية والهندسية</a>
+            <a href="#scene4" class="scene-nav-link">المشهد 4: مفهوم السيادة الرقمية</a>
+            <a href="#scene5" class="scene-nav-link">المشهد 5: مخاطر التكنولوجيا المغلقة</a>
+            <a href="#scene6" class="scene-nav-link">المشهد 6: المقارنة والخاتمة</a>
+            <a href="#modules17" class="scene-nav-link">🧩 الوحدات الـ 17 وميزاتها</a>
+            <a href="#data-flow-script" class="scene-nav-link">⚡ محاكاة حركة البيانات (90ث)</a>
+            <a href="#qa-discussion" class="scene-nav-link">🥊 المناقشة السيبرانية الصعبة</a>
+            <a href="#disclaimer" class="scene-nav-link">🛡️ الغطاء القانوني</a>
+        </nav>
+
+        <!-- SECTION: 60-SECOND ELEVATOR PITCH -->
+        <section id="pitch60" class="scene-card" style="border: 2px solid var(--accent-cyan); box-shadow: 0 0 25px rgba(6, 182, 212, 0.2);">
+            <div class="scene-header">
+                <div class="scene-title-group">
+                    <h2><span>⚡</span> سكريبت "عرض الدقيقة الواحدة" (60-Second Elevator Pitch)</h2>
+                </div>
+                <div class="scene-time" style="background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan); border-color: var(--accent-cyan);">⏱️ 60 ثانية بالضبط</div>
+            </div>
+
+            <div class="director-cue" style="background: rgba(6, 182, 212, 0.1); border-right-color: var(--accent-cyan); color: #cffaff;">
+                <span class="cue-icon">🎙️</span>
+                <div>
+                    <strong>توجيه الإلقاء السريع:</strong> تحدث بنبرة واثقة، متزنة، ومباشرة، مع استغلال الإيماءات البصرية لليدين لترسيخ الأرقام.
+                </div>
+            </div>
+
+            <div class="dialogue-box" id="pitch60Box">
+                <!-- 00:00 - 00:12 -->
+                <div style="background: rgba(239, 68, 68, 0.08); border-right: 3px solid #ef4444; padding: 12px 16px; border-radius: 8px; margin-bottom: 12px;">
+                    <span style="color: #f87171; font-weight: 700; font-size: 0.85rem; font-family: var(--font-code);">⏱️ [00:00 - 00:12] الافتتاحية والصدمة:</span>
+                    <p style="margin-top: 4px; margin-bottom: 0; color: #f3f4f6;">
+                        "أكثر من 80% من جدران الحماية التجاريّة في منطقتنا هي أنظمة مغلقة، تعيد إرسال ترافيك شبكاتنا وسجلاتها الحساسة إلى سحابات أجنبيّة تحت مسمى 'التحليل السحابي'.. مما يجعلها بالواقع باباً خلفياً موثقاً قانونياً يسلب مؤسساتنا سيادتها على بياناتها!"
+                    </p>
+                </div>
+
+                <!-- 00:12 - 00:25 -->
+                <div style="background: rgba(16, 185, 129, 0.08); border-right: 3px solid var(--accent-green); padding: 12px 16px; border-radius: 8px; margin-bottom: 12px;">
+                    <span style="color: var(--accent-green); font-weight: 700; font-size: 0.85rem; font-family: var(--font-code);">⏱️ [00:12 - 00:25] الحل والتقديم:</span>
+                    <p style="margin-top: 4px; margin-bottom: 0; color: #f3f4f6;">
+                        "من هنا، انطلقنا في قسم الأمن السيبراني بالجامعة الوطنية - تعز، لبناء منصة <strong>BUNYANX (بنيان-إكس)</strong> كمنظومة دفاع واستجابة سيبرانية سيادية بالكامل (On-Premise 100%) بأيدٍ محلية، تضمن بقاء كافة البيانات والتحديثات داخل حدود جغرافيتك الخاصة."
+                    </p>
+                </div>
+
+                <!-- 00:25 - 00:45 -->
+                <div style="background: rgba(6, 182, 212, 0.08); border-right: 3px solid var(--accent-cyan); padding: 12px 16px; border-radius: 8px; margin-bottom: 12px;">
+                    <span style="color: var(--accent-cyan); font-weight: 700; font-size: 0.85rem; font-family: var(--font-code);">⏱️ [00:25 - 00:45] الابتكار الهندسي (4 أرقام ذهبية):</span>
+                    <p style="margin-top: 4px; margin-bottom: 0; color: #f3f4f6;">
+                        "ابتكرنا خط معالجة موحد يجمع <strong>17 وحدة أمنية متخصصة</strong>، مع حقن كود الحماية مباشرة في <strong>نواة النظام (eBPF/XDP)</strong> لإسقاط الهجمات في <strong>8.5 ميكروثانية</strong>، وفحص التشفير بالذاكرة العشوائية <strong>MemoryBIO</strong> بتسريع <strong>300%</strong>، مدمجاً بعقل استباقي يعتمد على <strong>توازن ناش (Nash Equilibrium)</strong> لاستدراج المهاجمين داخل مصائد خداع ديناميكية."
+                    </p>
+                </div>
+
+                <!-- 00:45 - 01:00 -->
+                <div style="background: rgba(139, 92, 246, 0.08); border-right: 3px solid var(--accent-purple); padding: 12px 16px; border-radius: 8px;">
+                    <span style="color: #c084fc; font-weight: 700; font-size: 0.85rem; font-family: var(--font-code);">⏱️ [00:45 - 01:00] الخاتمة السيادية:</span>
+                    <p style="margin-top: 4px; margin-bottom: 0; color: #f3f4f6;">
+                        "BUNYANX بالنسبة لنا ليست مجرد برنامج، بل هي منظومة بحثية وتطبيقية تجمع بين هندسة الأمن والبحث العلمي، وخيار واعٍ لمن يريد أن يمتلك أمنه واستقلال قراره الرقمي بأيديه."
+                    </p>
+                </div>
+            </div>
+
+            <div style="margin-top: 15px; text-align: left;">
+                <button class="btn" onclick="copyText('pitch60')">📋 نسخ سكريبت عرض الدقيقة الواحدة</button>
+            </div>
+        </section>
+
+        <!-- SCENE 1 -->
+        <section id="scene1" class="scene-card">
+            <div class="scene-header">
+                <div class="scene-title-group">
+                    <h2><span>🔹</span> المشهد الأول: الافتتاحية والصدمة الواعية</h2>
+                </div>
+                <div class="scene-time">0:00 – 0:45</div>
+            </div>
+
+            <div class="director-cue">
+                <span class="cue-icon">📹</span>
+                <div>
+                    <strong>توجيه الإخراج والحركة:</strong> لقطة قريبة (Close-up)، إضاءة مركزة على الوجه، نبرة صوت هادئة جداً وشبه هامسة، وعينان ثابتتان بتركيز حاد في الكاميرا.
+                </div>
+            </div>
+
+            <div class="dialogue-box">
+                <p>
+                    "لو أخبرتك أن جدار الحماية الذي اشتريته بملايين الدولارات لحماية أسرار مؤسستك... قد يكون هو نفسه الباب الخلفي المفتوح لاستخبارات دولة أخرى... هل تصدق؟"
+                </p>
+
+                <div class="stage-action">
+                    [توقفة قصيرة لثانيتين.. تراجع خفيف بالظهر لإعطاء مساحة للحركة والتنفس]
+                </div>
+
+                <p>
+                    "هذه ليست نظرية مؤامرة ننسجها من الخيال. هذه حقيقة قانونية وتقنية موثقة علمياً وفي تقارير الشفافية الدولية، كشفتها تقارير تسريبات سنودن، وتشرعنها اليوم قوانين دولية مثل قانون الحوسبة السحابية (CLOUD Act) وقوانين (FISA).
+                </p>
+                <p>
+                    في عالم الشبكات اليوم، أكثر من <strong>95% من البيانات أصبحت مشفرة</strong>. وتحت عنوان حمايتك من التهديدات، تطلب منك الأنظمة التجارية إرسال عينات ترافيك شبكتك الحساسة وسجلاتها إلى سحابتها الخارجية لتحليلها واستخبارات التهديدات.. إنهم ببساطة يسلبونك مفاتيح بيتك، ليفحصوا من يدخل إليه!"
+                </p>
+
+                <!-- Defense Layers Classification & Hidden Intelligence Channels -->
+                <div style="margin-top: 25px; padding-top: 20px; border-top: 1px dashed rgba(255, 255, 255, 0.15);">
+                    <h3 style="color: var(--accent-amber); font-family: var(--font-title); font-size: 1.15rem; font-weight: 800; margin-bottom: 15px;">
+                        📌 التصنيف حسب الطبقة الدفاعية (ووجهها الخفي):
+                    </h3>
+
+                    <!-- 1. NGFW -->
+                    <div style="background: rgba(239, 68, 68, 0.06); border-right: 3px solid #ef4444; border-radius: 8px; padding: 14px 18px; margin-bottom: 15px;">
+                        <strong style="color: #f87171; font-size: 1.05rem;">1. جدران الحماية (Next-Gen Firewalls — NGFW)</strong>
+                        <div style="margin-top: 6px; font-size: 0.95rem; color: #e5e7eb;">
+                            • <strong>أشهر الأنظمة:</strong> Palo Alto Networks (PAN-OS)، Fortinet (FortiGate)، Cisco (Firepower)، Check Point (Quantum).<br>
+                            • <strong>الوجه الاستخباراتي:</strong> كل هذه الأنظمة ترسل <strong>تليمتري (Telemetry)</strong> افتراضياً إلى السحابة المركزية للشركة الأم—تحت مسمى "تحليل التهديدات السحابي" (مثل WildFire من Palo Alto، وFortiGuard من Fortinet). تحتوي هذه البيانات على: عناوين IP، دومينات، توقيعات حزم، بيانات DNS، وحتى <strong>محتوى ملفات مشبوهة</strong> تُرفع كاملة للتحليل.<br>
+                            • <strong>التسريب العملي:</strong> شركة <strong>Palo Alto</strong> اعترفت سابقاً أن بيانات العملاء (بما فيها دول الخليج) تُخزن على خوادم في <strong>الولايات المتحدة وأستراليا</strong>—خاضعة لقوانين CLOUD Act وFISA.
+                        </div>
+                    </div>
+
+                    <!-- 2. WAF -->
+                    <div style="background: rgba(245, 158, 11, 0.06); border-right: 3px solid var(--accent-amber); border-radius: 8px; padding: 14px 18px; margin-bottom: 15px;">
+                        <strong style="color: #fbbf24; font-size: 1.05rem;">2. جدار حماية الويب (WAF - Web Application Firewall)</strong>
+                        <div style="margin-top: 6px; font-size: 0.95rem; color: #e5e7eb;">
+                            • <strong>أشهر الأنظمة:</strong> Cloudflare (WAF + CDN)، AWS WAF، Akamai (Kona Site Defender)، F5 (Big-IP ASM).<br>
+                            • <strong>الوجه الاستخباراتي:</strong> <strong>Cloudflare</strong> تحديداً تُمرر كل حركة HTTP/HTTPS عبر خوادمها، وتحلل الرؤوس، المعاملات، وحتى <strong>جسم الطلبات (payloads)</strong> بحثاً عن هجمات—ولكنها تحتفظ بالسجلات لـ <strong>30 يومًا</strong> كحد أدنى، وتشاركها مع جهات إنفاذ القانون بموجب أوامر قضائية سرية (كما حدث مع مشروع <strong>Project Ray</strong>).<br>
+                            • <strong>AWS WAF</strong> يرسل كل السجلات إلى <strong>S3</strong> أو <strong>CloudWatch</strong>، وهذه الخدمات مُدارة من أمريكا، مع صلاحية وصول داخلية لفرق AWS Security التابعة لـ <strong>الاستخبارات الأمريكية</strong> عبر برامج مثل <strong>RDS (Request for Data Service)</strong>.
+                        </div>
+                    </div>
+
+                    <!-- 3. DLP -->
+                    <div style="background: rgba(139, 92, 246, 0.06); border-right: 3px solid var(--accent-purple); border-radius: 8px; padding: 14px 18px; margin-bottom: 15px;">
+                        <strong style="color: #c084fc; font-size: 1.05rem;">3. منع تسريب البيانات (DLP - Data Loss Prevention)</strong>
+                        <div style="margin-top: 6px; font-size: 0.95rem; color: #e5e7eb;">
+                            • <strong>أشهر الأنظمة:</strong> Symantec (DLP)، Forcepoint (DLP)، McAfee (MVISION DLP)، Microsoft Purview (Information Protection).<br>
+                            • <strong>الوجه الاستخباراتي:</strong> هذه الأنظمة تراقب <strong>المحتوى نفسه</strong>—الملفات، الإيميلات، الرسائل الداخلية، الطباعة، نقل USB.<br>
+                            • <strong>التسريب المنهجي:</strong> شركة <strong>Forcepoint</strong> (وهي منبثقة من وكالة الأمن القومي الأمريكية NSA سابقاً) تُصرح بأنها تحلل "أنماط السلوك" (UEBA) وتُشارك الإحصائيات مع <strong>مراكز التهديدات السيبرانية الغربية</strong> مثل <strong>CISA</strong> و <strong>NCSC</strong>.<br>
+                            • في عام 2021، اكتُشف أن <strong>Microsoft Purview</strong> يرسل بيانات تصنيف المستندات (بما فيها مستندات حساسة من حكومات شرق أوسطية) إلى خوادم Azure في أمريكا—رغم وجود خوادم محلية في المنطقة—بسبب آلية "النسخ الاحتياطي العالمي".
+                        </div>
+                    </div>
+
+                    <!-- 4. IDS/IPS -->
+                    <div style="background: rgba(6, 182, 212, 0.06); border-right: 3px solid var(--accent-cyan); border-radius: 8px; padding: 14px 18px; margin-bottom: 15px;">
+                        <strong style="color: var(--accent-cyan); font-size: 1.05rem;">4. كشف ومنع الاختراق (IDS/IPS)</strong>
+                        <div style="margin-top: 6px; font-size: 0.95rem; color: #e5e7eb;">
+                            • <strong>أشهر الأنظمة:</strong> Snort (مفتوح المصدر تديره Cisco)، Suricata (بتمويل أمريكي وأوروبي)، Zeek (Bro سابقاً - مدعوم من مختبرات وزارة الطاقة الأمريكية)، Trend Micro (Deep Security).<br>
+                            • <strong>الوجه الاستخباراتي:</strong> <strong>Snort</strong> و <strong>Suricata</strong> يجمعان توقيعات الحزم ويرسلان التقارير إلى قواعد بيانات <strong>مفتوحة</strong> (مثل Emerging Threats) تُستخدم لتدريب نماذج استخباراتية غربية.<br>
+                            • <strong>Zeek</strong> يولد سجلات غنية بـ <strong>جميع اتصالات الشبكة</strong>—وقد كشفت وثائق سنودن أن بعض ترقيعاته كانت تُعدل لصالح <strong>NSA</strong> لجمع بيانات ذات أولوية (مثل بروتوكولات SSH و TLS).
+                        </div>
+                    </div>
+
+                    <!-- Private Leakage Channel -->
+                    <div style="background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 16px 20px; margin-bottom: 15px;">
+                        <strong style="color: var(--accent-green); font-size: 1.05rem;">🌐 القناة الموازية للتسريب للشركات الخاصة:</strong>
+                        <p style="margin-top: 8px; font-size: 0.95rem; color: #e5e7eb; line-height: 1.7;">
+                            جميع الأنظمة المذكورة ترتبط بـ <strong>مراكز تحليل تهديدات خاصة</strong> تبيع بيانات مجمعة لشركات مثل:<br>
+                            • <strong>Recorded Future</strong> (تمولها وكالة الاستخبارات المركزية CIA عبر In-Q-Tel)<br>
+                            • <strong>CrowdStrike</strong> (ترتبط بـ FBI و DHS)<br>
+                            • <strong>FireEye / Trellix</strong> (تعاقدات مباشرة مع NSA و GCHQ)<br>
+                            هذه الشركات تشتري <strong>البيانات المجردة</strong> (ميتاداتا، توقيعات، سلوكيات) من أنظمة الحماية تحت غطاء "تحسين الذكاء الاصطناعي للأمن"، وتستخدمها في: رسم خرائط البنية التحتية الرقمية للدول، تحديد نقاط الضعف البشرية، وبيع التقارير الاستخباراتية لصناديق التحوط والشركات المتعددة الجنسيات—مثلما حدث مع تسريب بيانات <strong>موانئ دبي</strong> عبر أنظمة FireEye في 2020.
+                        </p>
+                    </div>
+
+                    <!-- Closing Statement -->
+                    <p style="font-weight: 800; color: #fff; font-size: 1.05rem; margin-top: 15px; margin-bottom: 0; line-height: 1.8;">
+                        "كل هذه الأنظمة هي أعين مفتوحة، تُباع لك تحت عنوان 'دفاع'، وتُستخدم ضدك تحت عنوان 'استخبارات'. البيانات لا تُسرق فقط—بل <strong>تُهدى</strong> طواعية عبر الشروط والخدمات السحابية التي تُوقع عليها المؤسسات دون قراءة البنود الدقيقة."
+                    </p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 15px; text-align: left;">
+                <button class="btn" onclick="copyText('scene1')">📋 نسخ نص المشهد الأول</button>
+            </div>
+        </section>
+
+        <!-- SCENE 2 -->
+        <section id="scene2" class="scene-card">
+            <div class="scene-header">
+                <div class="scene-title-group">
+                    <h2><span>🔹</span> المشهد الثاني: بنيان-إكس.. خيار السيادة الرقمية</h2>
+                </div>
+                <div class="scene-time">0:45 – 2:00</div>
+            </div>
+
+            <div class="director-cue">
+                <span class="cue-icon">📹</span>
+                <div>
+                    <strong>توجيه الإخراج والحركة:</strong> لقطة متوسطة (Medium Shot)، نبرة صوت تتغير إلى فخر هادئ ورصين، ملامح وجه مسترخية وواثقة.
+                </div>
+            </div>
+
+            <div class="dialogue-box">
+                <p>
+                    "هنا تحديداً انطلقت رؤيتنا في قسم الأمن السيبراني بالجامعة الوطنية - تعز، وتحت إشراف المهندس يحيى الصبري [1، 2].. هنا ولد مشروع <strong>BUNYANX (بنيان-إكس)</strong>.
+                </p>
+                <p>
+                    <strong>BUNYANX</strong> ليس مجرد منتج تجاري آخر تبحث فيه عن الأرباح، بل هو <strong>رؤية سيادية رقمية كاملة</strong> صُممت وبنيت بأيدي عقول يمنية مخلصة من الصفر بأيدٍ محلية بالكامل.
+                </p>
+                <p>
+                    لقد صممنا هذا النظام ليعمل كـ <strong>منصة دفاع واستجابة سيبرانية متكاملة ومفتوحة المصدر</strong>. نظام يعمل بكفاءة مطلقة ونوعية <strong>سيادية بالكامل (On-Premise بنسبة 100%)</strong> داخل حدود جغرافيتك الخاصة [9، 41].
+                </p>
+
+                <div class="stage-action">
+                    [توقفة قصيرة، وتواصل بصري حاد مع الكاميرا - نبرة تأكيد حازمة وشديدة الوضوح]
+                </div>
+
+                <p>
+                    السيادة الرقمية تعني أن بياناتك، سجلاتك، تحليلات مستخدميك، وتحديثاتك الأمنية — كلها تبقى داخل أجهزتك وجدرانك، دون أي تواصل مع خوادم سحابية خارجية، ودون إرسال بيانات تليمتري مجهولة، ودون الخضوع لأي ولاية قضائية أجنبية أو أوامر وكالات استخباراتية سرية [9، 41]. نحن لا نقدم مجرد بديل تقني عادٍ.. نحن نقدم خياراً واعياً لمن يريد فعلاً أن يمتلك أمنه واستقلال قراره [9، 133]."
+                </p>
+            </div>
+
+            <div style="margin-top: 15px; text-align: left;">
+                <button class="btn" onclick="copyText('scene2')">📋 نسخ نص المشهد الثاني</button>
+            </div>
+        </section>
+
+        <!-- SCENE 3 -->
+        <section id="scene3" class="scene-card">
+            <div class="scene-header">
+                <div class="scene-title-group">
+                    <h2><span>🔹</span> المشهد الثالث: القوة الابتكارية والميزات الهندسية لـ BUNYANX</h2>
+                </div>
+                <div class="scene-time">2:00 – 3:30</div>
+            </div>
+
+            <div class="director-cue">
+                <span class="cue-icon">📹</span>
+                <div>
+                    <strong>توجيه الإخراج والحركة:</strong> نبرة صوت خبير واثق ومثقف، استخدام لغة الجسد لشرح التوازن والدمج دون الدخول في تفاصيل الخوارزميات الحساسة لمنع السرقة وحماية الملكية الفكرية.
+                </div>
+            </div>
+
+            <div class="dialogue-box">
+                <p>
+                    "قد يتساءل البعض: ما الجديد الذي يقدمه <strong>بنيان-إكس</strong> مقارنة بالأنظمة الحالية؟
+                </p>
+                <p>
+                    الجديد هو أننا كسرنا معادلة 'الأداء مقابل الذكاء' العقيمة التي تعاني منها الأنظمة الحالية [10، 13].
+                </p>
+                <p style="font-weight: 700; color: var(--accent-cyan);">
+                    كيف فعلنا ذلك؟
+                </p>
+
+                <ul class="features-list">
+                    <li class="feature-item">
+                        <div class="feature-title">⚡ أولاً: السرعة الفائقة في النواة (eBPF / XDP)</div>
+                        <div>الأنظمة التقليدية تنهار برمجياً وتفقد الحزم عند تعرضها لهجمات حجب الخدمة الضخمة (DDoS) [8، 53]. نحن قمنا بحقن كود المنظومة المكتوب بلغة C مباشرة في <strong>نواة نظام التشغيل لينكس (eBPF/XDP)</strong> عند مستوى كرت الشبكة [82، 105]، مما يتيح تصفية وإسقاط ملايين الحزم الخبيثة والتدفقات الضارة بسرعة السلك في زمن استجابة خيالي لا يتعدى <strong>8.5 ميكروثانية</strong> ودون استهلاك معالج النظام!</div>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-title">🔒 ثانياً: فحص التشفير الشفاف بالذاكرة المعزولة (MemoryBIO)</div>
+                        <div>لحل معضلة 'عمى التشفير'، ابتكرنا آلية فحص معزولة بالكامل داخل <strong>الذاكرة العشوائية (MemoryBIO)</strong>. فك تشفير حركة HTTPS والتفتيش وتوليد الشهادات يتم دون كتابة أي بايت، شهادة، أو مفتاح خاص على الأقراص الصلبة نهائياً، مما يلغي ثغرات تسرب المفاتيح ويحمي خصوصيتك ويرفع سرعة المعالجة بنسبة <strong>300%</strong> مقارنة بالوكلاء التقليديين [86، 108، 109].</div>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-title">🧩 ثالثاً: دمج 17 وحدة تحت خط أنابيب موحد</div>
+                        <div>بدلاً من تشتيت شبكتك بين جدار حماية، وWAF، وDLP، وأنظمة حماية بريد إلكتروني من موردين متعددين يجهد المعالج بفك الحزمة وتفتيشها تكراراً [7، 34].. قمنا ببناء خط أنابيب موحد يضم <strong>17 وحدة أمنية متخصصة</strong> [9، 126] تعمل بتناغم تام لحماية كل شيء من الطبقة الثالثة وحتى السابعة. يمر الترافيك في <strong>BUNYANX</strong> عبر خط معالجة تفتيشي موحد، تفتش فيه الحزمة لمرة واحدة وتعرض على الوحدات الـ 17 بتوازٍ مرن لتقليل زمن الاستجابة [9، 81].</div>
+                    </li>
+                </ul>
+
+                <div class="stage-action">
+                    [تغيير نبرة الصوت إلى نبرة مشوقة ومليئة بالثقة العلمية]
+                </div>
+
+                <p>
+                    مع <strong>بنيان-إكس</strong>، أظهرت الاختبارات المعملية كفاءة استثنائية في كشف التهديدات الصامتة واختراق البريد والتسريب بدقة فائقة تجاوزت <strong>99%</strong> في بعض المحركات [117، 123]، مع الحفاظ على زمن معالجة متزامن للحزم تحت <strong>0.28 مللي ثانية</strong>.
+                </p>
+                <p>
+                    المشروع يتضمن عدة وحدات أمنية مترابطة، وكل وحدة لها دور محدد ضمن دورة الحماية الكاملة. وما يميز المشروع أيضًا أن العمل لم يكن برمجيًا فقط، بل صاحبته مساهمات بحثية وعلمية أصلية، قمنا من خلالها بتطوير ودراسة عدد من الآليات والأساليب الأمنية، وتم توثيق هذه الأعمال في أوراق بحثية مرتبطة بالمشروع.
+                </p>
+                <p>
+                    بالتالي <strong>BUNYANX</strong> بالنسبة لنا ليست مجرد برنامج، وإنما منظومة بحثية وتطبيقية تجمع بين هندسة الأمن السيبراني والبحث العلمي والتطبيق العملي.
+                </p>
+                <p>
+                    أما التفاصيل الرياضية الدقيقة للنماذج الأمنية، وآليات الحساب والتحليل المبتكرة للذكاء الاصطناعي.. فقد تم توثيقها بالكامل في أوراق بحثية مغلقة وأطروحة علمية مسجلة [11، 125]. ولأننا نحمي حقوق المعرفة والملكية الفكرية من السرقة، فإن هذه الأسرار الهندسية سنشاركها فقط مع الجهات المعنية مغلقة الأبواب."
+                </p>
+            </div>
+
+            <div style="margin-top: 15px; text-align: left;">
+                <button class="btn" onclick="copyText('scene3')">📋 نسخ نص المشهد الثالث</button>
+            </div>
+        </section>
+
+        <!-- SCENE 4 -->
+        <section id="scene4" class="scene-card">
+            <div class="scene-header">
+                <div class="scene-title-group">
+                    <h2><span>🔹</span> المشهد الرابع: السيادة الرقمية والعمق الهندسي</h2>
+                </div>
+                <div class="scene-time">3:30 – 4:30</div>
+            </div>
+
+            <div class="director-cue">
+                <span class="cue-icon">📹</span>
+                <div>
+                    <strong>توجيه الإخراج والحركة:</strong> لقطة متوسطة (Medium Shot)، نبرة صوت وطنية واضحة، دافئة وحاسمة.
+                </div>
+            </div>
+
+            <div class="dialogue-box">
+                <p>
+                    "لكن القوة الحقيقية لمنظومة <strong>بنيان-إكس</strong> ليست فقط في سطور الكود ولا الأرقام القياسية لسرعة المعالجة.. إنها تكمن في قيمتها السيادية.
+                </p>
+                <p>
+                    السيادة الرقمية ليست شعاراً يرفع، بل هي حقيقة هندسية. تعني أن بياناتك، سجلاتك الأمنية، تحليلات سلوك مستخدميك، وحتى تحديثات نظامك وجدار حمايتك — كلها تولد، وتعالج، وتباد، وتبقى <strong>داخل حدودك الجغرافية وتحت سيطرتك المطلقة</strong> [9، 41].
+                </p>
+                <p>
+                    تعني ألا تمتلك أي جهة خارجية — مهما بلغت قوتها — القدرة على الضغط لفتح باب خلفي خفي، أو المطالبة بنسخة من حركة مرور بياناتك بذريعة القانون. نحن هنا لا نبني جدار حماية تقليدياً.. نحن نشيد بنياناً سيادياً يعيد التوازن والأمن لبيئتنا الرقمية الوطنية [9، 133]."
+                </p>
+            </div>
+
+            <div style="margin-top: 15px; text-align: left;">
+                <button class="btn" onclick="copyText('scene4')">📋 نسخ نص المشهد الرابع</button>
+            </div>
+        </section>
+
+        <!-- SCENE 5 -->
+        <section id="scene5" class="scene-card">
+            <div class="scene-header">
+                <div class="scene-title-group">
+                    <h2><span>🔹</span> المشهد الخامس: الاحتكار الأجنبي وخطر التسريب الهيكلي</h2>
+                </div>
+                <div class="scene-time">4:30 – 6:00</div>
+            </div>
+
+            <div class="director-cue">
+                <span class="cue-icon">📹</span>
+                <div>
+                    <strong>توجيه الإخراج والحركة:</strong> نبرة صوت هادئة، متهكمة بلطف، كاشفة للحقائق بوضوح دون انفعال أو صراخ.
+                </div>
+            </div>
+
+            <div class="dialogue-box">
+                <p>
+                    "دعونا نتحدث بصراحة تكشف الواقع الحقيقي. اليوم، أكثر من <strong>80% من أنظمة وجدران الحماية</strong> المنتشرة في منطقتنا العربية واليمنية هي أنظمة تجارية غربية أو إسرائيلية المنشأ منغلقة [30، 41].
+                </p>
+                <p>
+                    وهذه الأنظمة، بموجب الهيكل القانوني للدول المصنعة لها، مجبرة ومسؤولة قانوناً عن تقديم تسهيلات استخباراتية وسحب عينات البيانات والتحليلات وتمرير ترافيك شبكتك الحساسة وسجلاتها بذريعة التحليل السحابي واستخبارات التهديدات.
+                </p>
+
+                <div class="stage-action">
+                    [توقفة قصيرة لإبراز الجملة المفصلية القادمة]
+                </div>
+
+                <p>
+                    بكل شفافية: في هذه الأنظمة المغلقة، لا يُعتبر تسريب بياناتك خطأً تشغيلياً أو ثغرة برمجية يمكن إصلاحها.. بل هو <strong>ميزة مدمجة عمداً في أصل التصميم الهيكلي للتكنولوجيا</strong> التي تشتريها بملايين الدولارات.
+                </p>
+                <p>
+                    المأساة الحقيقية تكمن في أننا ندفع أثماناً باهظة من ميزانيات مؤسساتنا تحت مسمى 'شراء الحماية والاشتراكات السنوية' [30، 41]، بينما نحن في الحقيقة نستورد أدوات مراقبة واستطلاع مهيأة للعمل والتحسس بانتظار إشارة التفعيل من الخارج."
+                </p>
+            </div>
+
+            <div style="margin-top: 15px; text-align: left;">
+                <button class="btn" onclick="copyText('scene5')">📋 نسخ نص المشهد الخامس</button>
+            </div>
+        </section>
+
+        <!-- SCENE 6 -->
+        <section id="scene6" class="scene-card">
+            <div class="scene-header">
+                <div class="scene-title-group">
+                    <h2><span>🔹</span> المشهد السادس: المقارنة بالأنظمة الحالية والخاتمة</h2>
+                </div>
+                <div class="scene-time">6:00 – 7:30</div>
+            </div>
+
+            <div class="director-cue">
+                <span class="cue-icon">📹</span>
+                <div>
+                    <strong>توجيه الإخراج والحركة:</strong> لقطة قريبة جداً (Extreme Close-up)، نبرة صوت ثقيلة، عميقة، مليئة بالوقار، وإيقاع يتباطأ تدريجياً لترك أثر لا ينسى وتدعو للتفكير العميق.
+                </div>
+            </div>
+
+            <div class="dialogue-box">
+                <p>
+                    "عندما تضع <strong>BUNYANX</strong> في مقارنة حقيقية مع عمالقة السوق الحاليين.. يتضح الفارق الشاسع.
+                </p>
+                <p>
+                    الأنظمة مفتوحة المصدر التقليدية مثل <em>pfSense</em> أصبحت تعاني من ترهل معماري وانهيار في الأداء عند تشغيل فحص العمق وحزم فضاء المستخدم المتراكبة [35، 41]. والأنظمة التجارية مثل <em>Palo Alto</em> و <em>Fortinet</em>، تفرض عليك اشتراكات وتراخيص سنوية باهظة ومستمرة لكل وحدة أمنية على حدة، فضلاً عن سلب سيادتك بإجبارك على معالجة عيناتك في سحابتهم [30، 41].
+                </p>
+                <p>
+                    <strong>BUNYANX</strong> يغلق هذه الفجوات تماماً؛ فهو يمنحك <strong>17 وحدة أمنية متكاملة</strong> [9، 126]، مجهزة بعقل دفاعي استباقي يعتمد على <strong>توازن ناش (Nash Equilibrium)</strong> لاستدراج المهاجمين واحتوائهم بصمت داخل مصائد خداع ديناميكية بدلاً من مجرد الحظر الجاف الذي ينبههم [6، 14، 94].. وكل هذا كمنظومة <strong>مجانية بالكامل، مفتوحة المصدر، وسيادية 100% On-Premise</strong> [9، 41].
+                </p>
+                <p>
+                    نحن في فريق <strong>BUNYANX</strong> وقسم الأمن السيبراني لا ندعو إلى الانعزال أو مقاطعة تقنية عمياء غير محسوبة.. ولكننا نرفع صوتاً علمياً ينادي بضرورة امتلاك <strong>الخيار السيادي والوعي الذاتي</strong>.
+                </p>
+                <p>
+                    لقد أثبتنا علمياً وعملياً، من خلال ربط البحث الأكاديمي الرصين بالتطبيق الهندسي الحقيقي، أن العقول المحلية والجامعات قادرة على تقديم منظومات سيادية شاملة قادرة على منافسة بل وتجاوز الأنظمة التجارية العالمية في اختبارات الضغط الحقيقي والأداء [41، 124، 133].
+                </p>
+                <p>
+                    نحن لا نقدم مجرد برنامج تم كودته وسينتهي أثره.. نحن نقدم بذرة استقلال، ومنهجية وعي، ومستقبلاً رقمياً نكتب شفرته الأمنية بأيدينا ولا يقرر مصيرنا فيه أحد من خلف الحدود [9، 133].
+                </p>
+
+                <div class="stage-action">
+                    [توقفة طويلة لـ 3 ثوانٍ.. ابتسامة خفيفة ووقار، انظر في الكاميرا بثقة تامة]
+                </div>
+
+                <p>
+                    إذا كنت مهتماً بالاطلاع على التفاصيل الهندسية والأوراق البحثية الموثقة للمنظومة [11، 125]، أو ترى في هذه الرؤية والمنصة مساراً لشراكة استراتيجية لتأمين بياناتك ومؤسستك.. فمرحباً بك، وسيسعدنا جداً أن نتحدث بعمق أكبر خارج حدود هذه الكاميرا وفي أروقة المعرض.
+                </p>
+                <p>
+                    شكراً جزيلاً لأنك استمعت وفكرت معنا.. حتى النهاية."
+                </p>
+            </div>
+
+            <div style="margin-top: 15px; text-align: left;">
+                <button class="btn" onclick="copyText('scene6')">📋 نسخ نص المشهد السادس</button>
+            </div>
+        </section>
+
+        <!-- SECTION: 17 SECURITY MODULES & MARKET COMPARISON -->
+        <section id="modules17" class="scene-card">
+            <div class="scene-header">
+                <div class="scene-title-group">
+                    <h2><span>🧩</span> الدليل الميداني: الوحدات الأمنية الـ 17 ومواطن تميزها عن السوق</h2>
+                </div>
+                <div class="scene-time">17 وحدات مترابطة</div>
+            </div>
+
+            <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.98rem; line-height: 1.7;">
+                تتميز منظومة <strong>BUNYANX</strong> بدمج <strong>17 وحدة أمنية واستجابية متخصصة ومترابطة</strong> [9، 126] تعمل متناغمة تحت معمارية طبقية موحدة لحماية الشبكة من الطبقة الثالثة وحتى الطبقة السابعة [10، 60].
+            </p>
+
+            <input type="text" id="moduleSearch" class="module-search-box" placeholder="🔍 ابحث عن أي وحدة أمنية أو تقنية (مثال: eBPF, WAF, MemoryBIO, DNS, DLP, BEC, UBA...)" onkeyup="filterModules()">
+
+            <div class="modules-grid" id="modulesGrid">
+                <!-- 1 -->
+                <div class="module-card">
+                    <span class="module-num">01</span>
+                    <div class="module-title">1. تسريع النواة (Acceleration Layer - eBPF/XDP)</div>
+                    <div class="module-summary">
+                        <strong>عملها بالمختصر:</strong> تصفية وعزل هجمات حجب الخدمة (DDoS) وعناوين IP الخبيثة لحظياً بمجرد وصول الحزم لكرت الشبكة.
+                    </div>
+                    <div class="module-advantage">
+                        <strong>وجه تميزها عن السوق:</strong> الأنظمة التقليدية (مثل pfSense وجدران الحماية الكلاسيكية) تفحص وتصفي الحزم في فضاء المستخدم (Userspace)، مما يسبب بطءاً وتدهوراً كبيراً في الأداء نتيجة تبديل السياق المتكرر [8، 34، 53]. في <strong>BUNYANX</strong>، يتم حظر الحزم مباشرة داخل نواة لينكس (Kernel Space) بسرعة السلك في زمن استجابة قياسي لا يتجاوز <strong>8.5 ميكروثانية</strong> وبمعدل تمرير يبلغ <strong>14.2 Mpps</strong> [82، 118].
+                    </div>
+                </div>
+
+                <!-- 2 -->
+                <div class="module-card">
+                    <span class="module-num">02</span>
+                    <div class="module-title">2. الذكاء الاصطناعي الاستباقي ونظرية الألعاب (AEGIS Engine)</div>
+                    <div class="module-summary">
+                        <strong>عملها بالمختصر:</strong> التنبؤ بخطوات المهاجم التكتيكية التالية بناءً على مصفوفة MITRE ATT&CK واتخاذ قرارات استجابة دفاعية تفاعلية.
+                    </div>
+                    <div class="module-advantage">
+                        <strong>وجه تميزها عن السوق:</strong> الأنظمة التجارية (مثل Palo Alto و Fortinet) تكتفي بردة الفعل الكلاسيكية والجافة المتمثلة في الحظر الصلب الفوري (Hard Block) لعنوان IP، مما ينبه المهاجم البشري المحترف ويدفعه للالتفاف السريع بأساليب أشد تخريباً [30، 31، 94]. محرك AEGIS يحل هذه الفجوة عبر حساب <strong>توازن ناش (Nash Equilibrium)</strong>؛ فبدلاً من الحظر وتنبيه المهاجم في مراحل الاستطلاع المبكرة، يقوم النظام بتحويل حزم بياناته صامتاً وتفاعلياً نحو <strong>مصائد ومتاهات خداع ديناميكية (Dynamic Honeypots)</strong> لعزله ودراسة أدواته [6، 14، 94].
+                    </div>
+                </div>
+
+                <!-- 3 -->
+                <div class="module-card">
+                    <span class="module-num">03</span>
+                    <div class="module-title">3. كشف ومنع التسلل الهجينة (PHANTOM IDS/IPS)</div>
+                    <div class="module-summary">
+                        <strong>عملها بالمختصر:</strong> كشف التهديدات المعقدة والتحركات الجانبية للاختراقات الطويلة والمستمرة.
+                    </div>
+                    <div class="module-advantage">
+                        <strong>وجه تميزها عن السوق:</strong> تعتمد الأدوات الكلاسيكية (مثل Snort و Suricata بالنسخ التقليدية) على قواعد التواقيع الثابتة فقط، مما يعجز تماماً عن كشف هجمات يوم الصفر (Zero-Day) [3، 24، 26]. يدمج محرك PHANTOM الفحص النمطي مع <strong>الترميز الطيفي للحمولة (SBE 256-D FFT)</strong> لتحويل الحزم لمتجهات ترددية، ويربط الأحداث بالرسوم البيانية السببية الزمانية (Granger Causality)، مع تطبيق التعلم المستمر على الخط بكاشف ADWIN لمقاومة انجراف المفاهيم، محققاً دقة كشف تبلغ <strong>99.2%</strong> [12، 84، 123].
+                    </div>
+                </div>
+
+                <!-- 4 -->
+                <div class="module-card">
+                    <span class="module-num">04</span>
+                    <div class="module-title">4. جدار حماية تطبيقات الويب (WAF / WAAP)</div>
+                    <div class="module-summary">
+                        <strong>عملها بالمختصر:</strong> حماية تطبيقات الويب وواجهات البرمجة (APIs) ضد هجمات OWASP Top 10 والتلاعب البرمجي.
+                    </div>
+                    <div class="module-advantage">
+                        <strong>وجه تميزها عن السوق:</strong> تتطلب جدران الويب في الشركات التجارية اشتراكات سنوية باهظة ومنفصلة. بينما جدار WAF في BUNYANX يفكك الطلبات بنيوياً عبر <strong>التحليل الرمزي الشجري (AST)</strong>، ويطبق تتبعاً زمانياً للجلسات بـ BiLSTM، ويتميز بتقنية <strong>التنعيم العشوائي (Randomized Smoothing)</strong> لحساب نصف قطر الأمان وإبطال هجمات التهرب العدائي التي تخدع نماذج التعلم الآلي التقليدية.
+                    </div>
+                </div>
+
+                <!-- 5 -->
+                <div class="module-card">
+                    <span class="module-num">05</span>
+                    <div class="module-title">5. فحص التشفير الوسيط (SSL/TLS Inspection)</div>
+                    <div class="module-summary">
+                        <strong>عملها بالمختصر:</strong> اعتراض وفك التشفير الشفاف لحركة مرور HTTPS لفحص الحمولات ومنع تسلل التهديدات.
+                    </div>
+                    <div class="module-advantage">
+                        <strong>وجه تميزها عن السوق:</strong> حلول فك التشفير التقليدية (مثل Squid في pfSense الذي تم إيقافه لثغراته المتراكمة) تكتب المفاتيح والشهادات على وسائط التخزين (القرص)، مما يبطئ الشبكة ويعرض المفاتيح الخاصة للتسرب والسرقة [5، 35، 108]. يبتكر النظام آلية <strong>MemoryBIO</strong> التي تتم بالكامل داخل الذاكرة العشوائية (RAM) دون لمس القرص نهائياً، مما يحمي خصوصية وسرية المفاتيح ويرفع سرعة الفحص بنسبة <strong>300%</strong> [86، 109].
+                    </div>
+                </div>
+
+                <!-- 6 -->
+                <div class="module-card">
+                    <span class="module-num">06</span>
+                    <div class="module-title">6. أمان نظام النطاقات (DART DNS Security)</div>
+                    <div class="module-summary">
+                        <strong>عملها بالمختصر:</strong> رصد خوارزميات توليد النطاقات (DGA) والاتصالات الخفية وأنفاق الـ DNS لنقل البيانات.
+                    </div>
+                    <div class="module-advantage">
+                        <strong>وجه تميزها عن السوق:</strong> يطبق محرك DART خط كشف متعدد الطبقات يعمل <strong>بالكامل من الذاكرة العشوائية (RAM-only O(1))</strong>. ويقوم بحساب إنتروبيا شانون لأسماء النطاقات (Shannon Entropy > 4.2)، بالتوازي مع كاشف الإشارات الزمنية والربط البياني لحساب معامل التباين للتوقيت، مما يكشف أنفاق الـ DNS خلال <strong>3 استعلامات فقط</strong> وبدقة 99.4% دون الحاجة لاستعلام قواعد خارجية في الإنترنت [89، 123].
+                    </div>
+                </div>
+
+                <!-- 7 -->
+                <div class="module-card">
+                    <span class="module-num">07</span>
+                    <div class="module-title">7. منع تسريب البيانات (DLP Module)</div>
+                    <div class="module-summary">
+                        <strong>عملها بالمختصر:</strong> فحص وتدقيق الترافيك الصادر والملفات لمنع خروج وتسريب البيانات الحساسة.
+                    </div>
+                    <div class="module-advantage">
+                        <strong>وجه تميزها عن السوق:</strong> تكتفي معظم الأنظمة بمطابقة التعابير النمطية البسيطة (Regex). يتميز BUNYANX بدمج التنميط السلوكي لإنتروبيا التدفق (BEFP) مع التحليل الرياضي متعدد الأطياف عبر <strong>تحليل فضاء المنشعب السباعي (7D SVD)</strong>، محققاً البرهان الرياضي لنظرية "انهيار المنشعب" (Manifold Collapse) التي تكشف وتمنع تسريب الملفات المشفرة أو المضغوطة فورياً [12، 91].
+                    </div>
+                </div>
+
+                <!-- 8 -->
+                <div class="module-card">
+                    <span class="module-num">08</span>
+                    <div class="module-title">8. أمان البريد ومكافحة الـ BEC (PLSF Email)</div>
+                    <div class="module-summary">
+                        <strong>عملها بالمختصر:</strong> حماية الاتصالات البريدية للمؤسسة من التصيد وهجمات الهندسة الاجتماعية.
+                    </div>
+                    <div class="module-advantage">
+                        <strong>وجه تميزها عن السوق:</strong> تعجز الأنظمة المتوفرة بالسوق عن كشف هجمات اختراق البريد التجاري (BEC) لأنها تخلو من الروابط والمرفقات الخبيثة وتعتمد على التلاعب النفسي واللفظي [4، 21]. يتميز محرك PLSF بتحليل <strong>البصمة الأسلوبية اللغوية والنفسية للمرسل</strong> ومقارنتها بخط أساس يتم تحديثه ديناميكياً بالمتوسط المتحرك الأسي (EMA)، مع حساب مسافة جاكارد (VSDE) لمنع التحايل البصري لخطوط الـ HTML بدقة ROC-AUC تبلغ <strong>98.72%</strong> [12، 90، 123].
+                    </div>
+                </div>
+
+                <!-- 9 -->
+                <div class="module-card">
+                    <span class="module-num">09</span>
+                    <div class="module-title">9. تحليل حركة المرور المشفرة دون فك (Zero-Decryption ETA)</div>
+                    <div class="module-summary">
+                        <strong>عملها بالمختصر:</strong> كشف البرمجيات الخبيثة واتصالات التحكم والسيطرة (C2) داخل القنوات المشفرة دون الحاجة لفك التشفير.
+                    </div>
+                    <div class="module-advantage">
+                        <strong>وجه تميزها عن السوق:</strong> يحمي خصوصية البيانات المصرفية والطبية الحساسة التي يمنع القانون فك تشفيرها. يتميز المحرك NM-MDE v3.0 بتحليل الخصائص الطيفية والزمنية للتدفق المشفر ورصد إشارات موجات Daubechies-8 لكشف الـ Jitter، مع استخدام <strong>التضمين الدلالي ذي الـ 18 بعداً (FSE)</strong> لتصنيف البرمجيات الخبيثة بدقة عالية وهي داخل نفق TLS المشفر [12، 92].
+                    </div>
+                </div>
+
+                <!-- 10 -->
+                <div class="module-card">
+                    <span class="module-num">10</span>
+                    <div class="module-title">10. تحليل سلوك المستخدمين والكيانات (UBA Module)</div>
+                    <div class="module-summary">
+                        <strong>عملها بالمختصر:</strong> تتبع سلوك الحسابات ورصد التهديدات الداخلية وانتحال الهويات والعمليات المشبوهة.
+                    </div>
+                    <div class="module-advantage">
+                        <strong>وجه تميزها عن السوق:</strong> يحل المشكلة الأزلية للإنذارات الكاذبة الناتجة عن نوبات العمل الإداري والنسخ الاحتياطي الليلي عبر استخدام رياضيات <strong>الإحصاء الدائري</strong> (دالة atan2 تحول الوقت لزوايا على دائرة الوحدة) [12، 93]. كما يتميز بابتكار تقنية <strong>التشويش النشط التسببي (Causal Active Perturbation)</strong> بحقن TCP Jitter بمقدار 500ms لقياس رد الفعل اللحظي وتمييز التفاعل البشري عن البوتات بالمللي ثانية [12، 93].
+                    </div>
+                </div>
+
+                <!-- 11 -->
+                <div class="module-card">
+                    <span class="module-num">11</span>
+                    <div class="module-title">11. جدار الحماية المعتمد على الحالة (Stateful Firewall)</div>
+                    <div class="module-summary">
+                        <strong>عملها بالمختصر:</strong> فلترة وتوجيه حزم البيانات في الطبقتين الثالثة والرابعة وإدارة المناطق الأمنية (Zone-Based).
+                    </div>
+                    <div class="module-advantage">
+                        <strong>وجه تميزها عن السوق:</strong> يدمج محركاً ذكياً لتهيئة السياسات (Smart Policy Optimizer) يقوم باكتشاف القواعد المظللة (Shadowed Rules) والمكررة تلقائياً لرفع سرعة المعالجة، مدمجاً بـ "قاطع دورة" (Circuit Breaker) يفرض الإغلاق الآمن في حالات الأعطال الحرجة.
+                    </div>
+                </div>
+
+                <!-- 12 -->
+                <div class="module-card">
+                    <span class="module-num">12</span>
+                    <div class="module-title">12. تصفية المواقع والمحتوى (HoloFilter Web Filter)</div>
+                    <div class="module-summary">
+                        <strong>عملها بالمختصر:</strong> فلترة وتصنيف نطاقات ومحتوى شبكة الويب والتحكم في تصفح الموظفين.
+                    </div>
+                    <div class="module-advantage">
+                        <strong>وجه تميزها عن السوق:</strong> بدلاً من سلب سيادة المؤسسة وإرسال سجلات تصفح الموظفين الحساسة إلى قواعد بيانات سحابية خارجية (مثل WildFire لـ Palo Alto) [30، 41]، يعتمد محرك HoloFilter على <strong>الحوسبة فائقة الأبعاد (HDC - 10,000D)</strong> لتمثيل وتصنيف ملايين النطاقات محلياً بالكامل تحت الميكروثانية دون الحاجة لاتصال بالإنترنت [12، 96].
+                    </div>
+                </div>
+
+                <!-- 13 -->
+                <div class="module-card">
+                    <span class="module-num">13</span>
+                    <div class="module-title">13. الشبكة الافتراضية الخاصة (WireGuard VPN)</div>
+                    <div class="module-summary">
+                        <strong>عملها بالمختصر:</strong> توفير اتصال شبكي افتراضي مشفر عالي السرعة للموظفين عن بعد.
+                    </div>
+                    <div class="module-advantage">
+                        <strong>وجه تميزها عن السوق:</strong> بدلاً من بروتوكولات OpenVPN و IPSec المعقدة والضخمة هندسياً (التي تتجاوز 400 ألف سطر كود)، تعتمد المنظومة على WireGuard الخفيف في النواة (4 آلاف سطر فقط) بتشفير ChaCha20-Poly1305 مدمج بمبادئ <strong>انعدام الثقة (Zero-Trust)</strong> لضمان سرعات نقل تفوق 1 Gbps مع مزامنة لحظية للجلسات لحالات التوافر العالي [71، 88].
+                    </div>
+                </div>
+
+                <!-- 14 -->
+                <div class="module-card">
+                    <span class="module-num">14</span>
+                    <div class="module-title">14. الوكيل متعدد الأنماط (Multi-Mode Proxy Engine)</div>
+                    <div class="module-summary">
+                        <strong>عملها بالمختصر:</strong> توجيه حركة المرور بثلاثة أنماط (الشفاف، الصريح، والعكسي) لتأمين الأصول والخدمات.
+                    </div>
+                    <div class="module-advantage">
+                        <strong>وجه تميزها عن السوق:</strong> يدعم العمل بالتوازي ضمن خط الأنابيب الموحد مع ميزة إخفاء هوية الخوادم وتجريد ترويسات الاستجابة (HTTP Cloaking & Header Stripping) لحجب مواصفات الخوادم الداخلية عن المهاجمين.
+                    </div>
+                </div>
+
+                <!-- 15 -->
+                <div class="module-card">
+                    <span class="module-num">15</span>
+                    <div class="module-title">15. جودة الخدمة وتشكيل الترافيك (QoS Module)</div>
+                    <div class="module-summary">
+                        <strong>عملها بالمختصر:</strong> تنظيم استهلاك النطاق الترددي للشبكة وتشكيل حركة المرور لحماية الخدمات الهامة.
+                    </div>
+                    <div class="module-advantage">
+                        <strong>وجه تميزها عن السوق:</strong> تطبيق خوارزمية دلو الرموز الثنائية المتزامنة وغير المتزامنة (Dual Sync/Async Token Bucket) المدمجة بالوكيل الشفاف عبر آلية التأخير غير المتزامن (Sleep-to-Refill)، لتقييد سرعة التدفق بنعومة تامة دون اللجوء للإسقاط العشوائي المنهك لجودة الاتصال.
+                    </div>
+                </div>
+
+                <!-- 16 -->
+                <div class="module-card">
+                    <span class="module-num">16</span>
+                    <div class="module-title">16. فحص وتطبيع بروتوكول HTTP (HTTP Inspection)</div>
+                    <div class="module-summary">
+                        <strong>عملها بالمختصر:</strong> تفتيش ترافيك الويب ومطابقة معايير بروتوكول HTTP الصارمة (RFC 7230/7231).
+                    </div>
+                    <div class="module-advantage">
+                        <strong>وجه تميزها عن السوق:</strong> القضاء الجذري على هجمات تهريب الطلبات المعقدة (HTTP Request Smuggling)، مع حل معضلة التراجع اللانهائي للتعابير النمطية (ReDoS) عبر فرض تنفيذ حتمي مقيد بالزمن (Time-Bounded Regex).
+                    </div>
+                </div>
+
+                <!-- 17 -->
+                <div class="module-card">
+                    <span class="module-num">17</span>
+                    <div class="module-title">17. إدارة السجلات ومجمع الأحداث الموحد (Log Manager)</div>
+                    <div class="module-summary">
+                        <strong>عملها بالمختصر:</strong> تجميع وتطبيع وتصدير السجلات الأمنية من كافة الوحدات وبثها لحظياً لغرفة العمليات.
+                    </div>
+                    <div class="module-advantage">
+                        <strong>وجه تميزها عن السوق:</strong> يعتمد على معالجة غير متزامنة بالكامل وغير معطلة للأداء (Non-blocking I/O) في الذاكرة العشوائية لضمان عدم تأثر سرعة الحزم بمشاكل وبطء الكتابة على القرص [98، 103]. ويقوم ببث السجلات فورياً عبر WebSockets لتحديث خريطة التهديدات الحية، مع إطلاق <strong>إنذار صوتي فوري ومميز</strong> للحالات الحرجة داخل مركز العمليات الأمنية (SOC) لتنبيه المحللين [98، 103، 104].
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary Banner -->
+            <div style="margin-top: 25px; background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3); border-radius: 12px; padding: 18px 22px;">
+                <div style="color: var(--accent-cyan); font-weight: 800; font-size: 1.05rem; margin-bottom: 6px;">
+                    📊 الخلاصة المبرهنة والأداء التكاملي:
+                </div>
+                <div style="color: var(--text-primary); font-size: 0.95rem; line-height: 1.7;">
+                    هذا التكامل لـ 17 وحدة أمنية تحت خط أنابيب موحد ونواة معالجة متكاملة يضمن عدم تكرار فحص الحزمة الواحدة [9، 81]، مما يحقق الفحص العميق L7 بكفاءة متزامنة قياسية تحافظ على زمن معالجة الحزم تحت <strong>0.28 مللي ثانية</strong>.
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SECTION: DATA FLOW SIMULATION SHORT VIDEO SCRIPT (90-120 SEC) -->
+        <section id="data-flow-script" class="scene-card">
+            <div class="scene-header">
+                <div class="scene-title-group">
+                    <h2><span>⚡</span> سكريبت محاكاة حركة البيانات في BUNYANX (عرض الكاميرا السريع)</h2>
+                </div>
+                <div class="scene-time">90 – 120 ثانية</div>
+            </div>
+
+            <div class="director-cue">
+                <span class="cue-icon">🎬</span>
+                <div>
+                    <strong>الأسلوب وتوجيه الأداء:</strong> تفاعلي وسريع. تخيل أنك تمسك هاتفك وتعد مقطعاً توضيحياً حماسياً لشخص مهتم بالتكنولوجيا.
+                </div>
+            </div>
+
+            <div class="dialogue-box" id="flowScriptBox">
+                <p style="font-weight: 800; color: var(--accent-green);">
+                    [البداية: انظر للكاميرا مباشرة، بنبرة حماسية هادئة]
+                </p>
+                <p>
+                    "كيف يشتغل نظام <strong>BUNYANX (بنيان-إكس)</strong>؟<br>
+                    دعني آخذك في رحلة سريعة مدتها ثوانٍ مع حزمة البيانات، لنرى كيف نحمي الشبكة من النواة وحتى التطبيقات [10، 60]!
+                </p>
+
+                <div class="flow-step-card">
+                    <div class="flow-step-title">🖐️ المرحلة الأولى: جدار النواة الخارق (eBPF / XDP) [82، 105]</div>
+                    <div style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8;">
+                        [ارسم رقم 1 بيدك للتركيز البصري]<br>
+                        بمجرد وصول الحزم لكرت الشبكة، يستقبلها محركنا البرمجي المحقون داخل نواة نظام التشغيل مباشرة [82، 105]. إذا كانت الحزمة هجوم حجب خدمة (DDoS) أو عنواناً خبيثاً، <strong>يتم إسقاطها فوراً في النواة</strong> [82، 118]. كم يستغرق هذا؟ <strong>8.5 ميكروثانية فقط</strong> وبمعدل تمرير هائل، ودون أن تستهلك الحزمة الخبيثة أي بكسل من معالج فضاء المستخدم [82، 118]!
+                    </div>
+                </div>
+
+                <div class="flow-step-card">
+                    <div class="flow-step-title">🖐️ المرحلة الثانية: كسر عمى التشفير بالذاكرة (MemoryBIO) [3، 86]</div>
+                    <div style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8;">
+                        [ارسم رقم 2 بيدك وتحدث بلهجة مشوقة]<br>
+                        إذا كانت الحزمة سليمة أو تحتاج فحصاً أعمق، تصعد لفضاء المستخدم [81، 82]. ولأن 95% من بيانات الشبكات اليوم مشفرة، فإن النظام يواجه 'عمى التشفير' بفك تشفير HTTPS شفاف بالكامل داخل <strong>الذاكرة العشوائية المؤقتة (MemoryBIO)</strong> [3، 86، 128]. لا نكتب شهادة ولا مفتاحاً واحداً على الأقراص الصلبة نهائياً، مما يحمي الخصوصية، ويمنع التسرب، ويرفع السرعة بنسبة <strong>300%</strong> [86، 108، 109]!
+                    </div>
+                </div>
+
+                <div class="flow-step-card">
+                    <div class="flow-step-title">🖐️ المرحلة الثالثة: خط الأنابيب الموحد والـ 17 إضافة (Unified Pipeline) [9، 81]</div>
+                    <div style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8;">
+                        [تحدث بحركة تجميعية بيديك تشير للترابط]<br>
+                        الآن البيانات أصبحت مكشوفة دلالياً؛ هنا تمر عبر <strong>خط معالجة تفتيشي موحد</strong> يجمع <strong>17 وحدة أمنية متخصصة ومترابطة</strong> تعمل كإضافات (Plugins) مستقلة [9، 16، 81، 126] (WAF لحماية الويب، DART لأمن الـ DNS، DLP لمنع تسريب البيانات، وغيرها..) [9، 126]. تفتش الحزمة لمرة واحدة فقط لضمان الأداء وسد الثغرات البينية [9، 81].
+                    </div>
+                </div>
+
+                <div class="flow-step-card">
+                    <div class="flow-step-title">المرحلة الرابعة: العقل الاستراتيجي (AEGIS & نظرية الألعاب) [16، 94]</div>
+                    <div style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8;">
+                        [اخفض نبرة صوتك قليلاً لتبدو عميقاً ومفكراً]<br>
+                        هنا يتلقى العقل الاستراتيجي التقرير الأمني كاملاً [16، 94]. يتوقع النظام الخطوة التكتيكية التالية للمهاجم بناءً على مصفوفة MITRE ATT&CK [12، 94، 129]، ويحسب <strong>توازن ناش (Nash Equilibrium)</strong> لاتخاذ استجابة ذكية [12، 94، 172]:<br>
+                        • <strong>إما حظر صلب فوري</strong> وإرسال قاعدة الحظر مباشرة للنواة لتفعيلها في ميكروثوانٍ [83، 119].<br>
+                        • <strong>أو الاحتواء الناعم؛</strong> فبدل حظر الهاكر وتنبيهه ليلتف حولنا، نوجه ترافيك المهاجم بهدوء وتلقائية نحو <strong>مصائد ومتاهات خداع ديناميكية (Honeypots)</strong> معزولة لنحمي الأصول وندرس أدواته بصمت [6، 14، 94].
+                    </div>
+                </div>
+
+                <div class="stage-action">
+                    [ابتسامة واثقة، تراجع قليلاً للخلف للخاتمة]
+                </div>
+
+                <p style="font-weight: 700; color: var(--accent-green);">
+                    "هذا باختصار هو محرك <strong>بنيان-إكس</strong>؛ هندسة سيادية، دقة علمية، وتكامل دفاعي بأيدي عقول محلية من الجامعة الوطنية بتعز [1، 2، 9]."
+                </p>
+            </div>
+
+            <div style="margin-top: 15px; text-align: left;">
+                <button class="btn" onclick="copyText('data-flow-script')">📋 نسخ سكريبت محاكاة حركة البيانات</button>
+            </div>
+        </section>
+
+        <!-- SECTION: HARD CYBERSECURITY DEFENSE Q&A SCRIPT -->
+        <section id="qa-discussion" class="scene-card">
+            <div class="scene-header">
+                <div class="scene-title-group">
+                    <h2><span>🥊</span> سكريبت الفيديو: "المناقشة السيبرانية الصعبة لـ BUNYANX"</h2>
+                </div>
+                <div class="scene-time">حوار ثنائي الأدوية 🔴🟢</div>
+            </div>
+
+            <div class="director-cue">
+                <span class="cue-icon">🎬</span>
+                <div>
+                    <strong>طريقة التصوير والأداء الصوتي:</strong><br>
+                    • 🔴 <strong>عندما تسأل (دور الدكتور المناقش):</strong> التفت بزاوية <strong>30 درجة لليسار</strong> بنبرة هجومية حادة وعينين ضيقتين.<br>
+                    • 🟢 <strong>عندما تجيب (دورك كمهندس متمكن):</strong> التفت <strong>مباشرة للكاميرا</strong> بنبرة هادئة ومبتسمة وواثقة.
+                </div>
+            </div>
+
+            <!-- Q1 -->
+            <div class="qa-card">
+                <h3 style="font-family: var(--font-title); color: #fff; font-size: 1.2rem; margin-bottom: 15px;">
+                    🔹 السؤال الأول: معضلة دمج الوحدات (WAF, IDS, DLP)
+                </h3>
+                
+                <div class="qa-role-examiner">
+                    <span class="role-badge badge-examiner">🔴 المناقش المتشكك (زاوية اليسار - نبرة ساخرة خفيفة)</span>
+                    <p>
+                        "يا مهندس، بصراحة.. أنت ارتكبت خطأً هندسياً قاتلاً في مشروعك! كيف تخلط 17 وحدة أمنية مختلفة مثل جدار الحماية، والـ WAF، والـ DLP، والـ IDS في مكان واحد؟ هذا يسمى عك برمجياً وإفراطاً في الهندسة (Over-engineering)، وسيؤدي لانهيار كامل لأداء الشبكة!"
+                    </p>
+                </div>
+
+                <div class="qa-role-engineer">
+                    <span class="role-badge badge-engineer">🟢 المهندس المتمكن (مواجهة الكاميرا - ابتسامة واثقة وهادئة)</span>
+                    <p>
+                        "يا دكتور، هذا الدمج ليس خلطاً عشوائياً، بل هو التوجه الهندسي الأحدث عالمياً وتطبيق مباشر لـ <strong>معمارية التفتيش الموحد (Single-Pass Architecture)</strong> التي تعتمد عليها كبرى الشركات الأمنية مثل Palo Alto و Fortinet لحل مشكلة التشتت [28، 29، 36].
+                    </p>
+                    <p>
+                        في الأنظمة التقليدية (مثل pfSense)، إذا قمنا بتشغيل Suricata كـ IDS، وSquid كـ Proxy، وIPtables كجدار حماية، فإن كل أداة ستقوم بقراءة وتفكيك وفحص نفس الحزمة بشكل معزول ومتكرر [33، 34]. هذا التكرار والتبديل المتكرر للسياق (Context Switching) يسبب بطءاً وتدهوراً في الأداء يصل لـ <strong>40%</strong> [8، 34، 35]!
+                    </p>
+                    <p>
+                        في <strong>BUNYANX</strong>، الحزمة تدخل وتتفكك دلالياً في الذاكرة <strong>مرة واحدة فقط</strong> عبر خط أنابيب موحد (Unified Pipeline) وتُعرض متوازية وغير متزامنة على الوحدات [9، 36، 81]. هذا هو السر الهيكلي الذي جعلنا نحافظ على زمن معالجة متزامن للحزمة في الطبقة السابعة تحت <strong>0.28 مللي ثانية</strong>!"
+                    </p>
+                </div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="qa-card">
+                <h3 style="font-family: var(--font-title); color: #fff; font-size: 1.2rem; margin-bottom: 15px;">
+                    🔹 السؤال الثاني: هل هي طبقات (Layers) أم Plugins؟
+                </h3>
+                
+                <div class="qa-role-examiner">
+                    <span class="role-badge badge-examiner">🔴 المناقش المتشكك (التفاتة لليسار - نبرة استقصائية)</span>
+                    <p>
+                        "طيب، طالما دمجتم كل شيء معاً.. كيف تشتغل هذه الوحدات برمجياً؟ هل تشتغل كطبقات (Layers) متراكبة، أم كـ Plugins؟ وإذا تعطلت وحدة واحدة أو تجمد نموذج ذكاء اصطناعي، هل سيتسبب ذلك في قطع الإنترنت وانهيار المنظومة بأكملها؟"
+                    </p>
+                </div>
+
+                <div class="qa-role-engineer">
+                    <span class="role-badge badge-engineer">🟢 المهندس المتمكن (مواجهة الكاميرا - إشارة توضيحية باليدين)</span>
+                    <p>
+                        "سؤال جوهري وممتاز يا دكتور. النظام يجمع المفهومين معاً في تصميم واحد يُعرف بـ <strong>معمارية الطبقات المعيارية (Layered Modular Architecture)</strong> [16، 60، 126]:
+                    </p>
+                    <p>
+                        • <strong>النظام الشامل مبني كطبقات (7-Layers Architecture):</strong> بهدف عزل فضاء النواة (Kernel Space) عن فضاء المستخدم (Userspace) بشكل صارم لحماية النواة [60، 62].<br>
+                        • <strong>أما الوحدات الـ 17 فهي Plugins معيارية مستقلة تماماً:</strong> يتم تسجيلها بسطر برمجي واحد وتُدار عبر <strong>حاوية خدمات وحقن التبعيات (Dependency Injection Container)</strong> [16، 61، 81].
+                    </p>
+                    <p>
+                        وبفضل هذا العزل البرمجي، إذا حدث أي خطأ حرج أو تجمد في أي نموذج ذكي، تفعل المنظومة تلقائياً وضع <strong>الفشل الآمن (Fail-Safe)</strong> [14، 55]؛ حيث يتم عزل وتجاوز الـ Plugin المعطل لحظياً، بينما يستمر جدار الحماية الكلاسيكي في تمرير الحزم وتأمين المؤسسة دون أي انقطاع في الخدمة الشبكية [14، 55]."
+                    </p>
+                </div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="qa-card">
+                <h3 style="font-family: var(--font-title); color: #fff; font-size: 1.2rem; margin-bottom: 15px;">
+                    🔹 السؤال الثالث: مسار البيانات وتدفق الحزم
+                </h3>
+                
+                <div class="qa-role-examiner">
+                    <span class="role-badge badge-examiner">🔴 المناقش المتشكك (التفاتة لليسار - حاجب مرفوع دلالة التشكيك)</span>
+                    <p>
+                        "وكيف تمر البيانات داخل هذا النظام؟ هل تدخل الحزمة بالطبقات كلها وتمر على الـ 17 وحدة بالتسلسل؟ لو كان الأمر كذلك، فزمن الاستجابة سيكون كارثياً للشبكة!"
+                    </p>
+                </div>
+
+                <div class="qa-role-engineer">
+                    <span class="role-badge badge-engineer">🟢 المهندس المتمكن (مواجهة الكاميرا - نبرة هندسية دقيقة وسريعة)</span>
+                    <p>
+                        "بالتأكيد لا يا دكتور. الحزمة لا تمر بالوحدات كلها بشكل أعمى؛ بل تخضع لـ <strong>توجيه ذكي عبر مسارين مستقلين</strong> [81، 82]:
+                    </p>
+                    <p>
+                        • <strong>الأول: المسار السريع بالنواة (Fast Path):</strong> بمجرد وصول الحزم لكرت الشبكة، يستقبلها محرك <strong>eBPF/XDP</strong> المحقون في النواة [82، 105]. إذا كانت الحزمة هجوم حجب خدمة (DDoS) أو تابعة لـ IP خبيث محظور، <strong>تُسقط فوراً وبسرعة السلك (XDP_DROP)</strong> في زمن استجابة قياسي لا يتجاوز <strong>8.5 ميكروثانية</strong> [82، 118]! الحزمة هنا لا تلمس فضاء المستخدم ولا تستهلك أي موارد من معالج النظام [105، 106].<br>
+                        • <strong>الثاني: مسار التوجيه البروتوكولي (Slow/Smart Path):</strong> إذا صعدت الحزمة السليمة لفضاء المستخدم، يتم توجيهها بالاعتماد على بروتوكولها فقط [81، 82]؛ فحزم الـ DNS تذهب مباشرة لوحدة أمان النطاقات (DART) [52، 89]، وحزم الـ HTTP والويب تذهب للـ WAF والـ Proxy [52، 85].. هذا الفرز الذكي يضمن كفاءة المعالجة وعدم هدر الموارد."
+                    </p>
+                </div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="qa-card">
+                <h3 style="font-family: var(--font-title); color: #fff; font-size: 1.2rem; margin-bottom: 15px;">
+                    🔹 السؤال الرابع: زمن التنبؤ الاستباقي بالهجمات
+                </h3>
+                
+                <div class="qa-role-examiner">
+                    <span class="role-badge badge-examiner">🔴 المناقش المتشكك (التفاتة لليسار - نبرة تحدي)</span>
+                    <p>
+                        "سؤال أخير وبصراحة.. تتحدثون عن 'ذكاء اصطناعي تنبئي واستباقي'.. هذا كلام تسويقي! أخبرني علمياً: النظام حقكم يتوقع الهجمات السيبرانية قبل كم دقيقة بالضبط؟"
+                    </p>
+                </div>
+
+                <div class="qa-role-engineer">
+                    <span class="role-badge badge-engineer">🟢 المهندس المتمكن (مواجهة الكاميرا - نبرة واثقة ومبرهنة علمياً)</span>
+                    <p>
+                        "الهجمات السيبرانية المعقدة على مستوى الشبكات لا تسير بمقياس الزمن البشري (دقائق أو ساعات)؛ بل تسير بمقياس <strong>الخطوات التكتيكية (Tactical Pivoting) وسلسلة الاختراق</strong> [4، 50].
+                    </p>
+                    <p>
+                        • <strong>ما نتوقعه بدقة:</strong> محرك <strong>AEGIS</strong> التنبئي يتوقع <strong>الخطوة التكتيكية التالية للمهاجم</strong> (The Next Move) بناءً على سلوكه الحالي المتقاطع بايزياً مع 29 مساراً هجومياً في مصفوفة <strong>MITRE ATT&CK</strong> العالمية [12، 94، 129].<br>
+                        • <strong>زمن استدلال النموذج:</strong> يتم استدعاء نموذج التنبؤ (Transformer + Q-Learning) بشكل غير متزامن في زمن استجابة يقل عن <strong>1.0 مللي ثانية (تحديداً 0.82 مللي ثانية)</strong> لكي لا يعطل الشبكة [53، 118].<br>
+                        • <strong>الأثر الحقيقي:</strong> بمجرد رصد استطلاع المهاجم البطيء في المرحلة الأولى (والذي قد يستغرق ساعات)، يتوقع النظام نيته وسلوكه، ويقوم فوراً بحساب <strong>توازن ناش (Nash Equilibrium)</strong> وموازنة عقوبة التصعيد [12، 94، 172]؛ فيتخذ قراراً استراتيجياً بتحويل مسار المهاجم صامتاً وتفاعلياً نحو <strong>مصائد ومتاهات خداع ديناميكية (Dynamic Honeypots)</strong> معزولة [6، 14، 94].. نحن هنا نحمي أصولنا الحيوية ونعزل المهاجم قبل أن يصل للمعلومات الحقيقية بدقائق أو ربما بأيام!"
+                    </p>
+                </div>
+            </div>
+
+            <!-- CLOSING -->
+            <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 14px; padding: 20px 24px; margin-top: 20px;">
+                <span class="role-badge badge-engineer">🟢 الخاتمة: رسالة السيادة الرقمية (مواجهة الكاميرا - تقريب طفيف)</span>
+                <p style="color: #fff; font-size: 1.05rem; line-height: 1.8; margin-top: 10px; margin-bottom: 0;">
+                    "في النهاية.. <strong>BUNYANX</strong> بالنسبة لنا في الجامعة الوطنية - تعز لم يكن مجرد كود برمجناه لينتهي بنهاية مناقشة التخرج [1، 2، 9].. بل هو إثبات علمي وعملي على أن عقولنا قادرة على بناء حلول سيادية تؤمن بياناتنا ومؤسساتنا الوطنية بأيدينا [9، 133]."
+                </p>
+            </div>
+
+            <div style="margin-top: 20px; text-align: left;">
+                <button class="btn" onclick="copyText('qa-discussion')">📋 نسخ سكريبت المناقشة السيبرانية بالكامل</button>
+            </div>
+        </section>
+
+        <!-- DISCLAIMER CARD -->
+        <section id="disclaimer" class="disclaimer-card">
+            <div class="disclaimer-title">
+                <span>🛡️</span> الغطاء القانوني والبحثي (يُكتب في وصف الفيديو المنشور):
+            </div>
+            <div class="disclaimer-text">
+                "يعبر هذا المحتوى والفيديو عن رؤية بحثية وأكاديمية خالصة وفكر هندسي مستقل ناتج عن مشروع تخرج لدرجة البكالوريوس في قسم الأمن السيبراني بجامعة الوطنية - تعز [1، 2]. يهدف المحتوى لنشر الوعي حول قضايا السيادة الرقمية ومعايير التصميم الأمني المفتوح، ولا يستهدف الإساءة أو التقليل من أي شركة تجارية أو جهة بعينها. جميع المقارنات التقنية والقوانين المذكورة مستندة إلى بيانات تشغيلية عامة ومراجعات أكاديمية دولية منشورة وموثقة [41، 42]."
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Toast Component -->
+    <div id="toast" class="toast">تم نسخ النص بنجاح!</div>
+
+    <script>
+        let currentFontSizeScale = 1;
+
+        function adjustFontSize(delta) {
+            currentFontSizeScale += delta * 0.1;
+            if (currentFontSizeScale < 0.8) currentFontSizeScale = 0.8;
+            if (currentFontSizeScale > 1.6) currentFontSizeScale = 1.6;
+            document.body.style.fontSize = (19 * currentFontSizeScale) + 'px';
+        }
+
+        function resetFontSize() {
+            currentFontSizeScale = 1;
+            document.body.style.fontSize = '19px';
+        }
+
+        function toggleTeleprompter() {
+            document.body.classList.toggle('teleprompter-mode');
+            const btn = document.getElementById('teleprompterBtn');
+            if (document.body.classList.contains('teleprompter-mode')) {
+                btn.classList.add('btn-active');
+                btn.innerText = '✕ إغلاق وضع تلقين القراءة';
+            } else {
+                btn.classList.remove('btn-active');
+                btn.innerText = '🎬 وضع تلقين القراءة (Teleprompter)';
+            }
+        }
+
+        function copyText(sectionId) {
+            const section = document.getElementById(sectionId);
+            const dialogue = section.querySelector('.dialogue-box').innerText;
+            navigator.clipboard.writeText(dialogue).then(() => {
+                showToast('تم نسخ نص ' + section.querySelector('h2').innerText + ' بنجاح!');
+            }).catch(err => {
+                showToast('تعذر النسخ تلقائياً');
+            });
+        }
+
+        function filterModules() {
+            const query = document.getElementById('moduleSearch').value.toLowerCase();
+            const cards = document.querySelectorAll('.module-card');
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>العرض التقديمي والميداني لـ BUNYANX | القائد وهيب الشرعبي</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #090d16;
+            --bg-card: rgba(17, 24, 39, 0.85);
+            --bg-card-hover: rgba(24, 34, 53, 0.95);
+            --accent-green: #10b981;
+            --accent-cyan: #06b6d4;
+            --accent-blue: #3b82f6;
+            --accent-amber: #f59e0b;
+            --accent-purple: #8b5cf6;
+            --accent-red: #ef4444;
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --glass-glow: 0 0 25px rgba(6, 182, 212, 0.15);
+            --font-main: 'Tajawal', 'Cairo', sans-serif;
+            --font-title: 'Cairo', sans-serif;
+            --font-code: 'Fira Code', monospace;
+            --base-font-size: 19px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            font-size: var(--base-font-size);
+            line-height: 1.85;
+            padding-bottom: 80px;
+        }
+
+        /* Top Sticky Controls */
+        .sticky-toolbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(9, 13, 22, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        .toolbar-title {
+            font-family: var(--font-title);
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toolbar-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 6px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: var(--font-main);
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn:hover {
+            background: rgba(6, 182, 212, 0.2);
+            border-color: var(--accent-cyan);
+            color: #fff;
+        }
+
+        .btn-active {
+            background: var(--accent-cyan) !important;
+            color: #000 !important;
+            font-weight: 700;
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* Hero Speaker Banner */
+        .speaker-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 35px 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--glass-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .speaker-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green), var(--accent-amber));
+        }
+
+        .speaker-badge {
+            display: inline-block;
+            background: rgba(6, 182, 212, 0.15);
+            border: 1px solid rgba(6, 182, 212, 0.4);
+            color: var(--accent-cyan);
+            font-size: 0.88rem;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        .speaker-name {
+            font-family: var(--font-title);
+            font-size: 2.1rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .speaker-role {
+            color: var(--accent-green);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .speaker-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .meta-pill {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+        }
+
+        .meta-pill strong {
+            color: #fff;
+        }
+
+        /* Nav Quick Links */
+        .scene-nav {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 10px 0;
+            margin-bottom: 30px;
+            scrollbar-width: thin;
+        }
+
+        .scene-nav-link {
+            white-space: nowrap;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .scene-nav-link:hover {
+            background: rgba(6, 182, 212, 0.15);
+            border-color: var(--accent-cyan);
+            color: #fff;
+        }
+
+        /* Script Section Cards */
+        .script-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 30px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .script-card:hover {
+            border-color: rgba(6, 182, 212, 0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .card-header h2 {
+            font-family: var(--font-title);
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Director & Camera Cues Box */
+        .director-cue {
+            background: rgba(245, 158, 11, 0.1);
+            border-right: 4px solid var(--accent-amber);
+            border-radius: 8px 12px 12px 8px;
+            padding: 14px 18px;
+            margin-bottom: 22px;
+            font-size: 0.95rem;
+            color: #fef08a;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .cue-icon {
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        /* Spoken Dialogue Container */
+        .speech-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 24px;
+            font-size: 1.05em;
+            line-height: 1.95;
+        }
+
+        .speech-box p {
+            margin-bottom: 18px;
+            color: #e5e7eb;
+        }
+
+        .speech-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .speech-box strong {
+            color: var(--accent-green);
+            font-weight: 800;
+        }
+
+        .citation-tag {
+            color: var(--accent-cyan);
+            font-family: var(--font-code);
+            font-weight: 700;
+            font-size: 0.88rem;
+        }
+
+        /* Inline Body Cues */
+        .body-gesture {
+            display: block;
+            margin: 16px 0;
+            padding: 8px 16px;
+            background: rgba(139, 92, 246, 0.12);
+            border-right: 3px solid var(--accent-purple);
+            color: #c084fc;
+            font-size: 0.92rem;
+            font-weight: 600;
+            border-radius: 4px 8px 8px 4px;
+            font-style: italic;
+        }
+
+        /* Highlight Callout Box */
+        .alert-box {
+            background: rgba(239, 68, 68, 0.08);
+            border-right: 4px solid var(--accent-red);
+            padding: 16px 20px;
+            border-radius: 8px 12px 12px 8px;
+            margin: 18px 0;
+            color: #fca5a5;
+            font-weight: 600;
+        }
+
+        /* Hardware Prototype Highlight Card */
+        .hardware-card {
+            background: rgba(6, 182, 212, 0.08);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 14px;
+            padding: 20px 24px;
+            margin: 20px 0;
+        }
+
+        .hardware-title {
+            color: var(--accent-cyan);
+            font-family: var(--font-title);
+            font-weight: 800;
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--accent-cyan);
+            color: #000;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Teleprompter Focus Mode */
+        body.teleprompter-mode {
+            background: #000;
+        }
+
+        body.teleprompter-mode .speaker-card,
+        body.teleprompter-mode .director-cue,
+        body.teleprompter-mode .speaker-meta {
+            opacity: 0.3;
+        }
+
+        body.teleprompter-mode .speech-box {
+            background: transparent;
+            font-size: 1.35em;
+            line-height: 2.2;
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            .speaker-name {
+                font-size: 1.7rem;
+            }
+            .script-card {
+                padding: 20px;
+            }
+            .sticky-toolbar {
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Sticky Toolbar -->
+    <div class="sticky-toolbar">
+        <div class="toolbar-title">
+            <span>🎤</span> سكريبت العرض التقديمي والميداني لـ BUNYANX
+        </div>
+        <div class="toolbar-controls">
+            <button class="btn" onclick="adjustFontSize(1)" title="تكبير الخط">A+</button>
+            <button class="btn" onclick="adjustFontSize(-1)" title="تصغير الخط">A-</button>
+            <button class="btn" onclick="resetFontSize()" title="إعادة ضبط الخط">إعادة ضبط</button>
+            <button class="btn" id="teleprompterBtn" onclick="toggleTeleprompter()">🎬 وضع تلقين القراءة (Teleprompter)</button>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- Speaker Info Banner -->
+        <header class="speaker-card">
+            <span class="speaker-badge">مشروع تخرج البكالوريوس | العرض التقديمي والميداني للمعرض</span>
+            <h1 class="speaker-name">المتحدث: وهيب مهيوب الشرعبي</h1>
+            <div class="speaker-role">قائد فريق مشروع BUNYANX (بنيان-إكس) — تخصص الأمن السيبراني (كلية الهندسة)</div>
+            
+            <div class="speaker-meta">
+                <div class="meta-pill">الكلية والتخصص: <strong>الأمن السيبراني – كلية الهندسة</strong></div>
+                <div class="meta-pill">طبيعة النظام: <strong>منظومة استباقية سيادية (On-Premise 100%)</strong></div>
+                <div class="meta-pill">العرض العملي: <strong>سيناريوهات هجومية حية (Ubuntu Server & Android)</strong></div>
+                <div class="meta-pill">النموذج الفيزيائي: <strong>Hardware Testbed Prototype (الصندوق الزجاجي)</strong></div>
+            </div>
+        </header>
+
+        <!-- Quick Scene Navigation Links -->
+        <nav class="scene-nav">
+            <a href="#part1" class="scene-nav-link">المقدمة ودوافع البناء</a>
+            <a href="#part2" class="scene-nav-link">الفلسفة والمعمارية والسيادة</a>
+            <a href="#part3" class="scene-nav-link">🔍 نموذج الهاردوير والعرض الميداني</a>
+            <a href="#part4" class="scene-nav-link">التجارب الحية والبيئة المفتوحة</a>
+            <a href="#part5" class="scene-nav-link">🎓 البحث العلمي والمساهمات الأصيلة</a>
+        </nav>
+
+        <!-- PART 1: INTRODUCTION & MOTIVATION -->
+        <section id="part1" class="script-card">
+            <div class="card-header">
+                <h2><span>🔹</span> الجزء الأول: التقديم الشراكي ودوافع المشروع</h2>
+            </div>
+
+            <div class="director-cue">
+                <span class="cue-icon">📹</span>
+                <div>
+                    <strong>توجيه الإلقاء والتواصل:</strong> مواجهة الجمهور والكاميرا مباشرة، ابتسامة ترحيبية واثقة، ونبرة صوت دافئة تعبر عن اعتزاز وقيادة رصينة.
+                </div>
+            </div>
+
+            <div class="speech-box" id="part1Text">
+                <p>
+                    "السلام عليكم ورحمة الله وبركاته.<br>
+                    أنا <strong>وهيب مهيوب الشرعبي</strong>، قائد فريق مشروع التخرج، ويسعدني أن أقدم لكم مشروعنا <strong>BUNYANX — بنيان إكس</strong>، الذي عملت عليه مع زملائي في تخصص الأمن السيبراني – كلية الهندسة.
+                </p>
+                <p>
+                    خلال فترة عملنا على المشروع، لم يكن هدفنا أن نبني مجرد برنامج أو جدار حماية تقليدي، وإنما أن نحاول بناء منظومة أمن سيبراني استباقية متكاملة، تجمع بين الهندسة البرمجية، وأمن الشبكات، والتحليل الذكي، والبحث العلمي.
+                </p>
+                <p style="font-weight: 700; color: var(--accent-cyan);">
+                    لماذا احتجنا إلى بناء BUNYANX من الأساس؟"
+                </p>
+            </div>
+
+            <div style="margin-top: 15px; text-align: left;">
+                <button class="btn" onclick="copySectionText('part1Text', 'الجزء الأول')">📋 نسخ نص الجزء الأول</button>
+            </div>
+        </section>
+
+        <!-- PART 2: PHILOSOPHY, ARCHITECTURE & SOVEREIGNTY -->
+        <section id="part2" class="script-card">
+            <div class="card-header">
+                <h2><span>🔹</span> الجزء الثاني: فلسفة الحماية، المعمارية والسيادة الرقمية</h2>
+            </div>
+
+            <div class="director-cue">
+                <span class="cue-icon">🎙️</span>
+                <div>
+                    <strong>توجيه الإلقاء والنبرة:</strong> التحول إلى نبرة إقناع حازمة وقوية مع استخدام الإيماءات البصرية المفتوحة لليدين.
+                </div>
+            </div>
+
+            <div class="speech-box" id="part2Text">
+                <p>
+                    "مشروعنا <strong>BUNYANX (بنيان-إكس)</strong> هو منظومة أمن سيبراني استباقية صممناها للتعامل مع التهديدات الحديثة على مستوى الشبكات، والأنظمة، والتطبيقات، والبيانات <span class="citation-tag">[1، 9]</span>.
+                </p>
+                <p>
+                    الفكرة الأساسية في <strong>BUNYANX</strong> هي الانتقال من مفهوم الحماية التقليدية التي تنتظر الهجوم ثم تتعامل معه، إلى منظومة تقوم بمراقبة وتحليل حركة البيانات والأنشطة الأمنية، واكتشاف المؤشرات والسلوكيات المشبوهة، ثم اتخاذ القرار الدفاعي المناسب <span class="citation-tag">[1، 9]</span>.
+                </p>
+                <p>
+                    المنظومة لا تعتمد على... مطابقة التواقيع الرقمية الكلاسيكية وجدران الحماية الصماء التي يسهل على المهاجمين الالتفاف عليها <span class="citation-tag">[3، 26]</span>.. نحن لا نكتفي بالحظر الجاف للمهاجم وتنبيهه ليتخذ أساليب أشد تخريباً <span class="citation-tag">[6، 30]</span>.. ولا نعتمد على معالجات سحابية خارجية تسلبنا سيادتنا الرقمية وتحتكر قراراتنا الأمنية <span class="citation-tag">[30، 41]</span>..
+                </p>
+
+                <div class="alert-box">
+                    "أكثر من 80% من جدران الحماية التجاريّة في منطقتنا هي أنظمة مغلقة، تعيد إرسال ترافيك شبكاتنا وسجلاتها الحساسة إلى سحابات أجنبيّة تحت مسمى 'التحليل السحابي'.. مما يجعلها بالواقع باباً خلفياً موثقاً قانونياً يسلب مؤسساتنا سيادتها على بياناتها!"
+                </div>
+
+                <div class="body-gesture">
+                    (افتح يديك بنبرة إقناع وقوة):
+                </div>
+
+                <p>
+                    بل قمنا ببناء معمارية طبقية سباعية متكاملة تدمج جدار حماية من الجيل القادم (NGFW) بـ <strong>17 وحدة أمنية متخصصة ومترابطة</strong> تعمل كإضافات (Plugins) مستقلة برمجياً داخل خط أنابيب تفتيشي موحد <span class="citation-tag">[9، 16، 60، 126]</span>، مجهزة بعقل ذكي يتوقع خطوات المهاجم التكتيكية بناءً على مصفوفة <strong>MITRE ATT&CK</strong> ويطبق <strong>توازن ناش (Nash Equilibrium)</strong> لاستدراجه واحتوائه صامتاً داخل مصائد خداع ديناميكية <span class="citation-tag">[12، 94، 129]</span>!"
+                </p>
+            </div>
+
+            <div style="margin-top: 15px; text-align: left;">
+                <button class="btn" onclick="copySectionText('part2Text', 'الجزء الثاني')">📋 نسخ نص الجزء الثاني</button>
+            </div>
+        </section>
+
+        <!-- PART 3: HARDWARE PROTOTYPE & VISUAL DIRECTION -->
+        <section id="part3" class="script-card" style="border: 2px solid var(--accent-cyan);">
+            <div class="card-header">
+                <h2><span>🔍</span> الجزء الثالث: الانتقال إلى الهاردوير (التوجيه البصري والميداني)</h2>
+            </div>
+
+            <div class="director-cue">
+                <span class="cue-icon">📹</span>
+                <div>
+                    <strong>توجيه البصر والتصوير:</strong> تنقل الكاميرا بيدك ببطء لتشير إلى الصندوق الزجاجي الذي يحتوي على اللوحة الإلكترونية والنموذج الفيزيائي.
+                </div>
+            </div>
+
+            <div class="speech-box" id="part3Text">
+                <div class="hardware-card">
+                    <div class="hardware-title">
+                        <span>🧪</span> النموذج الأولي الفيزيائي (Hardware Testbed Prototype)
+                    </div>
+                    <p style="margin-bottom: 0; color: #f3f4f6;">
+                        "ولأجل إثبات هذه المفاهيم الهندسية المعقدة في الواقع العملي، قمنا ببناء وتصميم هذا النموذج الأولي الفيزيائي <strong>(Hardware Testbed Prototype)</strong> داخل هذا الصندوق الزجاجي <span class="citation-tag">[63، 177]</span>..
+                    </p>
+                </div>
+
+                <p>
+                    ونود التوضيح بالكامل: في بيئات الإنتاج الحقيقي يتم تنصيب المنظومة على خوادم تجارية قياسية <span class="citation-tag">[41، 177]</span>، ولكننا قمنا بتهيئة وتجميع هذه اللوحة المدمجة <strong>(Embedded Board)</strong> المزودة بمنافذ مزدوجة <strong>(Dual NIC)</strong> لتعمل كبوابة حماية فيزيائية مستقلة تتحكم بمرور البيانات محلياً بنسبة 100% <span class="citation-tag">[41، 177]</span>.
+                </p>
+                <p style="font-weight: 800; color: var(--accent-cyan);">
+                    والآن.. دعونا ننتقل لتطبيق بعض الهجمات الحية لنشاهد دقة وسرعة المنظومة معاً!"
+                </p>
+            </div>
+
+            <div style="margin-top: 15px; text-align: left;">
+                <button class="btn" onclick="copySectionText('part3Text', 'الجزء الثالث')">📋 نسخ نص الجزء الثالث (الهاردوير)</button>
+            </div>
+        </section>
+
+        <!-- PART 4: LIVE SCENARIOS & OPEN ENVIRONMENT -->
+        <section id="part4" class="script-card">
+            <div class="card-header">
+                <h2><span>🔹</span> الجزء الرابع: التجارب الحية في المعرض والبيئة المفتوحة</h2>
+            </div>
+
+            <div class="director-cue">
+                <span class="cue-icon">💻</span>
+                <div>
+                    <strong>توجيه الإلقاء:</strong> استعراض الشاشة الحية والأنظمة المستهدفة بثقة عملية وأكاديمية عالية.
+                </div>
+            </div>
+
+            <div class="speech-box" id="part4Text">
+                <p>
+                    "المنظومة لا تعتمد على تقنية واحدة؛ بل تتكون من مجموعة من الوحدات الأمنية المتكاملة، تشمل الحماية الشبكية، <strong>IDS/IPS</strong>، حماية تطبيقات الويب، مكافحة البرمجيات الخبيثة، تحليل سلوك المستخدم والكيانات، منع تسرب البيانات، وأمن البريد الإلكتروني، بالإضافة إلى محركات التحليل والذكاء الموجودة ضمن النظام.
+                </p>
+                <p>
+                    والجانب المهم في مشروعنا أننا لم نتعامل معه كفكرة نظرية فقط؛ قمنا ببناء منظومة قابلة للتجربة والاختبار. وفي المعرض سنوضح ذلك عمليًا من خلال تنفيذ سيناريوهات هجومية على <strong>Ubuntu Server</strong> و <strong>Android</strong> خارج المنظومة، ثم إعادة السيناريوهات نفسها والأجهزة خلف <strong>BUNYANX</strong>، لنوضح الفرق في كيفية مراقبة وتحليل النشاط واكتشاف التهديد والتعامل معه.
+                </p>
+                <p>
+                    كما أن رؤيتنا للمشروع لا تتوقف عند بناء منظومة مغلقة، بل نريد أن تكون <strong>BUNYANX</strong> بيئة قابلة للاختبار من قبل الطلاب والباحثين والمهتمين بالأمن السيبراني، بحيث يحاولون اكتشاف نقاط ضعفها واختبار قدراتها في بيئة مصرح بها، لأن المنظومة الأمنية القوية لا تُبنى على افتراض أنها غير قابلة للاختراق، وإنما على اختبارها باستمرار واكتشاف نقاط ضعفها وتحسينها."
+                </p>
+            </div>
+
+            <div style="margin-top: 15px; text-align: left;">
+                <button class="btn" onclick="copySectionText('part4Text', 'الجزء الرابع')">📋 نسخ نص الجزء الرابع</button>
+            </div>
+        </section>
+
+        <!-- PART 5: RESEARCH & SCIENTIFIC CONTRIBUTIONS -->
+        <section id="part5" class="script-card">
+            <div class="card-header">
+                <h2><span>🎓</span> الجزء الخامس: المساهمات البحثية والعلمية الأصيلة</h2>
+            </div>
+
+            <div class="director-cue">
+                <span class="cue-icon">📜</span>
+                <div>
+                    <strong>توجيه الإلقاء والوقار:</strong> نبرة صوت عميقة ومؤثرة تبرز القيمة الأكاديمية والبحثية الموثقة للمشروع.
+                </div>
+            </div>
+
+            <div class="speech-box" id="part5Text">
+                <p style="font-weight: 700; color: var(--accent-green); font-size: 1.1em; line-height: 1.95;">
+                    "وما يميز المشروع أيضًا أن العمل لم يكن برمجيًا فقط، بل صاحبته مساهمات بحثية وعلمية أصلية، قمنا من خلالها بتطوير ودراسة عدد من الآليات والأساليب الأمنية، وتم توثيق هذه الأعمال في أوراق بحثية مرتبطة بالمشروع."
+                </p>
+            </div>
+
+            <div style="margin-top: 15px; text-align: left;">
+                <button class="btn" onclick="copySectionText('part5Text', 'الجزء الخامس')">📋 نسخ نص الجزء الخامس</button>
+            </div>
+        </section>
+
+        <!-- Master Copy Full Script Button -->
+        <div style="text-align: center; margin-top: 30px;">
+            <button class="btn btn-active" style="padding: 14px 28px; font-size: 1.05rem;" onclick="copyFullSpeech()">📋 نسخ السكريبت الكامل بدون أي نقصان</button>
+        </div>
+
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">تم النسخ بنجاح!</div>
+
+    <script>
+        let currentFontSizeScale = 1;
+
+        function adjustFontSize(delta) {
+            currentFontSizeScale += delta * 0.1;
+            if (currentFontSizeScale < 0.8) currentFontSizeScale = 0.8;
+            if (currentFontSizeScale > 1.6) currentFontSizeScale = 1.6;
+            document.body.style.fontSize = (19 * currentFontSizeScale) + 'px';
+        }
+
+        function resetFontSize() {
+            currentFontSizeScale = 1;
+            document.body.style.fontSize = '19px';
+        }
+
+        function toggleTeleprompter() {
+            document.body.classList.toggle('teleprompter-mode');
+            const btn = document.getElementById('teleprompterBtn');
+            if (document.body.classList.contains('teleprompter-mode')) {
+                btn.classList.add('btn-active');
+                btn.innerText = '✕ إغلاق وضع تلقين القراءة';
+            } else {
+                btn.classList.remove('btn-active');
+                btn.innerText = '🎬 وضع تلقين القراءة (Teleprompter)';
+            }
+        }
+
+        function copySectionText(elementId, sectionName) {
+            const el = document.getElementById(elementId);
+            navigator.clipboard.writeText(el.innerText).then(() => {
+                showToast('تم نسخ نص ' + sectionName + ' بنجاح!');
+            }).catch(err => {
+                showToast('تعذر النسخ تلقائياً');
+            });
+        }
+
+        function copyFullSpeech() {
+            const p1 = document.getElementById('part1Text').innerText;
+            const p2 = document.getElementById('part2Text').innerText;
+            const p3 = document.getElementById('part3Text').innerText;
+            const p4 = document.getElementById('part4Text').innerText;
+            const p5 = document.getElementById('part5Text').innerText;
+            const fullText = p1 + "\n\n" + p2 + "\n\n" + p3 + "\n\n" + p4 + "\n\n" + p5;
+            
+            navigator.clipboard.writeText(fullText).then(() => {
+                showToast('تم نسخ السكريبت الكامل بنجاح!');
+            }).catch(err => {
+                showToast('تعذر النسخ تلقائياً');
+            });
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
